@@ -8,8 +8,8 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: "Lev — Data Projects",
   description: "Selected data engineering, analytics and automation projects by Lev.",
-  openGraph: { title: "Lev — Data Projects", description: "Turning messy data into useful systems.", type: "website", images: ["/og.png"] },
-  twitter: { card: "summary_large_image", title: "Lev — Data Projects", description: "Turning messy data into useful systems.", images: ["/og.png"] },
+  openGraph: { title: "Lev — Data Projects", description: "Turning messy data into useful systems.", type: "website", images: ["/og.jpg"] },
+  twitter: { card: "summary_large_image", title: "Lev — Data Projects", description: "Turning messy data into useful systems.", images: ["/og.jpg"] },
   icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
 };
 
