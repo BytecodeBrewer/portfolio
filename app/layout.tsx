@@ -6,11 +6,21 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? (productionHost ? `https://$
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "Lev — Data Projects",
+  title: "Lev - Data Projects",
   description: "Selected data engineering, analytics and automation projects by Lev.",
-  openGraph: { title: "Lev — Data Projects", description: "Turning messy data into useful systems.", type: "website", images: ["/og.jpg"] },
-  twitter: { card: "summary_large_image", title: "Lev — Data Projects", description: "Turning messy data into useful systems.", images: ["/og.jpg"] },
-  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" },
+  openGraph: {
+    title: "Lev - Data Projects",
+    description: "Data projects explained through product thinking, system design and practical workflows.",
+    type: "website",
+    images: ["/og.svg"]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Lev - Data Projects",
+    description: "Data projects explained through product thinking, system design and practical workflows.",
+    images: ["/og.svg"]
+  },
+  icons: { icon: "/favicon.svg", shortcut: "/favicon.svg" }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

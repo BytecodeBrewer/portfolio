@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f1f0e9"/>
+  <rect x="72" y="72" width="1056" height="486" rx="18" fill="#10110f"/>
+  <circle cx="998" cy="146" r="34" fill="#c9ff3d"/>
+  <path d="M132 430h108v-62h64v62h108v-64H132v64Zm0-102h280v-64H132v64Zm0-102h210v-64H132v64Z" fill="#f1f0e9"/>
+  <text x="480" y="248" font-family="Arial, Helvetica, sans-serif" font-size="74" font-weight="800" fill="#f1f0e9">Lev Data Projects</text>
+  <text x="484" y="330" font-family="Arial, Helvetica, sans-serif" font-size="31" fill="#bfc0b8">Product logic, data flows, automation and analytics.</text>
+  <text x="484" y="414" font-family="monospace" font-size="22" fill="#c9ff3d">ARGUS / Q-Bet / S.M.A.R.T. / Notion Sync</text>
+</svg>
