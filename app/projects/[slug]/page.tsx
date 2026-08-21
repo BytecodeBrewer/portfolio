@@ -21,12 +21,13 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   };
 }
 
-function FlowDiagram({ title, nodes }: { title: string; nodes: string[] }) {
+function FlowDiagram({ label, title, intro, nodes }: { label: string; title: string; intro: string; nodes: string[] }) {
   return <section className="case-band">
     <div className="case-section-head">
-      <p>System diagram</p>
+      <p>{label}</p>
       <h2>{title}</h2>
     </div>
+    <p className="diagram-intro">{intro}</p>
     <div className="flow-diagram">
       {nodes.map((node, index) => <div className="flow-node" key={node}>
         <span>{String(index + 1).padStart(2, "0")}</span>
@@ -63,24 +64,19 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       <section className="case-split shell">
-        <div>
-          <span>Problem</span>
-          <h2>Why this exists</h2>
-          <p>{project.problem}</p>
-        </div>
-        <div>
-          <span>Solution</span>
-          <h2>What the product does</h2>
-          <p>{project.solution}</p>
-        </div>
+        {project.storySections.map((section) => <div key={section.title}>
+          <span>{section.eyebrow}</span>
+          <h2>{section.title}</h2>
+          <p>{section.body}</p>
+        </div>)}
       </section>
 
-      <FlowDiagram title={project.diagramTitle} nodes={project.diagramNodes} />
+      <FlowDiagram label={project.diagram.label} title={project.diagram.title} intro={project.diagram.intro} nodes={project.diagram.nodes} />
 
       <section className="roadmap shell">
         <div className="case-section-head">
           <p>Roadmap</p>
-          <h2>From prototype to useful product</h2>
+          <h2>{project.roadmapTitle}</h2>
         </div>
         <div className="roadmap-list">
           {project.roadmap.map((item) => <div className="roadmap-item" key={item.title}>
@@ -94,7 +90,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       <section className="notes shell">
         <div className="case-section-head">
           <p>Portfolio angle</p>
-          <h2>What this should communicate</h2>
+          <h2>{project.productNotesTitle}</h2>
         </div>
         <ul>{project.productNotes.map((note) => <li key={note}>{note}</li>)}</ul>
       </section>

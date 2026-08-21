@@ -18,22 +18,22 @@ export default function Home() {
 
     <section className="hero shell" id="top">
       <div className="eyebrow"><span /> Informatics · Data · Systems</div>
-      <h1>Data projects with<br />a <em>product logic.</em></h1>
+      <h1>I turn messy data<br />into <em>useful systems.</em></h1>
       <div className="hero-bottom">
-        <p>I build practical systems around data engineering, analytics and automation. This portfolio focuses on what each product solves, how the system works and where it is going.</p>
+        <p>I’m Lev, an Informatics student in Leipzig building practical projects at the intersection of data engineering, analytics, automation and AI-enabled workflows.</p>
         <a className="round-link" href="#work" aria-label="Explore selected projects">↓</a>
       </div>
       <div className="hero-grid" aria-hidden="true">
-        <div><b>PROBLEM</b><span>what is broken or manual</span></div>
-        <div><b>SYSTEM</b><span>how data moves through it</span></div>
-        <div><b>ROADMAP</b><span>what becomes useful next</span></div>
+        <div><b>INGEST</b><span>APIs · files · events</span></div>
+        <div><b>TRANSFORM</b><span>clean · model · validate</span></div>
+        <div><b>DELIVER</b><span>insight · tools · action</span></div>
       </div>
     </section>
 
     <section className="work shell" id="work">
       <div className="section-head">
         <p>Selected work</p>
-        <span>Project pages with problem, solution, diagrams and roadmap.</span>
+        <span>Projects with a data story — not just a dependency list.</span>
       </div>
       <div className="project-list">
         {projects.map((project) => <article className={`project ${project.tone}`} key={project.name}>
