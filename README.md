@@ -13,4 +13,4 @@ Open `http://localhost:3000`.
 
 ## Production
 
-Built with Next.js for Vercel. Pushes to the connected production branch can trigger a new deployment.
+Built with Next.js for Vercel. Connect this repository in Vercel so pushes to `main` create production deployments.
