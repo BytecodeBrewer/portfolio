@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   };
 }
 
-function FlowDiagram({ label, title, intro, nodes }: { label: string; title: string; intro: string; nodes: string[] }) {
+function FlowDiagram({ label, title, intro, nodes }: { label: string; title: string; intro: string; nodes: NonNullable<ReturnType<typeof getProject>>["diagram"]["nodes"] }) {
   return <section className="case-band">
     <div className="case-section-head">
       <p>{label}</p>
@@ -29,10 +29,24 @@ function FlowDiagram({ label, title, intro, nodes }: { label: string; title: str
     </div>
     <p className="diagram-intro">{intro}</p>
     <div className="flow-diagram">
-      {nodes.map((node, index) => <div className="flow-node" key={node}>
-        <span>{String(index + 1).padStart(2, "0")}</span>
-        <b>{node}</b>
-      </div>)}
+      {nodes.map((node, index) => {
+        const item = typeof node === "string" ? { title: node } : node;
+        const classes = ["flow-node", item.span === "wide" ? "wide" : "", item.media ? "has-media" : ""].filter(Boolean).join(" ");
+        return <div className={classes} key={`${index}-${item.title}`}>
+          <span>{String(index + 1).padStart(2, "0")}</span>
+          <div>
+            <b>{item.title}</b>
+            {item.text ? <p>{item.text}</p> : null}
+          </div>
+          {item.media ? <figure>
+            <img src={item.media.src} alt={item.media.alt} />
+            <figcaption>
+              <strong>{item.media.title}</strong>
+              <small>{item.media.caption}</small>
+            </figcaption>
+          </figure> : null}
+        </div>;
+      })}
     </div>
   </section>;
 }

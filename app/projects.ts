@@ -10,7 +10,7 @@ type Diagram = {
   label: string;
   title: string;
   intro: string;
-  nodes: string[];
+  nodes: DiagramNode[];
 };
 
 type ProjectMedia = {
@@ -20,6 +20,13 @@ type ProjectMedia = {
   caption: string;
   span?: "wide";
   variant?: "logo";
+};
+
+type DiagramNode = string | {
+  title: string;
+  text?: string;
+  media?: ProjectMedia;
+  span?: "wide";
 };
 
 export type Project = {
@@ -127,7 +134,7 @@ export const projects: Project[] = [
     index: "03",
     name: "SMART",
     label: "AI-assisted test infrastructure",
-    summary: "A completed student team project that turns natural-language test intent into generated Playwright code, runs it against reproducible mockserver data and returns feedback in one UI loop.",
+    summary: "A student team project that turns natural-language test intent into generated Playwright code, runs it against reproducible mockserver data and returns feedback in one UI loop.",
     contribution: "Student team project - completed",
     tags: ["TypeScript", "Go", "MCP", "Playwright", "Mockserver", "Docker"],
     href: "https://github.com/BytecodeBrewer/smart-showcase",
@@ -137,55 +144,59 @@ export const projects: Project[] = [
       {
         eyebrow: "Why it existed",
         title: "Generated tests only help when they can actually run",
-        body: "The point was not to build another chat surface that spits out code and leaves the user alone with it. SMART connects prompt, validation, generated Playwright, mockserver data and execution feedback, so the test idea becomes something inspectable and runnable."
+        body: "SMART was built around a simple gap: natural-language test ideas are useful only when they become reviewable, runnable test cases. The system connects prompt validation, generated Playwright code, mockserver data and execution feedback in one workflow."
       },
       {
         eyebrow: "Demo shape",
-        title: "Prompt, code, run result, then refinement",
-        body: "The demo is the useful thing to show: a booking scenario is written as natural language, the system validates the prompt, generates Playwright code and opens a run view with output, browser screenshot and feedback. Not magic. More like a controlled workflow with fewer places to lose the thread."
+        title: "Prompt, review, execute, reuse",
+        body: "The useful part is the controlled sequence. A user writes the scenario, receives validation feedback, reviews the generated Playwright code and starts the run only after confirmation. Automation helps here, but it does not run ahead of the user."
       },
       {
         eyebrow: "My contribution",
         title: "Frontend flow, validation logic and documentation",
-        body: "I worked across the visible workflow: chat-like interaction, prompt validation, generated-code presentation, save/edit actions, result feedback and project documentation. The portfolio page should therefore show the product loop first, and the engineering detail only after that."
+        body: "I worked across the visible workflow: chat-like interaction, prompt validation, generated-code presentation, save/edit actions, result feedback and project documentation."
       }
     ],
     diagram: {
-      label: "Demo loop",
-      title: "From test intent to a reproducible run",
-      intro: "SMART should be read as a loop, not as a dependency list. The user starts with intent, the system turns that into generated test code, and the run result closes the loop.",
-      nodes: ["Booking test scenario", "Prompt validation", "Generated Playwright code", "Mockserver / supplier data", "Browser execution", "Output, screenshot and video", "Edit or save", "Reusable testcase"]
+      label: "Demo flow",
+      title: "Seven steps from prompt to reusable test",
+      intro: "The flow below shows one test case from clean chat context to a saved, reusable test.",
+      nodes: [
+        { title: "Open new chat", text: "A fresh chat creates a clean context for a new test scenario." },
+        { title: "Write prompt", text: "The user describes the test case in natural language and sends it." },
+        { title: "Validate prompt", text: "The prompt is checked first. Missing information leads to feedback; a valid prompt moves on." },
+        {
+          title: "Generate Playwright code",
+          text: "The system returns generated code for review before anything is executed.",
+          span: "wide",
+          media: {
+            src: "/projects/smart-svg/chat-ui.svg",
+            alt: "SMART chat interface showing a German travel-booking test prompt and generated Playwright code",
+            title: "Prompt-to-code interface",
+            caption: "The generated test appears inside the same chat flow, so the user can review it before running it."
+          }
+        },
+        { title: "Confirm run", text: "The user checks the draft, edits if needed and starts the run deliberately." },
+        {
+          title: "Start test environment",
+          text: "The environment starts and Playwright runs the generated flow in a browser view.",
+          span: "wide",
+          media: {
+            src: "/projects/smart-svg/test-run-result.svg",
+            alt: "SMART run view showing Playwright test output and browser execution",
+            title: "Run view",
+            caption: "The execution view shows the run output and the browser state of the tested flow."
+          }
+        },
+        { title: "Save, edit or rerun", text: "The test case and chat history stay available for later edits and reruns." }
+      ]
     },
-    mediaTitle: "Demo material",
-    mediaIntro: "Screenshots from the completed demo flow: project identity, prompt-to-code interface and execution result.",
-    media: [
-      {
-        src: "/projects/smart-svg/cover-smart.svg",
-        alt: "SMART project logo with the subtitle Software for Mockserver and Automated Resource Testing",
-        title: "Project identity",
-        caption: "SMART stands for Software for Mockserver and Automated Resource Testing.",
-        span: "wide",
-        variant: "logo"
-      },
-      {
-        src: "/projects/smart-svg/chat-ui.svg",
-        alt: "SMART chat interface showing a German travel-booking test prompt and generated Playwright code",
-        title: "Prompt-to-code interface",
-        caption: "A booking scenario is validated and converted into Playwright code inside the UI."
-      },
-      {
-        src: "/projects/smart-svg/test-run-result.svg",
-        alt: "SMART run view showing Playwright test output and a browser screenshot of a CHECK24 travel page",
-        title: "Test execution",
-        caption: "The generated test opens a run view with output logs and a browser screenshot of the tested flow."
-      }
-    ],
-    roadmapTitle: "Completed sprint path",
+    roadmapTitle: "Project roadmap",
     roadmap: [
-      { title: "Sprint 1", status: "Completed", text: "Design thinking phase: problem space, target space, first prototypes and the technical stack decision." },
-      { title: "Sprint 2", status: "Completed", text: "Pilot phase: frontend input flow, prompt API connection, system prompts, entity relations and simple SU-Proxy behavior." },
-      { title: "Sprint 3", status: "Completed", text: "MVP phase: Playwright generation from user prompts, prompt validation, request/response tagging and storage-connected data handling." },
-      { title: "Sprint 4", status: "Completed", text: "Final integration: running tests through the web interface, user-prompt feedback, cache integration, frontend chat history and MCP server work." }
+      { title: "Sprint 1", status: "Foundation", text: "Design thinking phase: problem space, target space, first prototypes and the technical stack decision." },
+      { title: "Sprint 2", status: "Pilot", text: "Frontend input flow, prompt API connection, system prompts, entity relations and simple SU-Proxy behavior." },
+      { title: "Sprint 3", status: "MVP", text: "Playwright generation from user prompts, prompt validation, request/response tagging and storage-connected data handling." },
+      { title: "Sprint 4", status: "Integration", text: "Running tests through the web interface, user-prompt feedback, cache integration, frontend chat history and MCP server work." }
     ]
   },
   {
