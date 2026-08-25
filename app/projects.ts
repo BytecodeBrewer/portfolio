@@ -19,6 +19,7 @@ type ProjectMedia = {
   title: string;
   caption: string;
   span?: "wide";
+  variant?: "logo";
 };
 
 export type Project = {
@@ -39,8 +40,6 @@ export type Project = {
   mediaIntro?: string;
   roadmapTitle: string;
   roadmap: { title: string; status: string; text: string }[];
-  productNotesTitle: string;
-  productNotes: string[];
 };
 
 export const projects: Project[] = [
@@ -79,12 +78,6 @@ export const projects: Project[] = [
       { title: "Sprint 2", status: "In progress", text: "Stronger market metrics, broader data clients, yfinance workflows and tested pandas transformations." },
       { title: "Sprint 3", status: "Planned", text: "Storage layer, clearer data architecture and a web-ready interface direction with NiceGUI." },
       { title: "Sprint 4+", status: "Future", text: "Docker, scheduled ingestion, cloud storage, quality checks, reporting and later AI-assisted monitoring." }
-    ],
-    productNotesTitle: "How to read it",
-    productNotes: [
-      "This is not positioned as a trading tool; it is a staged analytics and data-engineering project.",
-      "The strongest signal is the roadmap discipline: usable slices instead of one oversized architecture promise.",
-      "Future screenshots should show the dashboard and the metric layer working on real historical data."
     ]
   },
   {
@@ -127,12 +120,6 @@ export const projects: Project[] = [
       { title: "Base Engine", status: "Next", text: "Matched-betting calculations, free-bet strategies, dutching, stake optimization and arbitrage checks." },
       { title: "Capital Layer", status: "Planned", text: "An orchestrator that routes capital by EV, ROI, risk, liquidity and lock-up across strategy engines." },
       { title: "Cloud v1", status: "Target", text: "Web UI, collectors, API adapters, simulation controls, performance reports and approved execution flows." }
-    ],
-    productNotesTitle: "What this page should prove",
-    productNotes: [
-      "Q-Bet is early, so the page must clearly separate implemented domain layer from future v1 target.",
-      "The engine flow should emphasize calculations, constraints and approval boundaries, not hype around automation.",
-      "Later portfolio assets should show formulas, example opportunity objects and simulation output."
     ]
   },
   {
@@ -169,34 +156,28 @@ export const projects: Project[] = [
       intro: "SMART should be read as a loop, not as a dependency list. The user starts with intent, the system turns that into generated test code, and the run result closes the loop.",
       nodes: ["Booking test scenario", "Prompt validation", "Generated Playwright code", "Mockserver / supplier data", "Browser execution", "Output, screenshot and video", "Edit or save", "Reusable testcase"]
     },
-    mediaTitle: "What belongs on the page",
-    mediaIntro: "These assets make SMART understandable without turning the page into a poster dump: one logo visual, one demo screen, one execution proof and one sprint history.",
+    mediaTitle: "Demo material",
+    mediaIntro: "Screenshots from the completed demo flow: project identity, prompt-to-code interface and execution result.",
     media: [
       {
         src: "/projects/smart-svg/cover-smart.svg",
         alt: "SMART project logo with the subtitle Software for Mockserver and Automated Resource Testing",
-        title: "Logo and project name",
-        caption: "Good as the visual opener. It communicates the acronym and keeps the project title clean: SMART, not smart-showcase.",
-        span: "wide"
+        title: "Project identity",
+        caption: "SMART stands for Software for Mockserver and Automated Resource Testing.",
+        span: "wide",
+        variant: "logo"
       },
       {
         src: "/projects/smart-svg/chat-ui.svg",
         alt: "SMART chat interface showing a German travel-booking test prompt and generated Playwright code",
-        title: "Demo interface",
-        caption: "This is the strongest product screenshot: user intent, prompt validation and generated Playwright code are visible in one screen."
+        title: "Prompt-to-code interface",
+        caption: "A booking scenario is validated and converted into Playwright code inside the UI."
       },
       {
         src: "/projects/smart-svg/test-run-result.svg",
         alt: "SMART run view showing Playwright test output and a browser screenshot of a CHECK24 travel page",
         title: "Test execution",
-        caption: "Useful as proof that the generated test is not only text. The run view shows logs, browser state and feedback."
-      },
-      {
-        src: "/projects/smart-svg/timeline.svg",
-        alt: "SMART sprint timeline from design thinking through pilot, MVP and MCP server work",
-        title: "Completed sprint path",
-        caption: "This belongs on the page as project history: four sprints from problem framing to pilot, MVP and the final MCP/SU-Proxy work.",
-        span: "wide"
+        caption: "The generated test opens a run view with output logs and a browser screenshot of the tested flow."
       }
     ],
     roadmapTitle: "Completed sprint path",
@@ -205,12 +186,6 @@ export const projects: Project[] = [
       { title: "Sprint 2", status: "Completed", text: "Pilot phase: frontend input flow, prompt API connection, system prompts, entity relations and simple SU-Proxy behavior." },
       { title: "Sprint 3", status: "Completed", text: "MVP phase: Playwright generation from user prompts, prompt validation, request/response tagging and storage-connected data handling." },
       { title: "Sprint 4", status: "Completed", text: "Final integration: running tests through the web interface, user-prompt feedback, cache integration, frontend chat history and MCP server work." }
-    ],
-    productNotesTitle: "What should not be over-presented",
-    productNotes: [
-      "The Vercel phone screenshots are deployment debugging material, not portfolio content.",
-      "The full architecture flow and MCP class diagram are useful engineering references, but too dense for the first SMART read.",
-      "The page should show SMART as a completed team project: demo loop, sprint path and clear personal contribution."
     ]
   },
   {
@@ -253,12 +228,6 @@ export const projects: Project[] = [
       { title: "Sync core", status: "Working", text: "Mirrors source records into a central database with persistent mapping state." },
       { title: "Robustness", status: "Next", text: "Conflict handling, property mismatch warnings and clearer sync diagnostics." },
       { title: "Cloud service", status: "Future", text: "Permissioned connectors, scheduled sync and schema checks without desktop dependency." }
-    ],
-    productNotesTitle: "Why this is general",
-    productNotes: [
-      "The problem is not limited to study modules; it applies to any Notion workspace split across separate databases.",
-      "The valuable proof is the merge behavior: source tables, mapping state, deletion handling and one central target.",
-      "A future demo should show Notion before the tool, the sync run, and the unified database after the tool."
     ]
   }
 ];

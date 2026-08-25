@@ -47,7 +47,7 @@ function MediaGallery({ project }: { project: NonNullable<ReturnType<typeof getP
     </div>
     {project.mediaIntro ? <p className="media-intro">{project.mediaIntro}</p> : null}
     <div className="media-grid">
-      {project.media.map((item) => <figure className={item.span === "wide" ? "wide" : undefined} key={item.src}>
+      {project.media.map((item) => <figure className={[item.span === "wide" ? "wide" : "", item.variant === "logo" ? "logo-media" : ""].filter(Boolean).join(" ") || undefined} key={item.src}>
         <img src={item.src} alt={item.alt} />
         <figcaption>
           <b>{item.title}</b>
@@ -108,14 +108,6 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             <p>{item.text}</p>
           </div>)}
         </div>
-      </section>
-
-      <section className="notes shell">
-        <div className="case-section-head">
-          <p>Portfolio angle</p>
-          <h2>{project.productNotesTitle}</h2>
-        </div>
-        <ul>{project.productNotes.map((note) => <li key={note}>{note}</li>)}</ul>
       </section>
     </article>
   </main>;
