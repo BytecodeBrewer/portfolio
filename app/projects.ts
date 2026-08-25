@@ -13,6 +13,14 @@ type Diagram = {
   nodes: string[];
 };
 
+type ProjectMedia = {
+  src: string;
+  alt: string;
+  title: string;
+  caption: string;
+  span?: "wide";
+};
+
 export type Project = {
   slug: string;
   index: string;
@@ -26,6 +34,9 @@ export type Project = {
   signal: number[];
   storySections: StorySection[];
   diagram: Diagram;
+  media?: ProjectMedia[];
+  mediaTitle?: string;
+  mediaIntro?: string;
   roadmapTitle: string;
   roadmap: { title: string; status: string; text: string }[];
   productNotesTitle: string;
@@ -127,44 +138,79 @@ export const projects: Project[] = [
   {
     slug: "smart",
     index: "03",
-    name: "S.M.A.R.T.",
+    name: "SMART",
     label: "AI-assisted test infrastructure",
-    summary: "A team project with CHECK24 combining natural-language Playwright generation, deterministic mock data and execution feedback.",
-    contribution: "Student team - frontend, workflow & validation",
-    tags: ["TypeScript", "Go", "S3", "Parquet", "Redis", "Docker"],
+    summary: "A completed student team project that turns natural-language test intent into generated Playwright code, runs it against reproducible mockserver data and returns feedback in one UI loop.",
+    contribution: "Student team project - completed",
+    tags: ["TypeScript", "Go", "MCP", "Playwright", "Mockserver", "Docker"],
     href: "https://github.com/BytecodeBrewer/smart-showcase",
     tone: "violet",
     signal: [28, 40, 48, 43, 65, 58, 77, 84],
     storySections: [
       {
-        eyebrow: "Product loop",
-        title: "Not just prompt in, test out",
-        body: "The interesting part is the feedback loop: a user describes test intent, generated Playwright code is validated against deterministic mock data, execution returns feedback, and the flow can be refined."
+        eyebrow: "Why it existed",
+        title: "Generated tests only help when they can actually run",
+        body: "The point was not to build another chat surface that spits out code and leaves the user alone with it. SMART connects prompt, validation, generated Playwright, mockserver data and execution feedback, so the test idea becomes something inspectable and runnable."
+      },
+      {
+        eyebrow: "Demo shape",
+        title: "Prompt, code, run result, then refinement",
+        body: "The demo is the useful thing to show: a booking scenario is written as natural language, the system validates the prompt, generates Playwright code and opens a run view with output, browser screenshot and feedback. Not magic. More like a controlled workflow with fewer places to lose the thread."
       },
       {
         eyebrow: "My contribution",
-        title: "Interface, validation and data handling",
-        body: "My work crossed UI flows, prompt validation, storage-connected paths and documentation. That makes the project useful in the portfolio as AI-assisted developer tooling, not as another generic chatbot example."
+        title: "Frontend flow, validation logic and documentation",
+        body: "I worked across the visible workflow: chat-like interaction, prompt validation, generated-code presentation, save/edit actions, result feedback and project documentation. The portfolio page should therefore show the product loop first, and the engineering detail only after that."
       }
     ],
     diagram: {
-      label: "Execution feedback loop",
-      title: "From test intent to reproducible run",
-      intro: "S.M.A.R.T. is best explained as a loop, because the value is in connecting generation, mock data and execution feedback.",
-      nodes: ["Natural-language intent", "Prompt validation", "Playwright generation", "Mock data", "Execution", "Feedback", "Refinement", "Documentation"]
+      label: "Demo loop",
+      title: "From test intent to a reproducible run",
+      intro: "SMART should be read as a loop, not as a dependency list. The user starts with intent, the system turns that into generated test code, and the run result closes the loop.",
+      nodes: ["Booking test scenario", "Prompt validation", "Generated Playwright code", "Mockserver / supplier data", "Browser execution", "Output, screenshot and video", "Edit or save", "Reusable testcase"]
     },
-    roadmapTitle: "Project lens",
-    roadmap: [
-      { title: "Intent", status: "Built", text: "User-facing flow for describing test goals and validating generated output." },
-      { title: "Data", status: "Built", text: "Mock-data paths and storage-connected handling for reproducible test contexts." },
-      { title: "Execution", status: "Built", text: "Playwright-centered feedback loop around generated tests." },
-      { title: "Showcase", status: "Portfolio", text: "Demonstrates AI-assisted developer tooling with real workflow constraints." }
+    mediaTitle: "What belongs on the page",
+    mediaIntro: "These assets make SMART understandable without turning the page into a poster dump: one logo visual, one demo screen, one execution proof and one sprint history.",
+    media: [
+      {
+        src: "/projects/smart-svg/cover-smart.svg",
+        alt: "SMART project logo with the subtitle Software for Mockserver and Automated Resource Testing",
+        title: "Logo and project name",
+        caption: "Good as the visual opener. It communicates the acronym and keeps the project title clean: SMART, not smart-showcase.",
+        span: "wide"
+      },
+      {
+        src: "/projects/smart-svg/chat-ui.svg",
+        alt: "SMART chat interface showing a German travel-booking test prompt and generated Playwright code",
+        title: "Demo interface",
+        caption: "This is the strongest product screenshot: user intent, prompt validation and generated Playwright code are visible in one screen."
+      },
+      {
+        src: "/projects/smart-svg/test-run-result.svg",
+        alt: "SMART run view showing Playwright test output and a browser screenshot of a CHECK24 travel page",
+        title: "Test execution",
+        caption: "Useful as proof that the generated test is not only text. The run view shows logs, browser state and feedback."
+      },
+      {
+        src: "/projects/smart-svg/timeline.svg",
+        alt: "SMART sprint timeline from design thinking through pilot, MVP and MCP server work",
+        title: "Completed sprint path",
+        caption: "This belongs on the page as project history: four sprints from problem framing to pilot, MVP and the final MCP/SU-Proxy work.",
+        span: "wide"
+      }
     ],
-    productNotesTitle: "What to show next",
+    roadmapTitle: "Completed sprint path",
+    roadmap: [
+      { title: "Sprint 1", status: "Completed", text: "Design thinking phase: problem space, target space, first prototypes and the technical stack decision." },
+      { title: "Sprint 2", status: "Completed", text: "Pilot phase: frontend input flow, prompt API connection, system prompts, entity relations and simple SU-Proxy behavior." },
+      { title: "Sprint 3", status: "Completed", text: "MVP phase: Playwright generation from user prompts, prompt validation, request/response tagging and storage-connected data handling." },
+      { title: "Sprint 4", status: "Completed", text: "Final integration: running tests through the web interface, user-prompt feedback, cache integration, frontend chat history and MCP server work." }
+    ],
+    productNotesTitle: "What should not be over-presented",
     productNotes: [
-      "A short demo should show prompt, generated Playwright test and execution result in one loop.",
-      "The case page should stay focused on workflow, not on listing every backend dependency.",
-      "Screenshots from the UI will matter more than extra architecture text."
+      "The Vercel phone screenshots are deployment debugging material, not portfolio content.",
+      "The full architecture flow and MCP class diagram are useful engineering references, but too dense for the first SMART read.",
+      "The page should show SMART as a completed team project: demo loop, sprint path and clear personal contribution."
     ]
   },
   {

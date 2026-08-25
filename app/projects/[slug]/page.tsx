@@ -37,6 +37,27 @@ function FlowDiagram({ label, title, intro, nodes }: { label: string; title: str
   </section>;
 }
 
+function MediaGallery({ project }: { project: NonNullable<ReturnType<typeof getProject>> }) {
+  if (!project.media?.length) return null;
+
+  return <section className="case-media shell">
+    <div className="case-section-head">
+      <p>Selected material</p>
+      <h2>{project.mediaTitle ?? "Project visuals"}</h2>
+    </div>
+    {project.mediaIntro ? <p className="media-intro">{project.mediaIntro}</p> : null}
+    <div className="media-grid">
+      {project.media.map((item) => <figure className={item.span === "wide" ? "wide" : undefined} key={item.src}>
+        <img src={item.src} alt={item.alt} />
+        <figcaption>
+          <b>{item.title}</b>
+          <span>{item.caption}</span>
+        </figcaption>
+      </figure>)}
+    </div>
+  </section>;
+}
+
 export default async function ProjectPage({ params }: ProjectPageProps) {
   const { slug } = await params;
   const project = getProject(slug);
@@ -72,6 +93,8 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
       </section>
 
       <FlowDiagram label={project.diagram.label} title={project.diagram.title} intro={project.diagram.intro} nodes={project.diagram.nodes} />
+
+      <MediaGallery project={project} />
 
       <section className="roadmap shell">
         <div className="case-section-head">
