@@ -22,13 +22,17 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
 }
 
 function FlowDiagram({ label, title, intro, nodes }: { label: string; title: string; intro: string; nodes: NonNullable<ReturnType<typeof getProject>>["diagram"]["nodes"] }) {
+  const hasRichNodes = nodes.some((node) => typeof node !== "string");
+  const richFlowStyles = ".flow-diagram.rich-flow{grid-template-columns:1fr}.flow-diagram.rich-flow .flow-node{grid-column:1/-1;min-height:auto;justify-content:flex-start;gap:18px}.flow-diagram.rich-flow .flow-node:not(:last-child)::after{display:none}@media(min-width:861px){.flow-diagram.rich-flow .flow-node.has-media{display:grid;grid-template-columns:minmax(220px,.82fr) minmax(0,1.55fr);align-items:start;gap:24px}.flow-diagram.rich-flow .flow-node.has-media>span{grid-column:1}.flow-diagram.rich-flow .flow-node.has-media>div{grid-column:1}.flow-diagram.rich-flow .flow-node.has-media>figure{grid-column:2;grid-row:1/span 2}.flow-diagram.rich-flow .flow-node img{max-height:560px;object-fit:contain}}@media(max-width:860px){.flow-diagram.rich-flow .flow-node.has-media{display:flex;flex-direction:column}.flow-diagram.rich-flow .flow-node img{max-height:none}}";
+
   return <section className="case-band">
+    {hasRichNodes ? <style>{richFlowStyles}</style> : null}
     <div className="case-section-head">
       <p>{label}</p>
       <h2>{title}</h2>
     </div>
     <p className="diagram-intro">{intro}</p>
-    <div className="flow-diagram">
+    <div className={`flow-diagram${hasRichNodes ? " rich-flow" : ""}`}>
       {nodes.map((node, index) => {
         const item = typeof node === "string" ? { title: node } : node;
         const classes = ["flow-node", item.span === "wide" ? "wide" : "", item.media ? "has-media" : ""].filter(Boolean).join(" ");
