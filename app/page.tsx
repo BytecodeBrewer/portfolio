@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Script from "next/script";
 import { projects } from "./projects";
 
 function Signal({ values }: { values: number[] }) {
@@ -12,6 +13,7 @@ export default function Home() {
       <nav aria-label="Main navigation">
         <a href="#work">Projects</a>
         <a href="#approach">Approach</a>
+        <a href="#profile">LinkedIn</a>
         <a className="nav-cta" href="https://github.com/BytecodeBrewer" target="_blank" rel="noreferrer">GitHub</a>
       </nav>
     </header>
@@ -72,6 +74,33 @@ export default function Home() {
           <li><span>02</span><div><b>Show the data path</b><p>Where does input enter, how is it normalized, and what result reaches the user?</p></div></li>
           <li><span>03</span><div><b>State the product direction</b><p>Roadmaps matter when they explain how a prototype becomes more useful.</p></div></li>
         </ol>
+      </div>
+    </section>
+
+    <section className="profile-badge shell" id="profile">
+      <Script src="https://platform.linkedin.com/badges/js/profile.js" strategy="lazyOnload" />
+      <div className="section-head">
+        <p>Profile</p>
+        <span>Work history, studies and project context in one place.</span>
+      </div>
+      <div className="profile-badge-grid">
+        <div>
+          <h2>LinkedIn profile</h2>
+          <p>For a compact view of my current role, studies and project direction. The portfolio shows the work; LinkedIn keeps the formal context close by.</p>
+        </div>
+        <div className="linkedin-card" aria-label="LinkedIn profile badge">
+          <div
+            className="badge-base LI-profile-badge"
+            data-locale="en_US"
+            data-size="large"
+            data-theme="dark"
+            data-type="VERTICAL"
+            data-vanity="lev-gusiev"
+            data-version="v1"
+          >
+            <a className="badge-base__link LI-simple-link" href="https://de.linkedin.com/in/lev-gusiev/en?trk=profile-badge">Lev G.</a>
+          </div>
+        </div>
       </div>
     </section>
 
