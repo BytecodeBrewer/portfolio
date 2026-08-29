@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { LinkedInBadge } from "./LinkedInBadge";
 import { projects } from "./projects";
 
 function Signal({ values }: { values: number[] }) {
@@ -86,19 +87,7 @@ export default function Home() {
           <h2>LinkedIn profile</h2>
           <p>For a compact view of my current role, studies and project direction. The portfolio shows the work; LinkedIn keeps the formal context close by.</p>
         </div>
-        <div className="linkedin-card" aria-label="LinkedIn profile badge">
-          <div
-            className="badge-base LI-profile-badge"
-            data-locale="en_US"
-            data-size="large"
-            data-theme="dark"
-            data-type="VERTICAL"
-            data-vanity="lev-gusiev"
-            data-version="v1"
-          >
-            <a className="badge-base__link LI-simple-link" href="https://de.linkedin.com/in/lev-gusiev/en?trk=profile-badge">Lev G.</a>
-          </div>
-        </div>
+        <LinkedInBadge />
       </div>
     </section>
 
