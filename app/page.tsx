@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Script from "next/script";
 import { projects } from "./projects";
 
 function Signal({ values }: { values: number[] }) {
@@ -78,7 +77,6 @@ export default function Home() {
     </section>
 
     <section className="profile-badge shell" id="profile">
-      <Script src="https://platform.linkedin.com/badges/js/profile.js" strategy="lazyOnload" />
       <div className="section-head">
         <p>Profile</p>
         <span>Work history, studies and project context in one place.</span>
