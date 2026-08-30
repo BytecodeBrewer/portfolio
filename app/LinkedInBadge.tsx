@@ -11,7 +11,8 @@ export function LinkedInBadge() {
     if (!card) return;
 
     const checkBadge = () => {
-      setBadgeLoaded(Boolean(card.querySelector("iframe")));
+      const frames = Array.from(card.querySelectorAll("iframe"));
+      setBadgeLoaded(frames.some((frame) => frame.offsetWidth > 100 && frame.offsetHeight > 100));
     };
 
     checkBadge();
@@ -39,9 +40,15 @@ export function LinkedInBadge() {
         <a className="badge-base__link LI-simple-link" href="https://de.linkedin.com/in/lev-gusiev/en?trk=profile-badge">Lev G.</a>
       </div>
       <div className="linkedin-badge-fallback">
-        <span>LinkedIn profile</span>
-        <strong>Lev G.</strong>
-        <a href="https://de.linkedin.com/in/lev-gusiev/en?trk=profile-badge" target="_blank" rel="noreferrer">View profile</a>
+        <div className="linkedin-fallback-header" aria-hidden="true">
+          <span>Linked</span><b>in</b>
+        </div>
+        <div className="linkedin-fallback-content">
+          <div className="linkedin-fallback-avatar" aria-hidden="true">LG</div>
+          <strong>Lev G.</strong>
+          <p>Data, automation and systems projects.</p>
+          <a href="https://de.linkedin.com/in/lev-gusiev/en?trk=profile-badge" target="_blank" rel="noreferrer">View profile</a>
+        </div>
       </div>
     </div>
   );
