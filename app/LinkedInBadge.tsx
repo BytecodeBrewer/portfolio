@@ -44,7 +44,7 @@ export function LinkedInBadge() {
           <span>Linked</span><b>in</b>
         </div>
         <div className="linkedin-fallback-content">
-          <div className="linkedin-fallback-avatar" aria-hidden="true">LG</div>
+          <img className="linkedin-fallback-avatar" src="/profile/lev-linkedin.png" alt="Lev G." />
           <strong>Lev G.</strong>
           <p>Data, automation and systems projects.</p>
           <a href="https://de.linkedin.com/in/lev-gusiev/en?trk=profile-badge" target="_blank" rel="noreferrer">View profile</a>
