@@ -2,8 +2,34 @@ import Link from "next/link";
 import { LinkedInBadge } from "./LinkedInBadge";
 import { projects } from "./projects";
 
-function Signal({ values }: { values: number[] }) {
-  return <div className="signal" aria-hidden="true">{values.map((value, index) => <i key={index} style={{ height: `${value}%` }} />)}</div>;
+function ProjectMark({ slug }: { slug: string }) {
+  if (slug === "argus") {
+    return <div className="project-mark mark-argus" aria-hidden="true">
+      <span /><span /><span /><span />
+      <i />
+    </div>;
+  }
+
+  if (slug === "q-bet") {
+    return <div className="project-mark mark-qbet" aria-hidden="true">
+      <span>01</span>
+      <i />
+      <span>10</span>
+    </div>;
+  }
+
+  if (slug === "smart") {
+    return <div className="project-mark mark-smart" aria-hidden="true">
+      <span>LLM</span>
+      <i />
+      <span>PW</span>
+    </div>;
+  }
+
+  return <div className="project-mark mark-notion" aria-hidden="true">
+    <span /><span /><span /><span />
+    <i />
+  </div>;
 }
 
 export default function Home() {
@@ -20,7 +46,7 @@ export default function Home() {
 
     <section className="hero shell" id="top">
       <div className="eyebrow"><span /> Informatics · Data · Systems</div>
-      <h1>I turn messy data<br />into <em>useful systems.</em></h1>
+      <h1>Turn messy data<br />into <em>useful systems.</em></h1>
       <div className="hero-bottom">
         <p>I’m Lev, an Informatics student in Leipzig building practical projects at the intersection of data engineering, analytics, automation and AI-enabled workflows.</p>
         <a className="round-link" href="#work" aria-label="Explore selected projects">↓</a>
@@ -35,7 +61,7 @@ export default function Home() {
     <section className="work shell" id="work">
       <div className="section-head">
         <p>Selected work</p>
-        <span>Projects with a data story — not just a dependency list.</span>
+        <div className="section-mark" aria-hidden="true"><i /><i /><i /></div>
       </div>
       <div className="project-list">
         {projects.map((project) => <article className={`project ${project.tone}`} key={project.name}>
@@ -43,7 +69,7 @@ export default function Home() {
           <div className="project-main">
             <div className="project-title">
               <div><p>{project.label}</p><h2>{project.name}</h2></div>
-              <Signal values={project.signal} />
+              <ProjectMark slug={project.slug} />
             </div>
             <p className="project-copy">{project.summary}</p>
             <p className="contribution">{project.contribution}</p>
