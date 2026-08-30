@@ -5,16 +5,27 @@ import { projects } from "./projects";
 function ProjectMark({ slug }: { slug: string }) {
   if (slug === "argus") {
     return <div className="project-mark mark-argus" aria-hidden="true">
-      <span /><span /><span /><span />
-      <i />
+      <svg viewBox="0 0 156 92" role="img">
+        <path d="M22 70H136" />
+        <path d="M22 70L43 55L62 60L83 38L104 45L130 22" />
+        <circle cx="43" cy="55" r="3" />
+        <circle cx="62" cy="60" r="3" />
+        <circle cx="83" cy="38" r="3" />
+        <circle cx="104" cy="45" r="3" />
+        <circle cx="130" cy="22" r="3" />
+      </svg>
     </div>;
   }
 
   if (slug === "q-bet") {
     return <div className="project-mark mark-qbet" aria-hidden="true">
-      <span>01</span>
-      <i />
-      <span>10</span>
+      <div className="binary-stream">
+        <span>0101</span>
+        <span>1100</span>
+        <span>0011</span>
+      </div>
+      <div className="gear gear-large" />
+      <div className="gear gear-small" />
     </div>;
   }
 
