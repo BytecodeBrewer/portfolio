@@ -7,6 +7,7 @@ import { AmbientCanvas } from "./components/AmbientCanvas";
 import { LanguageToggle } from "./components/LanguageToggle";
 import { TechIconBadge } from "./components/TechIcon";
 import { useLanguage } from "./context/LanguageContext";
+import { useTheme } from "./context/ThemeContext";
 import { Project, defaultProjects } from "./projects";
 
 function StatusBadge({ status }: { status: Project["status"] }) {
@@ -114,9 +115,10 @@ function TechStackPopover({ techList, secondaryTechList }: { techList: Project["
 
 export default function Home() {
   const { lang, t } = useLanguage();
+  const { isDark, toggleTheme } = useTheme();
+  const darkMode = isDark;
   const [projectList, setProjectList] = useState<Project[]>(defaultProjects);
   const [privateModalOpen, setPrivateModalOpen] = useState(false);
-  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     const saved = localStorage.getItem("portfolio_projects_override");
@@ -128,14 +130,6 @@ export default function Home() {
       }
     }
   }, []);
-
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
-  }, [darkMode]);
 
   const handleProjectsChange = (updated: Project[]) => {
     setProjectList(updated);
@@ -160,7 +154,7 @@ export default function Home() {
           <a href="#footer-links" className="hover:text-cyan-500 transition-colors">{t({ en: "Contact", de: "Kontakt" })}</a>
           <LanguageToggle />
           <button
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={toggleTheme}
             className={`p-1.5 rounded-lg border text-xs font-mono transition-colors ${darkMode ? "border-slate-800 bg-slate-900 text-slate-300 hover:border-slate-700" : "border-slate-300 bg-white text-slate-700 hover:border-slate-400"}`}
             title="Toggle theme mode"
           >
