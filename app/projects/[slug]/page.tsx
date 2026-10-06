@@ -72,7 +72,7 @@ export default function ProjectPage() {
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 relative">
-      <AmbientCanvas className="z-0" />
+      <AmbientCanvas className="z-0" projectSlug={project.slug} />
 
       {/* Navigation */}
       <header className="shell flex items-center justify-between py-5 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
