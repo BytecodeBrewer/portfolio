@@ -46,18 +46,78 @@ function AiBadge({ text, aiAugmented }: { text?: { en: string; de: string }; aiA
   );
 }
 
-function ProjectMark({ slug }: { slug: string }) {
-  if (slug === "argus") return <AmbientCanvas variant="etl" className="h-16 w-32 rounded-lg opacity-80" />;
-  if (slug === "q-bet") return <AmbientCanvas variant="quant" className="h-16 w-32 rounded-lg opacity-80" />;
-  if (slug === "mas") return <AmbientCanvas variant="agent" className="h-16 w-32 rounded-lg opacity-80" />;
-  if (slug === "data-lab") return <AmbientCanvas variant="lab" className="h-16 w-32 rounded-lg opacity-80" />;
-  if (slug === "notion-sync") return <AmbientCanvas variant="etl" className="h-16 w-32 rounded-lg opacity-80" />;
-  return <AmbientCanvas variant="agent" className="h-16 w-32 rounded-lg opacity-80" />;
+function PrivateRepoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+  const { t } = useLanguage();
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-slate-900 border border-slate-700 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-2xl">
+        <div className="flex items-center justify-between border-b border-slate-800 pb-3">
+          <h3 className="text-lg font-bold text-white flex items-center gap-2">
+            🔒 {t({ en: "Private Repository", de: "Privates Repository" })}
+          </h3>
+          <button onClick={onClose} className="text-slate-400 hover:text-white font-mono text-sm">✕</button>
+        </div>
+        <p className="text-sm text-slate-300 leading-relaxed">
+          {t({
+            en: "Q-Bet contains proprietary quantitative models and market algorithms. Source code access is granted upon request for technical interviews.",
+            de: "Q-Bet enthält proprietäre Quant-Modelle und Ausführungs-Algorithmen. Quellcode-Zugriff wird auf Anfrage für Tech-Interviews gewährt."
+          })}
+        </p>
+        <div className="flex justify-end pt-2">
+          <button
+            onClick={onClose}
+            className="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-mono text-xs font-semibold"
+          >
+            {t({ en: "Understood", de: "Verstanden" })}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function TechStackPopover({ techList }: { techList: Project["techStack"] }) {
+  const [showMore, setShowMore] = useState(false);
+  const { t } = useLanguage();
+
+  const mainTechs = techList.slice(0, 4);
+  const extraTechs = techList.slice(4);
+
+  return (
+    <div className="relative flex flex-wrap items-center gap-2 pt-2">
+      {mainTechs.map((tech) => (
+        <TechIconBadge key={tech} name={tech} showLabel={false} />
+      ))}
+
+      {extraTechs.length > 0 ? (
+        <div className="relative">
+          <button
+            onClick={() => setShowMore(!showMore)}
+            className="px-2 py-1 rounded-lg border border-slate-700/80 bg-slate-900/90 text-xs font-mono font-semibold text-cyan-400 hover:border-cyan-400 hover:bg-slate-800 transition-colors"
+          >
+            +{extraTechs.length} {t({ en: "More", de: "Mehr" })}
+          </button>
+
+          {showMore ? (
+            <div className="absolute left-0 top-full mt-2 z-30 p-3 rounded-xl bg-slate-900 border border-slate-700 shadow-xl flex flex-wrap gap-2 max-w-xs">
+              {extraTechs.map((tech) => (
+                <TechIconBadge key={tech} name={tech} showLabel={true} />
+              ))}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+    </div>
+  );
 }
 
 export default function Home() {
   const { lang, t } = useLanguage();
   const [projectList, setProjectList] = useState<Project[]>(defaultProjects);
+  const [privateModalOpen, setPrivateModalOpen] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
 
   useEffect(() => {
     const saved = localStorage.getItem("portfolio_projects_override");
@@ -76,32 +136,33 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
+    <main className={`min-h-screen ${darkMode ? "bg-slate-950 text-slate-100" : "bg-slate-900 text-slate-100"} font-sans selection:bg-cyan-500 selection:text-slate-950 transition-colors`}>
       <AdminModal projects={projectList} onProjectsChange={handleProjectsChange} />
+      <PrivateRepoModal isOpen={privateModalOpen} onClose={() => setPrivateModalOpen(false)} />
 
       {/* Header Nav */}
-      <header className="nav shell flex items-center justify-between py-5 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
-        <Link className="wordmark text-lg font-bold font-mono tracking-tight text-white hover:text-cyan-400 transition-colors" href="/">
+      <header className="nav shell flex items-center justify-between py-4 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
+        <Link className="wordmark flex items-center gap-2 text-xl font-extrabold font-mono tracking-tight text-white hover:text-cyan-400 transition-colors" href="/">
+          <span className="w-3 h-3 rounded-sm bg-cyan-400 inline-block" />
           LB<span className="text-cyan-400">/data</span>
         </Link>
-        <nav className="flex items-center gap-6 text-sm font-medium text-slate-300" aria-label="Main navigation">
+        <nav className="flex items-center gap-5 text-sm font-medium text-slate-300" aria-label="Main navigation">
           <a href="#work" className="hover:text-cyan-400 transition-colors">{t({ en: "Projects", de: "Projekte" })}</a>
           <a href="#approach" className="hover:text-cyan-400 transition-colors">{t({ en: "Approach", de: "Ansatz" })}</a>
-          <a href="#footer-links" className="hover:text-cyan-400 transition-colors">{t({ en: "Contact & Socials", de: "Kontakt & Socials" })}</a>
+          <a href="#footer-links" className="hover:text-cyan-400 transition-colors">{t({ en: "Contact", de: "Kontakt" })}</a>
           <LanguageToggle />
-          <a
-            className="nav-cta px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs border border-slate-700 transition-all shadow-sm"
-            href="https://github.com/BytecodeBrewer"
-            target="_blank"
-            rel="noreferrer"
+          <button
+            onClick={() => setDarkMode(!darkMode)}
+            className="p-1.5 rounded-lg border border-slate-800 bg-slate-900 hover:border-slate-700 text-xs font-mono text-slate-300"
+            title="Toggle theme mode"
           >
-            GitHub ↗
-          </a>
+            {darkMode ? "🌙" : "☀️"}
+          </button>
         </nav>
       </header>
 
       {/* Hero Section */}
-      <section className="hero shell py-16 md:py-24 space-y-10" id="top">
+      <section className="hero shell py-12 md:py-20 space-y-8" id="top">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-cyan-400">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
           {t({
@@ -128,35 +189,30 @@ export default function Home() {
           </p>
         </div>
 
-        {/* Jules-inspired ambient canvas in Hero */}
+        {/* Jules-inspired ETL Canvas */}
         <div className="relative w-full h-32 md:h-40 rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-inner">
           <AmbientCanvas variant="etl" className="absolute inset-0 w-full h-full" />
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
           <div className="absolute bottom-4 left-6 flex items-center gap-6 font-mono text-xs text-slate-400">
-            <div><b className="text-cyan-400 font-normal">INGEST:</b> APIs · Files · Realtime Market Odds</div>
-            <div><b className="text-indigo-400 font-normal">TRANSFORM:</b> Vectorized Pandas · Pydantic Schemas</div>
-            <div><b className="text-emerald-400 font-normal">EXECUTE:</b> Controlled Pipelines & Agents</div>
+            <div><b className="text-cyan-400 font-normal">INGEST:</b> APIs · Files · Market Feeds</div>
+            <div><b className="text-indigo-400 font-normal">TRANSFORM:</b> Pandas · Schemas · Vectorization</div>
+            <div><b className="text-emerald-400 font-normal">EXECUTE:</b> Pipelines & Autonomous Workers</div>
           </div>
         </div>
       </section>
 
       {/* Selected Work Section */}
-      <section className="work shell py-12 space-y-10" id="work">
-        <div className="flex items-center justify-between border-b border-slate-900 pb-4">
-          <div>
-            <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">{t({ en: "Selected Work", de: "Ausgewählte Arbeiten" })}</p>
-            <h2 className="text-2xl font-bold text-white tracking-tight">{t({ en: "Engineered Repositories", de: "Entwickelte Repositories" })}</h2>
-          </div>
-          <span className="text-xs font-mono text-slate-500">
-            {t({ en: "Press Ctrl + Shift + A for Admin Panel", de: "Drücke Ctrl + Shift + A fürs Admin-Panel" })}
-          </span>
+      <section className="work shell py-12 space-y-8" id="work">
+        <div className="border-b border-slate-900 pb-4 pt-2">
+          <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">{t({ en: "Selected Work", de: "Ausgewählte Arbeiten" })}</p>
+          <h2 className="text-2xl font-bold text-white tracking-tight mt-1">{t({ en: "Engineered Repositories", de: "Entwickelte Repositories" })}</h2>
         </div>
 
         <div className="space-y-8">
           {projectList.map((project) => (
             <article
               key={project.slug}
-              className={`project group relative p-6 md:p-8 rounded-2xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 transition-all duration-300 hover:shadow-xl hover:shadow-cyan-950/20`}
+              className="project group relative p-6 md:p-8 rounded-2xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:shadow-cyan-950/20"
             >
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
                 <div className="space-y-4 flex-1">
@@ -181,16 +237,13 @@ export default function Home() {
                     {project.contribution[lang]}
                   </p>
 
-                  {/* Tech stack icons row */}
-                  <div className="flex flex-wrap items-center gap-2 pt-2">
-                    {project.techStack.map((tech) => (
-                      <TechIconBadge key={tech} name={tech} />
-                    ))}
-                  </div>
+                  <TechStackPopover techList={project.techStack} />
                 </div>
 
                 <div className="flex flex-col items-end justify-between gap-6 shrink-0">
-                  <ProjectMark slug={project.slug} />
+                  <div className="h-16 w-32 rounded-lg bg-slate-950/60 border border-slate-800 overflow-hidden relative">
+                    <AmbientCanvas variant="etl" className="absolute inset-0 w-full h-full" />
+                  </div>
 
                   <div className="flex items-center gap-3 font-mono text-xs pt-4">
                     <Link
@@ -199,14 +252,24 @@ export default function Home() {
                     >
                       {t({ en: "Open Case Study →", de: "Case Study Öffnen →" })}
                     </Link>
-                    <a
-                      href={project.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
-                    >
-                      {t({ en: "Repo ↗", de: "Repo ↗" })}
-                    </a>
+
+                    {project.isPrivateRepo ? (
+                      <button
+                        onClick={() => setPrivateModalOpen(true)}
+                        className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex items-center gap-1.5"
+                      >
+                        🔒 Private
+                      </button>
+                    ) : (
+                      <a
+                        href={project.href}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
+                      >
+                        {t({ en: "Repo ↗", de: "Repo ↗" })}
+                      </a>
+                    )}
                   </div>
                 </div>
               </div>
@@ -266,7 +329,6 @@ export default function Home() {
             <h2 className="text-3xl font-bold text-white">{t({ en: "Let’s connect.", de: "Lass uns vernetzen." })}</h2>
           </div>
 
-          {/* Social Links with icons */}
           <div className="flex items-center gap-4">
             <a
               href="https://www.linkedin.com/in/lev-b"
