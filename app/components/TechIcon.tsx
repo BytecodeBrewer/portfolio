@@ -16,46 +16,22 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = fal
     switch (iconKey) {
       case "supabase":
         return (
-          <Image
-            src="/logos/supabase-logo.jpeg"
-            alt="Supabase"
-            width={size}
-            height={size}
-            className="rounded-sm object-contain"
-          />
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M21.362 9.354H12V.312L2.638 14.646H12v9.042l9.362-14.334z" />
+          </svg>
         );
       case "vercel":
         return (
-          <Image
-            src="/logos/logo-vercel.png"
-            alt="Vercel"
-            width={size}
-            height={size}
-            className="rounded-sm object-contain"
-          />
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 1L24 22H0L12 1Z" />
+          </svg>
         );
       case "electron":
       case "electronjs":
         return (
-          <Image
-            src="/logos/electron-ts-logo-inspiration.png"
-            alt="Electron"
-            width={size * 1.8}
-            height={size}
-            className="rounded-sm object-contain"
-          />
-        );
-      case "ai":
-      case "aiagent":
-      case "agenticai":
-        return (
-          <Image
-            src="/logos/ai-logo.png"
-            alt="AI"
-            width={size}
-            height={size}
-            className="rounded-sm object-contain"
-          />
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm0 2c5.523 0 10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12 6.477 2 12 2zm0 3a7 7 0 100 14 7 7 0 000-14z" />
+          </svg>
         );
       case "django":
         return (

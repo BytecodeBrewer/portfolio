@@ -7,16 +7,22 @@ interface Props {
   projectSlug?: string;
 }
 
-interface FloatingNode {
+interface DataPacket {
+  railIndex: number;
+  position: number; // 0 to 1 along segment
+  speed: number;
+  size: number;
+  color: string;
+  label?: string;
+  type: "raw" | "transformed" | "db" | "ai";
+}
+
+interface PipelineNode {
   x: number;
   y: number;
-  vx: number;
-  vy: number;
-  radius: number;
   label: string;
-  type: "cloud" | "db" | "ai" | "code" | "node";
-  color: string;
-  pulseOffset: number;
+  type: "source" | "etl" | "warehouse" | "agent";
+  subLabel?: string;
 }
 
 export function AmbientCanvas({ className = "", projectSlug }: Props) {
@@ -40,97 +46,73 @@ export function AmbientCanvas({ className = "", projectSlug }: Props) {
 
     window.addEventListener("resize", handleResize);
 
-    const getLabelsForSlug = (slug?: string) => {
-      switch (slug) {
-        case "q-bet":
-          return [
-            { text: "EV Engine", type: "node", color: "#10b981" },
-            { text: "Arbitrage", type: "node", color: "#34d399" },
-            { text: "Liquidity", type: "db", color: "#059669" },
-            { text: "Pydantic", type: "code", color: "#6ee7b7" },
-            { text: "Risk Lockup", type: "ai", color: "#10b981" },
-          ] as const;
-        case "mas":
-          return [
-            { text: "Agent Bob", type: "ai", color: "#10b981" },
-            { text: "Orchestrator", type: "node", color: "#34d399" },
-            { text: "RunPod GPU", type: "cloud", color: "#6ee7b7" },
-            { text: "vLLM", type: "ai", color: "#059669" },
-            { text: "Task Graph", type: "code", color: "#a7f3d0" },
-          ] as const;
-        case "argus":
-          return [
-            { text: "FX Stream", type: "node", color: "#38bdf8" },
-            { text: "yfinance", type: "db", color: "#0284c7" },
-            { text: "pandas EV", type: "code", color: "#0ea5e9" },
-            { text: "Anomaly Alert", type: "ai", color: "#38bdf8" },
-          ] as const;
-        case "notion-sync":
-          return [
-            { text: "Notion API", type: "cloud", color: "#f59e0b" },
-            { text: "Delta Sync", type: "node", color: "#d97706" },
-            { text: "Master DB", type: "db", color: "#b45309" },
-            { text: "Electron Tray", type: "code", color: "#fbbf24" },
-          ] as const;
-        case "smart":
-          return [
-            { text: "CPU Telemetry", type: "node", color: "#8b5cf6" },
-            { text: "RAM Daemon", type: "db", color: "#7c3aed" },
-            { text: "Linux Kernel", type: "code", color: "#a78bfa" },
-            { text: "Systemd", type: "cloud", color: "#c084fc" },
-          ] as const;
-        case "data-lab":
-          return [
-            { text: "NumPy Math", type: "code", color: "#3b82f6" },
-            { text: "RAG Vector Search", type: "ai", color: "#2563eb" },
-            { text: "Databricks", type: "cloud", color: "#1d4ed8" },
-            { text: "Azure Pipeline", type: "node", color: "#60a5fa" },
-          ] as const;
-        default:
-          return [
-            { text: "ETL", type: "node", color: "#38bdf8" },
-            { text: "PostgreSQL", type: "db", color: "#34d399" },
-            { text: "Django", type: "code", color: "#818cf8" },
-            { text: "Next.js", type: "code", color: "#f472b6" },
-            { text: "Supabase", type: "db", color: "#34d399" },
-            { text: "Vercel", type: "cloud", color: "#a78bfa" },
-            { text: "Agentic AI", type: "ai", color: "#fbbf24" },
-            { text: "DuckDB", type: "db", color: "#fb7185" },
-            { text: "Pipeline", type: "node", color: "#38bdf8" },
-            { text: "PyTorch", type: "ai", color: "#fbbf24" },
-          ] as const;
-      }
+    // Layout Data Engineering Pipeline Rails & Processing Sinks
+    const createPipelineTopology = (w: number, h: number) => {
+      const topY = h * 0.22;
+      const midY = h * 0.52;
+      const botY = h * 0.82;
+
+      const nodes: PipelineNode[] = [
+        { x: w * 0.1, y: topY, label: "yfinance / FX Feed", type: "source" },
+        { x: w * 0.38, y: topY, label: "Pandas / Vector Engine", type: "etl" },
+        { x: w * 0.68, y: topY, label: "PostgreSQL Sink", type: "warehouse" },
+
+        { x: w * 0.12, y: midY, label: "REST / Webhooks", type: "source" },
+        { x: w * 0.42, y: midY, label: "Pydantic Schema Guard", type: "etl" },
+        { x: w * 0.72, y: midY, label: "DuckDB Analytics", type: "warehouse" },
+
+        { x: w * 0.15, y: botY, label: "RunPod Worker Logs", type: "source" },
+        { x: w * 0.45, y: botY, label: "Orchestrator Agent", type: "agent" },
+        { x: w * 0.78, y: botY, label: "Delta Lake / Storage", type: "warehouse" },
+      ];
+
+      // Connections between nodes (Rails)
+      const rails = [
+        { from: 0, to: 1 },
+        { from: 1, to: 2 },
+        { from: 3, to: 4 },
+        { from: 4, to: 5 },
+        { from: 6, to: 7 },
+        { from: 7, to: 8 },
+        // Inter-pipeline cross streams
+        { from: 1, to: 5 },
+        { from: 4, to: 8 },
+      ];
+
+      return { nodes, rails };
     };
 
-    const labels = getLabelsForSlug(projectSlug);
+    let topology = createPipelineTopology(width, height);
 
-    const nodes: FloatingNode[] = Array.from({ length: 22 }, (_, i) => {
-      const meta = labels[i % labels.length];
+    // Initialize flowing data packets
+    const packets: DataPacket[] = Array.from({ length: 28 }, (_, i) => {
+      const railIndex = i % topology.rails.length;
+      const packetTypes: DataPacket["type"][] = ["raw", "transformed", "db", "ai"];
+      const colors = ["#38bdf8", "#34d399", "#818cf8", "#f59e0b"];
+      const typeIdx = i % packetTypes.length;
+
       return {
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.4,
-        vy: (Math.random() - 0.5) * 0.4,
-        radius: Math.random() * 3 + 2,
-        label: meta.text,
-        type: meta.type as FloatingNode["type"],
-        color: meta.color,
-        pulseOffset: Math.random() * Math.PI * 2,
+        railIndex,
+        position: Math.random(),
+        speed: 0.002 + Math.random() * 0.003,
+        size: 3 + Math.random() * 2,
+        color: colors[typeIdx],
+        type: packetTypes[typeIdx],
+        label: i % 3 === 0 ? "0x7F" : undefined,
       };
     });
 
     let time = 0;
 
     const render = () => {
-      time += 0.015;
+      time += 0.02;
       ctx.clearRect(0, 0, width, height);
 
-      // Determine theme mode from document class
       const isDark = document.documentElement.classList.contains("dark");
 
-      // Grid dot background
-      const gridSpacing = 48;
-      ctx.fillStyle = isDark ? "rgba(255, 255, 255, 0.03)" : "rgba(15, 23, 42, 0.04)";
+      // Draw subtle grid overlay
+      const gridSpacing = 40;
+      ctx.fillStyle = isDark ? "rgba(255, 255, 255, 0.02)" : "rgba(15, 23, 42, 0.03)";
       for (let x = gridSpacing / 2; x < width; x += gridSpacing) {
         for (let y = gridSpacing / 2; y < height; y += gridSpacing) {
           ctx.beginPath();
@@ -139,54 +121,62 @@ export function AmbientCanvas({ className = "", projectSlug }: Props) {
         }
       }
 
-      // Connecting pipeline edges between nearby nodes
-      for (let i = 0; i < nodes.length; i++) {
-        for (let j = i + 1; j < nodes.length; j++) {
-          const dx = nodes[i].x - nodes[j].x;
-          const dy = nodes[i].y - nodes[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
+      // Draw pipeline rails
+      topology.rails.forEach((rail) => {
+        const startNode = topology.nodes[rail.from];
+        const endNode = topology.nodes[rail.to];
 
-          if (dist < 180) {
-            const alpha = (1 - dist / 180) * (isDark ? 0.15 : 0.22);
-            ctx.beginPath();
-            ctx.moveTo(nodes[i].x, nodes[i].y);
-            ctx.lineTo(nodes[j].x, nodes[j].y);
-            ctx.strokeStyle = isDark ? `rgba(56, 189, 248, ${alpha})` : `rgba(37, 99, 235, ${alpha})`;
-            ctx.lineWidth = 1;
-            ctx.setLineDash([4, 4]);
-            ctx.stroke();
-            ctx.setLineDash([]);
-          }
-        }
-      }
-
-      // Draw floating nodes with labels and light animations
-      nodes.forEach((node, idx) => {
-        node.x += node.vx;
-        node.y += node.vy;
-
-        if (node.x < 0) node.x = width;
-        if (node.x > width) node.x = 0;
-        if (node.y < 0) node.y = height;
-        if (node.y > height) node.y = 0;
-
-        const pulse = Math.sin(time + node.pulseOffset) * 0.3 + 0.7;
-
-        // Glowing node point
         ctx.beginPath();
-        ctx.arc(node.x, node.y, node.radius * (1 + pulse * 0.2), 0, Math.PI * 2);
-        ctx.fillStyle = node.color;
-        ctx.shadowColor = node.color;
-        ctx.shadowBlur = isDark ? 8 : 4;
+        ctx.moveTo(startNode.x, startNode.y);
+        ctx.lineTo(endNode.x, endNode.y);
+        ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.12)" : "rgba(14, 165, 233, 0.18)";
+        ctx.lineWidth = 1.5;
+        ctx.setLineDash([6, 6]);
+        ctx.stroke();
+        ctx.setLineDash([]);
+      });
+
+      // Draw pipeline nodes
+      topology.nodes.forEach((node) => {
+        const pulse = Math.sin(time + node.x) * 0.2 + 0.8;
+
+        // Node core
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 3 * pulse, 0, Math.PI * 2);
+        ctx.fillStyle = isDark ? "#38bdf8" : "#0284c7";
+        ctx.fill();
+
+        // Node ring
+        ctx.beginPath();
+        ctx.arc(node.x, node.y, 6, 0, Math.PI * 2);
+        ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.2)" : "rgba(2, 132, 199, 0.2)";
+        ctx.lineWidth = 1;
+        ctx.stroke();
+      });
+
+      // Animate flowing data packets along rails
+      packets.forEach((packet) => {
+        packet.position += packet.speed;
+        if (packet.position > 1) {
+          packet.position = 0;
+          packet.railIndex = Math.floor(Math.random() * topology.rails.length);
+        }
+
+        const rail = topology.rails[packet.railIndex];
+        const start = topology.nodes[rail.from];
+        const end = topology.nodes[rail.to];
+
+        const px = start.x + (end.x - start.x) * packet.position;
+        const py = start.y + (end.y - start.y) * packet.position;
+
+        // Packet glow
+        ctx.beginPath();
+        ctx.arc(px, py, packet.size, 0, Math.PI * 2);
+        ctx.fillStyle = packet.color;
+        ctx.shadowColor = packet.color;
+        ctx.shadowBlur = isDark ? 6 : 3;
         ctx.fill();
         ctx.shadowBlur = 0;
-
-        // Draw node label every few nodes
-        if (idx % 2 === 0) {
-          ctx.font = "10px Inter, system-ui, sans-serif";
-          ctx.fillStyle = isDark ? "rgba(226, 232, 240, 0.45)" : "rgba(30, 41, 59, 0.55)";
-          ctx.fillText(node.label, node.x + 8, node.y + 3);
-        }
       });
 
       animationFrameId = requestAnimationFrame(render);
@@ -198,7 +188,7 @@ export function AmbientCanvas({ className = "", projectSlug }: Props) {
       cancelAnimationFrame(animationFrameId);
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [projectSlug]);
 
   return (
     <canvas
