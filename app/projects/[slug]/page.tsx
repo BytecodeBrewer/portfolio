@@ -1,132 +1,218 @@
-import type { Metadata } from "next";
+"use client";
+
 import Link from "next/link";
-import { notFound } from "next/navigation";
-import { getProject, projects } from "../../projects";
+import { notFound, useParams } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { AmbientCanvas } from "../../components/AmbientCanvas";
+import { LanguageToggle } from "../../components/LanguageToggle";
+import { TechIconBadge } from "../../components/TechIcon";
+import { useLanguage } from "../../context/LanguageContext";
+import { Project, defaultProjects, getProject } from "../../projects";
 
-type ProjectPageProps = {
-  params: Promise<{ slug: string }>;
-};
+function FlowDiagram({ project }: { project: Project }) {
+  const { lang } = useLanguage();
+  const { diagram } = project;
 
-export function generateStaticParams() {
-  return projects.map((project) => ({ slug: project.slug }));
+  return (
+    <section className="py-12 border-t border-slate-900 space-y-6">
+      <div className="space-y-1">
+        <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">{diagram.label[lang]}</p>
+        <h2 className="text-2xl font-bold text-white tracking-tight">{diagram.title[lang]}</h2>
+        <p className="text-sm text-slate-400 max-w-2xl">{diagram.intro[lang]}</p>
+      </div>
+
+      <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+        {diagram.nodes.map((node, index) => {
+          const item = typeof node === "string" ? { title: { en: node, de: node } } : node;
+          return (
+            <div
+              key={index}
+              className="p-5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2 relative overflow-hidden group hover:border-slate-700 transition-colors"
+            >
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-mono font-bold text-cyan-400">0{index + 1}</span>
+                <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-60" />
+              </div>
+              <h3 className="font-bold text-white text-sm">{item.title[lang]}</h3>
+              {item.text ? <p className="text-xs text-slate-400 leading-relaxed">{item.text[lang]}</p> : null}
+            </div>
+          );
+        })}
+      </div>
+    </section>
+  );
 }
 
-export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { slug } = await params;
-  const project = getProject(slug);
-  if (!project) return {};
-  return {
-    title: `${project.name} - Lev Data Projects`,
-    description: project.summary
+export default function ProjectPage() {
+  const params = useParams();
+  const slug = typeof params?.slug === "string" ? params.slug : "";
+  const { lang, t } = useLanguage();
+  const [projectsList, setProjectsList] = useState<Project[]>(defaultProjects);
+
+  useEffect(() => {
+    const saved = localStorage.getItem("portfolio_projects_override");
+    if (saved) {
+      try {
+        setProjectsList(JSON.parse(saved));
+      } catch (e) {
+        console.error(e);
+      }
+    }
+  }, []);
+
+  const project = getProject(slug, projectsList);
+  if (!project) return notFound();
+
+  const bgTypeLabels = {
+    market_gap: { en: "Market Gap / Commercial Intent 🤑", de: "Marktlücke / Kommerzielle Absicht 🤑" },
+    proof_of_work: { en: "Proof of Work / Core Grounding 🎓", de: "Proof of Work / Fundament 🎓" },
+    heavy_workload: { en: "Heavy Workload & Cost Optimization ⚡", de: "Heavy Workload & Kosten-Optimierung ⚡" },
+    academic: { en: "Academic & Showcase 🏛️", de: "Akademischer Showcase 🏛️" }
   };
-}
 
-function FlowDiagram({ label, title, intro, nodes }: { label: string; title: string; intro: string; nodes: NonNullable<ReturnType<typeof getProject>>["diagram"]["nodes"] }) {
-  const hasRichNodes = nodes.some((node) => typeof node !== "string");
-  const richFlowStyles = ".flow-diagram.rich-flow{grid-template-columns:1fr}.flow-diagram.rich-flow .flow-node{grid-column:1/-1;min-height:auto;justify-content:flex-start;gap:18px}.flow-diagram.rich-flow .flow-node:not(:last-child)::after{display:none}@media(min-width:861px){.flow-diagram.rich-flow .flow-node.has-media{display:grid;grid-template-columns:minmax(220px,.82fr) minmax(0,1.55fr);align-items:start;gap:24px}.flow-diagram.rich-flow .flow-node.has-media>span{grid-column:1}.flow-diagram.rich-flow .flow-node.has-media>div{grid-column:1}.flow-diagram.rich-flow .flow-node.has-media>figure{grid-column:2;grid-row:1/span 2}.flow-diagram.rich-flow .flow-node img{max-height:560px;object-fit:contain}}@media(max-width:860px){.flow-diagram.rich-flow .flow-node.has-media{display:flex;flex-direction:column}.flow-diagram.rich-flow .flow-node img{max-height:none}}";
+  return (
+    <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
+      {/* Navigation */}
+      <header className="shell flex items-center justify-between py-5 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
+        <Link className="wordmark text-lg font-bold font-mono tracking-tight text-white hover:text-cyan-400 transition-colors" href="/">
+          LB<span className="text-cyan-400">/data</span>
+        </Link>
+        <nav className="flex items-center gap-6 text-sm font-medium text-slate-300">
+          <Link href="/#work" className="hover:text-cyan-400 transition-colors">
+            ← {t({ en: "All Projects", de: "Alle Projekte" })}
+          </Link>
+          <LanguageToggle />
+          <a
+            className="px-3.5 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-mono text-xs border border-slate-700 transition-all"
+            href={project.href}
+            target="_blank"
+            rel="noreferrer"
+          >
+            Repository ↗
+          </a>
+        </nav>
+      </header>
 
-  return <section className="case-band">
-    {hasRichNodes ? <style>{richFlowStyles}</style> : null}
-    <div className="case-section-head">
-      <p>{label}</p>
-      <h2>{title}</h2>
-    </div>
-    <p className="diagram-intro">{intro}</p>
-    <div className={`flow-diagram${hasRichNodes ? " rich-flow" : ""}`}>
-      {nodes.map((node, index) => {
-        const item = typeof node === "string" ? { title: node } : node;
-        const classes = ["flow-node", item.span === "wide" ? "wide" : "", item.media ? "has-media" : ""].filter(Boolean).join(" ");
-        return <div className={classes} key={`${index}-${item.title}`}>
-          <span>{String(index + 1).padStart(2, "0")}</span>
-          <div>
-            <b>{item.title}</b>
-            {item.text ? <p>{item.text}</p> : null}
+      <article className="shell py-12 md:py-16 space-y-12">
+        {/* Hero Section */}
+        <div className="space-y-6">
+          <div className="flex items-center gap-3">
+            <span className="px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-cyan-400">
+              {project.label[lang]}
+            </span>
+            <span className="px-3 py-1 rounded-full bg-cyan-950/50 border border-cyan-800/40 text-xs font-mono text-cyan-300">
+              {bgTypeLabels[project.backgroundType][lang]}
+            </span>
           </div>
-          {item.media ? <figure>
-            <img src={item.media.src} alt={item.media.alt} />
-            <figcaption>
-              <strong>{item.media.title}</strong>
-              <small>{item.media.caption}</small>
-            </figcaption>
-          </figure> : null}
-        </div>;
-      })}
-    </div>
-  </section>;
-}
 
-function MediaGallery({ project }: { project: NonNullable<ReturnType<typeof getProject>> }) {
-  if (!project.media?.length) return null;
+          <h1 className="text-4xl md:text-6xl font-extrabold text-white tracking-tight leading-tight">
+            {project.name}
+          </h1>
 
-  return <section className="case-media shell">
-    <div className="case-section-head">
-      <p>Selected material</p>
-      <h2>{project.mediaTitle ?? "Project visuals"}</h2>
-    </div>
-    {project.mediaIntro ? <p className="media-intro">{project.mediaIntro}</p> : null}
-    <div className="media-grid">
-      {project.media.map((item) => <figure className={[item.span === "wide" ? "wide" : "", item.variant === "logo" ? "logo-media" : ""].filter(Boolean).join(" ") || undefined} key={item.src}>
-        <img src={item.src} alt={item.alt} />
-        <figcaption>
-          <b>{item.title}</b>
-          <span>{item.caption}</span>
-        </figcaption>
-      </figure>)}
-    </div>
-  </section>;
-}
+          <p className="text-lg md:text-xl text-slate-300 max-w-3xl leading-relaxed">
+            {project.summary[lang]}
+          </p>
 
-export default async function ProjectPage({ params }: ProjectPageProps) {
-  const { slug } = await params;
-  const project = getProject(slug);
-  if (!project) notFound();
-
-  return <main>
-    <header className="nav shell">
-      <Link className="wordmark" href="/" aria-label="Lev home">LB<span>/data</span></Link>
-      <nav aria-label="Project navigation">
-        <Link href="/#work">Projects</Link>
-        <a className="nav-cta" href={project.href} target="_blank" rel="noreferrer">Repository</a>
-      </nav>
-    </header>
-
-    <article className={`case-page ${project.tone}`}>
-      <section className="case-hero shell">
-        <Link className="back-link" href="/#work">← Projects</Link>
-        <p className="case-kicker">{project.label}</p>
-        <h1>{project.name}</h1>
-        <p className="case-summary">{project.summary}</p>
-        <div className="case-meta">
-          <span>{project.contribution}</span>
-          <ul>{project.tags.map((tag) => <li key={tag}>{tag}</li>)}</ul>
+          <p className="text-xs font-mono text-slate-400">
+            {project.contribution[lang]}
+          </p>
         </div>
-      </section>
 
-      <section className="case-split shell">
-        {project.storySections.map((section) => <div key={section.title}>
-          <span>{section.eyebrow}</span>
-          <h2>{section.title}</h2>
-          <p>{section.body}</p>
-        </div>)}
-      </section>
-
-      <FlowDiagram label={project.diagram.label} title={project.diagram.title} intro={project.diagram.intro} nodes={project.diagram.nodes} />
-
-      <MediaGallery project={project} />
-
-      <section className="roadmap shell">
-        <div className="case-section-head">
-          <p>Roadmap</p>
-          <h2>{project.roadmapTitle}</h2>
+        {/* Ambient Visual Banner */}
+        <div className="relative w-full h-40 md:h-52 rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden">
+          <AmbientCanvas
+            variant={
+              project.slug === "q-bet"
+                ? "quant"
+                : project.slug === "mas"
+                ? "agent"
+                : project.slug === "data-lab"
+                ? "lab"
+                : "etl"
+            }
+            className="absolute inset-0 w-full h-full"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90" />
         </div>
-        <div className="roadmap-list">
-          {project.roadmap.map((item) => <div className="roadmap-item" key={item.title}>
-            <span>{item.status}</span>
-            <h3>{item.title}</h3>
-            <p>{item.text}</p>
-          </div>)}
+
+        {/* Mandatory Sections: Introduction, Tech Stack, Background */}
+        <div className="grid md:grid-cols-3 gap-8 pt-4">
+          {/* Section 1: Introduction */}
+          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+            <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">
+              {t({ en: "01. Introduction", de: "01. Einleitung" })}
+            </p>
+            <h2 className="text-xl font-bold text-white">{t({ en: "Core Objectives", de: "Kernziel" })}</h2>
+            <p className="text-sm text-slate-300 leading-relaxed">{project.introduction[lang]}</p>
+          </section>
+
+          {/* Section 2: Tech Stack (Logo Icons) */}
+          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4">
+            <p className="text-xs font-mono text-indigo-400 uppercase tracking-widest">
+              {t({ en: "02. Tech Stack", de: "02. Technologie-Stack" })}
+            </p>
+            <h2 className="text-xl font-bold text-white">{t({ en: "Engine & Tools", de: "Tools & Frameworks" })}</h2>
+            <div className="flex flex-wrap gap-2">
+              {project.techStack.map((tech) => (
+                <TechIconBadge key={tech} name={tech} size={20} />
+              ))}
+            </div>
+          </section>
+
+          {/* Section 3: Background */}
+          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+            <p className="text-xs font-mono text-emerald-400 uppercase tracking-widest">
+              {t({ en: "03. Background", de: "03. Hintergrund" })}
+            </p>
+            <h2 className="text-xl font-bold text-white">{t({ en: "Why This Exists", de: "Warum es existiert" })}</h2>
+            <p className="text-sm text-slate-300 leading-relaxed">{project.background[lang]}</p>
+          </section>
         </div>
-      </section>
-    </article>
-  </main>;
+
+        {/* Story Sections */}
+        <section className="grid md:grid-cols-2 gap-8 py-8 border-t border-slate-900">
+          {project.storySections.map((sec, i) => (
+            <div key={i} className="space-y-2 p-6 rounded-2xl bg-slate-900/30 border border-slate-800/80">
+              <span className="text-xs font-mono text-slate-400">{sec.eyebrow[lang]}</span>
+              <h3 className="text-lg font-bold text-white">{sec.title[lang]}</h3>
+              <p className="text-sm text-slate-300 leading-relaxed">{sec.body[lang]}</p>
+            </div>
+          ))}
+        </section>
+
+        {/* System / Pipeline Flow Diagram */}
+        <FlowDiagram project={project} />
+
+        {/* Roadmap Section */}
+        <section className="py-12 border-t border-slate-900 space-y-6">
+          <div className="space-y-1">
+            <p className="text-xs font-mono text-indigo-400 uppercase tracking-widest">{t({ en: "Roadmap", de: "Roadmap" })}</p>
+            <h2 className="text-2xl font-bold text-white tracking-tight">{project.roadmapTitle[lang]}</h2>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-4 pt-2">
+            {project.roadmap.map((item, index) => (
+              <div key={index} className="p-5 rounded-xl bg-slate-900/50 border border-slate-800 space-y-2">
+                <span className="inline-block px-2 py-0.5 rounded text-[11px] font-mono bg-slate-800 text-cyan-300">
+                  {item.status[lang]}
+                </span>
+                <h3 className="font-bold text-white text-base">{item.title}</h3>
+                <p className="text-xs text-slate-300 leading-relaxed">{item.text[lang]}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer Link back */}
+        <div className="pt-8 border-t border-slate-900 flex justify-between items-center text-xs font-mono text-slate-400">
+          <Link href="/#work" className="hover:text-cyan-400 transition-colors">
+            ← {t({ en: "Back to selected work", de: "Zurück zur Übersicht" })}
+          </Link>
+          <a href={project.href} target="_blank" rel="noreferrer" className="hover:text-cyan-400 transition-colors">
+            {t({ en: "View Repository on GitHub ↗", de: "Repository auf GitHub ansehen ↗" })}
+          </a>
+        </div>
+      </article>
+    </main>
+  );
 }
