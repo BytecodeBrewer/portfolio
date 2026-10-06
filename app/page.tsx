@@ -78,16 +78,15 @@ function PrivateRepoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
   );
 }
 
-function TechStackPopover({ techList }: { techList: Project["techStack"] }) {
+function TechStackPopover({ techList, secondaryTechList }: { techList: Project["techStack"]; secondaryTechList?: Project["secondaryTechStack"] }) {
   const [showMore, setShowMore] = useState(false);
   const { t } = useLanguage();
 
-  const mainTechs = techList.slice(0, 4);
-  const extraTechs = techList.slice(4);
+  const extraTechs = secondaryTechList || [];
 
   return (
     <div className="relative flex flex-wrap items-center gap-2 pt-2">
-      {mainTechs.map((tech) => (
+      {techList.map((tech) => (
         <TechIconBadge key={tech} name={tech} showLabel={false} />
       ))}
 
@@ -95,7 +94,7 @@ function TechStackPopover({ techList }: { techList: Project["techStack"] }) {
         <div className="relative">
           <button
             onClick={() => setShowMore(!showMore)}
-            className="px-2 py-1 rounded-lg border border-slate-700/80 bg-slate-900/90 text-xs font-mono font-semibold text-cyan-400 hover:border-cyan-400 hover:bg-slate-800 transition-colors"
+            className="px-2.5 py-1 rounded-lg border border-slate-700/80 bg-slate-900/90 text-xs font-mono font-semibold text-cyan-400 hover:border-cyan-400 hover:bg-slate-800 transition-colors"
           >
             +{extraTechs.length} {t({ en: "More", de: "Mehr" })}
           </button>
@@ -136,17 +135,18 @@ export default function Home() {
   };
 
   return (
-    <main className={`min-h-screen ${darkMode ? "bg-slate-950 text-slate-100" : "bg-slate-900 text-slate-100"} font-sans selection:bg-cyan-500 selection:text-slate-950 transition-colors`}>
+    <main className={`min-h-screen ${darkMode ? "bg-slate-950 text-slate-100" : "bg-slate-900 text-slate-100"} font-sans selection:bg-cyan-500 selection:text-slate-950 transition-colors relative`}>
+      <AmbientCanvas className="z-0" />
       <AdminModal projects={projectList} onProjectsChange={handleProjectsChange} />
       <PrivateRepoModal isOpen={privateModalOpen} onClose={() => setPrivateModalOpen(false)} />
 
       {/* Header Nav */}
-      <header className="nav shell flex items-center justify-between py-4 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
-        <Link className="wordmark flex items-center gap-2 text-xl font-extrabold font-mono tracking-tight text-white hover:text-cyan-400 transition-colors" href="/">
+      <header className="nav shell flex flex-wrap items-center justify-between gap-3 py-4 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
+        <Link className="wordmark flex items-center gap-2 text-lg md:text-xl font-extrabold font-mono tracking-tight text-white hover:text-cyan-400 transition-colors shrink-0" href="/">
           <span className="w-3 h-3 rounded-sm bg-cyan-400 inline-block" />
           LB<span className="text-cyan-400">/data</span>
         </Link>
-        <nav className="flex items-center gap-5 text-sm font-medium text-slate-300" aria-label="Main navigation">
+        <nav className="flex items-center gap-3 md:gap-5 text-xs md:text-sm font-medium text-slate-300" aria-label="Main navigation">
           <a href="#work" className="hover:text-cyan-400 transition-colors">{t({ en: "Projects", de: "Projekte" })}</a>
           <a href="#approach" className="hover:text-cyan-400 transition-colors">{t({ en: "Approach", de: "Ansatz" })}</a>
           <a href="#footer-links" className="hover:text-cyan-400 transition-colors">{t({ en: "Contact", de: "Kontakt" })}</a>
@@ -162,8 +162,8 @@ export default function Home() {
       </header>
 
       {/* Hero Section */}
-      <section className="hero shell py-12 md:py-20 space-y-8" id="top">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-xs font-mono text-cyan-400">
+      <section className="hero shell relative z-10 py-8 md:py-20 space-y-6 md:space-y-8" id="top">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-slate-900 border border-slate-800 text-[11px] md:text-xs font-mono text-cyan-400">
           <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
           {t({
             en: "Informatics · Data Engineering · Autonomous Systems",
@@ -172,7 +172,7 @@ export default function Home() {
         </div>
 
         <div className="space-y-4 max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
+          <h1 className="text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight text-white leading-tight">
             {t({
               en: "Turn messy data streams into ",
               de: "Verwandle ungeordnete Datenströme in "
@@ -181,42 +181,31 @@ export default function Home() {
               {t({ en: "bulletproof systems.", de: "kugelsichere Systeme." })}
             </em>
           </h1>
-          <p className="text-lg md:text-xl text-slate-300 max-w-2xl font-light leading-relaxed">
+          <p className="text-base md:text-xl text-slate-300 max-w-2xl font-light leading-relaxed">
             {t({
               en: "I’m Lev, an Informatics student in Leipzig engineering data pipelines, quantitative engines, and cost-effective multi-agent workflows. Dry humor, structured discipline, zero fluff.",
               de: "Ich bin Lev, Informatikstudent in Leipzig. Ich baue Data-Pipelines, Quant-Engines und kosteneffiziente Multi-Agenten-Systeme. Trockener Humor, klares Systemverständnis, kein Blabla."
             })}
           </p>
         </div>
-
-        {/* Jules-inspired ETL Canvas */}
-        <div className="relative w-full h-32 md:h-40 rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden shadow-inner">
-          <AmbientCanvas variant="etl" className="absolute inset-0 w-full h-full" />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-80" />
-          <div className="absolute bottom-4 left-6 flex items-center gap-6 font-mono text-xs text-slate-400">
-            <div><b className="text-cyan-400 font-normal">INGEST:</b> APIs · Files · Market Feeds</div>
-            <div><b className="text-indigo-400 font-normal">TRANSFORM:</b> Pandas · Schemas · Vectorization</div>
-            <div><b className="text-emerald-400 font-normal">EXECUTE:</b> Pipelines & Autonomous Workers</div>
-          </div>
-        </div>
       </section>
 
       {/* Selected Work Section */}
-      <section className="work shell py-12 space-y-8" id="work">
+      <section className="work shell relative z-10 py-8 md:py-12 space-y-6 md:space-y-8" id="work">
         <div className="border-b border-slate-900 pb-4 pt-2">
           <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">{t({ en: "Selected Work", de: "Ausgewählte Arbeiten" })}</p>
-          <h2 className="text-2xl font-bold text-white tracking-tight mt-1">{t({ en: "Engineered Repositories", de: "Entwickelte Repositories" })}</h2>
+          <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight mt-1">{t({ en: "Engineered Repositories", de: "Entwickelte Repositories" })}</h2>
         </div>
 
-        <div className="space-y-8">
+        <div className="space-y-6 md:space-y-8">
           {projectList.map((project) => (
             <article
               key={project.slug}
-              className="project group relative p-6 md:p-8 rounded-2xl bg-slate-900/50 border border-slate-800/80 hover:border-slate-700 transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:shadow-cyan-950/20"
+              className="project group relative p-5 md:p-8 rounded-2xl bg-slate-900/70 backdrop-blur-sm border border-slate-800/80 hover:border-slate-700 transition-all duration-300 hover:scale-[1.01] hover:shadow-xl hover:shadow-cyan-950/20"
             >
               <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
                 <div className="space-y-4 flex-1">
-                  <div className="flex items-center gap-3 flex-wrap">
+                  <div className="flex items-center gap-2 md:gap-3 flex-wrap">
                     <span className="text-xs font-mono font-bold text-cyan-400">{project.index}</span>
                     <StatusBadge status={project.status} />
                     <AiBadge text={project.aiBadgeText} aiAugmented={project.aiAugmented} />
@@ -224,7 +213,7 @@ export default function Home() {
 
                   <div>
                     <p className="text-xs font-mono text-slate-400">{project.label[lang]}</p>
-                    <h3 className="text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+                    <h3 className="text-xl md:text-2xl font-bold text-white group-hover:text-cyan-400 transition-colors">
                       {project.name}
                     </h3>
                   </div>
@@ -237,26 +226,22 @@ export default function Home() {
                     {project.contribution[lang]}
                   </p>
 
-                  <TechStackPopover techList={project.techStack} />
+                  <TechStackPopover techList={project.techStack} secondaryTechList={project.secondaryTechStack} />
                 </div>
 
-                <div className="flex flex-col items-end justify-between gap-6 shrink-0">
-                  <div className="h-16 w-32 rounded-lg bg-slate-950/60 border border-slate-800 overflow-hidden relative">
-                    <AmbientCanvas variant="etl" className="absolute inset-0 w-full h-full" />
-                  </div>
-
-                  <div className="flex items-center gap-3 font-mono text-xs pt-4">
+                <div className="flex flex-wrap items-center justify-between md:flex-col md:items-end gap-4 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 border-slate-800/60">
+                  <div className="flex items-center gap-2 md:gap-3 font-mono text-xs w-full md:w-auto justify-end">
                     <Link
                       href={`/projects/${project.slug}`}
-                      className="px-4 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold transition-all shadow-md shadow-cyan-600/20"
+                      className="px-3.5 py-2 rounded-xl bg-cyan-600 hover:bg-cyan-500 text-white font-semibold transition-all shadow-md shadow-cyan-600/20"
                     >
-                      {t({ en: "Open Case Study →", de: "Case Study Öffnen →" })}
+                      {t({ en: "Case Study →", de: "Case Study →" })}
                     </Link>
 
                     {project.isPrivateRepo ? (
                       <button
                         onClick={() => setPrivateModalOpen(true)}
-                        className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex items-center gap-1.5"
+                        className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 transition-colors flex items-center gap-1.5"
                       >
                         🔒 Private
                       </button>
@@ -265,7 +250,7 @@ export default function Home() {
                         href={project.href}
                         target="_blank"
                         rel="noreferrer"
-                        className="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
+                        className="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 transition-colors"
                       >
                         {t({ en: "Repo ↗", de: "Repo ↗" })}
                       </a>
@@ -279,16 +264,16 @@ export default function Home() {
       </section>
 
       {/* Approach Section */}
-      <section className="approach shell py-16 space-y-10" id="approach">
+      <section className="approach shell relative z-10 py-12 md:py-16 space-y-8 md:space-y-10" id="approach">
         <div className="border-b border-slate-900 pb-4">
           <p className="text-xs font-mono text-indigo-400 uppercase tracking-widest">{t({ en: "Engineering Discipline", de: "Ingenieursprinzipien" })}</p>
-          <h2 className="text-2xl font-bold text-white tracking-tight">{t({ en: "How I Frame Projects", de: "Wie ich Projekte angehe" })}</h2>
+          <h2 className="text-xl md:text-2xl font-bold text-white tracking-tight">{t({ en: "How I Frame Projects", de: "Wie ich Projekte angehe" })}</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-6">
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+          <div className="p-5 md:p-6 rounded-2xl bg-slate-900/60 backdrop-blur-sm border border-slate-800 space-y-3">
             <span className="text-xs font-mono text-cyan-400 font-bold">01</span>
-            <h3 className="text-lg font-bold text-white">{t({ en: "Domain First", de: "Domain Zuerst" })}</h3>
+            <h3 className="text-base md:text-lg font-bold text-white">{t({ en: "Domain First", de: "Domain Zuerst" })}</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
               {t({
                 en: "Model risks, EV, data schemas, and mathematical constraints in strict code objects before running heavy compute or risky trades.",
@@ -297,9 +282,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+          <div className="p-5 md:p-6 rounded-2xl bg-slate-900/60 backdrop-blur-sm border border-slate-800 space-y-3">
             <span className="text-xs font-mono text-indigo-400 font-bold">02</span>
-            <h3 className="text-lg font-bold text-white">{t({ en: "Cost & Token Efficiency", de: "Kosten- & Token-Effizienz" })}</h3>
+            <h3 className="text-base md:text-lg font-bold text-white">{t({ en: "Cost & Token Efficiency", de: "Kosten- & Token-Effizienz" })}</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
               {t({
                 en: "Don't burn thousands on generic commercial API tokens. Offload heavy workloads to tailored agent orchestrators, local LLMs, and RunPods.",
@@ -308,9 +293,9 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+          <div className="p-5 md:p-6 rounded-2xl bg-slate-900/60 backdrop-blur-sm border border-slate-800 space-y-3">
             <span className="text-xs font-mono text-emerald-400 font-bold">03</span>
-            <h3 className="text-lg font-bold text-white">{t({ en: "Proof of Work", de: "Proof of Work" })}</h3>
+            <h3 className="text-base md:text-lg font-bold text-white">{t({ en: "Proof of Work", de: "Proof of Work" })}</h3>
             <p className="text-xs text-slate-300 leading-relaxed">
               {t({
                 en: "Ground theoretical informatics knowledge into runnable code, vector search benchmarks, and cloud data warehouse certifications.",
@@ -322,14 +307,14 @@ export default function Home() {
       </section>
 
       {/* Footer & Socials Section */}
-      <footer className="shell py-16 border-t border-slate-900 space-y-8" id="footer-links">
+      <footer className="shell relative z-10 py-12 md:py-16 border-t border-slate-900 space-y-8" id="footer-links">
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div className="space-y-2">
             <p className="text-xs font-mono text-cyan-400">{t({ en: "INTERESTED IN COLLABORATION OR TECH INTERVIEWS?", de: "INTERESSE AN ZUSAMMENARBEIT ODER TECH INTERVIEWS?" })}</p>
-            <h2 className="text-3xl font-bold text-white">{t({ en: "Let’s connect.", de: "Lass uns vernetzen." })}</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white">{t({ en: "Let’s connect.", de: "Lass uns vernetzen." })}</h2>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-3">
             <a
               href="https://www.linkedin.com/in/lev-b"
               target="_blank"
@@ -355,7 +340,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between text-xs font-mono text-slate-500 gap-4">
+        <div className="pt-8 border-t border-slate-900 flex flex-col md:flex-row items-center justify-between text-xs font-mono text-slate-500 gap-4 text-center md:text-left">
           <p>© {new Date().getFullYear()} Lev · Informatics & Data Engineering · Leipzig, Germany.</p>
           <p>{t({ en: "Built with curiosity & an unreasonable number of terminal tabs.", de: "Gebaut mit Neugier & unverschämt vielen Terminal-Tabs." })}</p>
         </div>

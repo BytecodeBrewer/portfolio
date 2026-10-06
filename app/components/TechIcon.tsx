@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { TechIcon } from "../projects";
 
 interface Props {
@@ -11,8 +12,57 @@ interface Props {
 export function TechIconBadge({ name, size = 18, className = "", showLabel = false }: Props) {
   const iconKey = name.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-  const renderSvg = () => {
+  const renderContent = () => {
     switch (iconKey) {
+      case "supabase":
+        return (
+          <Image
+            src="/logos/supabase-logo.jpeg"
+            alt="Supabase"
+            width={size}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "vercel":
+        return (
+          <Image
+            src="/logos/logo-vercel.png"
+            alt="Vercel"
+            width={size}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "electron":
+      case "electronjs":
+        return (
+          <Image
+            src="/logos/electron-ts-logo-inspiration.png"
+            alt="Electron"
+            width={size * 1.8}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "ai":
+      case "aiagent":
+      case "agenticai":
+        return (
+          <Image
+            src="/logos/ai-logo.png"
+            alt="AI"
+            width={size}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "django":
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.146 0h3.137v18.729c-1.428.243-2.604.364-3.528.364-2.22 0-3.822-.61-4.805-1.832-.983-1.221-1.475-3.051-1.475-5.489 0-2.459.512-4.321 1.536-5.587 1.024-1.265 2.476-1.898 4.356-1.898.283 0 .543.013.779.038V0zm0 7.37c-.203-.02-.416-.03-.64-.03-1.016 0-1.788.356-2.316 1.067-.528.711-.792 1.777-.792 3.198 0 1.382.254 2.427.762 3.137.508.711 1.25 1.066 2.225 1.066.244 0 .498-.02.761-.061V7.37zM24 6.305v12.423h-3.137V16.73c-.69.833-1.575 1.458-2.652 1.874-1.077.417-2.185.625-3.323.625-1.524 0-2.825-.386-3.902-1.158s-1.616-1.829-1.616-3.17c0-1.341.539-2.388 1.616-3.14 1.077-.752 2.53-1.128 4.357-1.128.793 0 1.585.081 2.377.244v-.549c0-1.016-.274-1.768-.823-2.256-.549-.488-1.372-.732-2.469-.732-.874 0-1.788.163-2.744.488V5.329c1.077-.325 2.154-.488 3.231-.488 1.931 0 3.374.457 4.33 1.372.955.915 1.433 2.286 1.433 4.113v.021zm-3.137 5.792c-.63-.162-1.28-.244-1.951-.244-1.077 0-1.87.183-2.378.549-.508.366-.762.894-.762 1.585 0 .63.224 1.118.671 1.463.447.346 1.057.519 1.829.519.833 0 1.595-.213 2.286-.64.691-.427 1.034-.986 1.034-1.677v-1.555z"/>
+          </svg>
+        );
       case "python":
         return (
           <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -51,12 +101,6 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = fal
             <path d="M12 0a12 12 0 100 24 12 12 0 000-24zm0 2.18a9.82 9.82 0 110 19.64 9.82 9.82 0 010-19.64zm-.82 3.64v5.45l-3.27-3.27-1.54 1.54 5.91 5.91 5.91-5.91-1.54-1.54-3.27 3.27V5.82z" />
           </svg>
         );
-      case "redis":
-        return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-            <path d="M22.75 8.25l-10.5-4.5-10.5 4.5 10.5 4.5 10.5-4.5zm-21 3.5l10.5 4.5 10.5-4.5v3l-10.5 4.5-10.5-4.5v-3zm0 5l10.5 4.5 10.5-4.5v3l-10.5 4.5-10.5-4.5v-3z" />
-          </svg>
-        );
       default:
         return (
           <span className="font-mono text-[10px] font-extrabold uppercase tracking-tighter text-cyan-400">
@@ -73,7 +117,7 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = fal
         showLabel ? "px-2.5 py-1 gap-1.5" : "w-8 h-8 rounded-lg"
       } border border-slate-700/60 bg-slate-900/80 text-slate-200 transition-all hover:border-cyan-400/80 hover:bg-slate-800 hover:scale-105 shadow-sm ${className}`}
     >
-      <span className="text-cyan-400">{renderSvg()}</span>
+      <span className="text-cyan-400 inline-flex items-center justify-center">{renderContent()}</span>
       {showLabel ? <span className="text-xs font-mono font-medium">{name}</span> : null}
     </span>
   );

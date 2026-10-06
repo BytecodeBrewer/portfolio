@@ -31,7 +31,7 @@ export type Diagram = {
   nodes: DiagramNode[];
 };
 
-export type TechIcon = "python" | "typescript" | "go" | "docker" | "pandas" | "numpy" | "nextjs" | "electron" | "pytorch" | "azure" | "databricks" | "snowflake" | "mcp" | "playwright" | "fastapi" | "postgres" | "redis" | "yfinance" | "pytest" | "pydantic";
+export type TechIcon = "python" | "django" | "typescript" | "go" | "docker" | "pandas" | "numpy" | "nextjs" | "electron" | "pytorch" | "azure" | "databricks" | "snowflake" | "mcp" | "playwright" | "fastapi" | "postgres" | "redis" | "yfinance" | "pytest" | "pydantic" | "supabase" | "vercel" | "ai";
 
 export type Project = {
   slug: string;
@@ -45,6 +45,7 @@ export type Project = {
   aiBadgeText?: { en: string; de: string };
   isPrivateRepo?: boolean;
   techStack: TechIcon[];
+  secondaryTechStack?: TechIcon[];
   tags: string[];
   href?: string;
   tone: ProjectTone;
@@ -80,8 +81,9 @@ export const defaultProjects: Project[] = [
     },
     status: "active",
     aiAugmented: false,
-    techStack: ["python", "pandas", "numpy", "yfinance", "pytest", "fastapi"],
-    tags: ["Python", "pandas", "NumPy", "yfinance", "FastAPI", "pytest"],
+    techStack: ["python", "django", "pandas"],
+    secondaryTechStack: ["fastapi", "numpy", "yfinance", "pytest"],
+    tags: ["Python", "Django", "pandas", "FastAPI", "yfinance"],
     href: "https://github.com/BytecodeBrewer/ARGUS",
     tone: "cyan",
     signal: [32, 44, 38, 57, 52, 73, 68, 88],
@@ -152,8 +154,9 @@ export const defaultProjects: Project[] = [
     status: "active",
     aiAugmented: false,
     isPrivateRepo: true,
-    techStack: ["python", "pydantic", "pytest", "numpy", "postgres"],
-    tags: ["Python", "Pydantic", "pytest", "NumPy", "Quant Modeling", "Data Pipelines"],
+    techStack: ["python", "vercel", "supabase"],
+    secondaryTechStack: ["pydantic", "postgres", "numpy", "pytest"],
+    tags: ["Python", "Vercel", "Supabase", "Pydantic", "PostgreSQL", "Quant Engine"],
     tone: "green",
     signal: [26, 35, 46, 42, 59, 66, 73, 91],
     introduction: {
@@ -226,8 +229,9 @@ export const defaultProjects: Project[] = [
       en: "🤖 Autonomous Agent System",
       de: "🤖 Autonomes Agenten-System"
     },
-    techStack: ["python", "docker", "fastapi", "postgres", "redis"],
-    tags: ["Python", "Docker", "Agentic Workflows", "FastAPI", "RunPod", "Local LLMs"],
+    techStack: ["python", "ai", "docker"],
+    secondaryTechStack: ["fastapi", "postgres", "redis"],
+    tags: ["Python", "Docker", "Agentic AI", "FastAPI", "RunPod", "vLLM"],
     href: "https://github.com/BytecodeBrewer/MAS",
     tone: "emerald",
     signal: [20, 38, 55, 62, 78, 85, 92, 98],
@@ -301,8 +305,9 @@ export const defaultProjects: Project[] = [
       en: "⚡ AI Data Transformation Experiments",
       de: "⚡ AI Daten-Transformation Experimente"
     },
-    techStack: ["python", "numpy", "pytorch", "azure", "databricks", "snowflake"],
-    tags: ["Python", "NumPy", "PyTorch", "Azure", "Databricks", "Snowflake", "RAG Systems"],
+    techStack: ["python", "azure", "databricks"],
+    secondaryTechStack: ["snowflake", "pytorch", "numpy"],
+    tags: ["Python", "Azure", "Databricks", "Snowflake", "PyTorch", "RAG Systems"],
     href: "https://github.com/BytecodeBrewer/Data-Lab",
     tone: "blue",
     signal: [30, 45, 60, 70, 82, 88, 94, 99],
@@ -376,8 +381,9 @@ export const defaultProjects: Project[] = [
       en: "🤖 AI-Assisted Knowledge Pipeline",
       de: "🤖 KI-Gestützte Wissens-Pipeline"
     },
-    techStack: ["electron", "typescript", "postgres"],
-    tags: ["Electron", "TypeScript", "Node.js", "Notion API", "Workflow Automation"],
+    techStack: ["typescript", "electron"],
+    secondaryTechStack: ["postgres"],
+    tags: ["TypeScript", "Electron", "Node.js", "Notion API", "Workflow Automation"],
     href: "https://github.com/BytecodeBrewer/Notion-Sync",
     tone: "amber",
     signal: [24, 34, 42, 55, 47, 62, 74, 80],
@@ -447,8 +453,9 @@ export const defaultProjects: Project[] = [
     },
     status: "side-quest",
     aiAugmented: false,
-    techStack: ["typescript", "go", "mcp", "playwright", "docker"],
-    tags: ["TypeScript", "Go", "MCP", "Playwright", "System Telemetry", "Docker"],
+    techStack: ["typescript", "go"],
+    secondaryTechStack: ["docker", "mcp"],
+    tags: ["TypeScript", "Go", "Docker", "System Telemetry"],
     href: "https://github.com/BytecodeBrewer/SMART",
     tone: "violet",
     signal: [28, 40, 48, 43, 65, 58, 77, 84],
