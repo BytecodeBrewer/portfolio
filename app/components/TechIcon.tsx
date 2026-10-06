@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 import { TechIcon } from "../projects";
 
 interface Props {
@@ -8,11 +9,60 @@ interface Props {
   showLabel?: boolean;
 }
 
-export function TechIconBadge({ name, size = 18, className = "", showLabel = true }: Props) {
-  const iconKey = name.toLowerCase();
+export function TechIconBadge({ name, size = 18, className = "", showLabel = false }: Props) {
+  const iconKey = name.toLowerCase().replace(/[^a-z0-9]/g, "");
 
-  const renderSvg = () => {
+  const renderContent = () => {
     switch (iconKey) {
+      case "supabase":
+        return (
+          <Image
+            src="/logos/supabase-logo.jpeg"
+            alt="Supabase"
+            width={size}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "vercel":
+        return (
+          <Image
+            src="/logos/logo-vercel.png"
+            alt="Vercel"
+            width={size}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "electron":
+      case "electronjs":
+        return (
+          <Image
+            src="/logos/electron-ts-logo-inspiration.png"
+            alt="Electron"
+            width={size * 1.8}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "ai":
+      case "aiagent":
+      case "agenticai":
+        return (
+          <Image
+            src="/logos/ai-logo.png"
+            alt="AI"
+            width={size}
+            height={size}
+            className="rounded-sm object-contain"
+          />
+        );
+      case "django":
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M11.146 0h3.137v18.729c-1.428.243-2.604.364-3.528.364-2.22 0-3.822-.61-4.805-1.832-.983-1.221-1.475-3.051-1.475-5.489 0-2.459.512-4.321 1.536-5.587 1.024-1.265 2.476-1.898 4.356-1.898.283 0 .543.013.779.038V0zm0 7.37c-.203-.02-.416-.03-.64-.03-1.016 0-1.788.356-2.316 1.067-.528.711-.792 1.777-.792 3.198 0 1.382.254 2.427.762 3.137.508.711 1.25 1.066 2.225 1.066.244 0 .498-.02.761-.061V7.37zM24 6.305v12.423h-3.137V16.73c-.69.833-1.575 1.458-2.652 1.874-1.077.417-2.185.625-3.323.625-1.524 0-2.825-.386-3.902-1.158s-1.616-1.829-1.616-3.17c0-1.341.539-2.388 1.616-3.14 1.077-.752 2.53-1.128 4.357-1.128.793 0 1.585.081 2.377.244v-.549c0-1.016-.274-1.768-.823-2.256-.549-.488-1.372-.732-2.469-.732-.874 0-1.788.163-2.744.488V5.329c1.077-.325 2.154-.488 3.231-.488 1.931 0 3.374.457 4.33 1.372.955.915 1.433 2.286 1.433 4.113v.021zm-3.137 5.792c-.63-.162-1.28-.244-1.951-.244-1.077 0-1.87.183-2.378.549-.508.366-.762.894-.762 1.585 0 .63.224 1.118.671 1.463.447.346 1.057.519 1.829.519.833 0 1.595-.213 2.286-.64.691-.427 1.034-.986 1.034-1.677v-1.555z"/>
+          </svg>
+        );
       case "python":
         return (
           <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
@@ -20,15 +70,10 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = tru
           </svg>
         );
       case "typescript":
+      case "ts":
         return (
           <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
             <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.782-.245 4.965 4.965 0 0 0-.846-.075c-.43 0-.783.076-1.058.228a.801.801 0 0 0-.413.738c0 .215.059.395.178.539.12.143.298.271.536.383.238.113.541.221.91.325l.84.237c.602.168 1.103.385 1.503.65.4.266.702.593.906.98.204.388.306.868.306 1.442 0 .783-.225 1.455-.675 2.016-.45.56-1.072.973-1.868 1.238-.795.265-1.716.398-2.761.398-.707 0-1.385-.067-2.034-.201a8.43 8.43 0 0 1-1.73-.556v-2.578c.62.333 1.23.585 1.83.756.6.172 1.182.258 1.747.258.483 0 .878-.08 1.185-.24.307-.16.46-.402.46-.725 0-.258-.088-.47-.264-.636-.176-.167-.432-.308-.768-.423a10.96 10.96 0 0 0-1.066-.307l-.873-.232c-.612-.162-1.11-.371-1.493-.628a2.53 2.53 0 0 1-.848-.923 2.72 2.72 0 0 1-.293-1.324c0-.752.222-1.398.667-1.938.445-.54 1.052-.94 1.821-1.2 0-.001.769-.39 2.518-.39zM8.99 10.012v2.302H6.551V21h-2.82V12.314H1.32V10.012z" />
-          </svg>
-        );
-      case "go":
-        return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
-            <path d="M1.81 10.072a.375.375 0 0 1 .374-.375h1.226a.375.375 0 0 1 .375.375v3.856c0 .884.281 1.488 1.168 1.488.887 0 1.196-.604 1.196-1.488v-3.856a.375.375 0 0 1 .375-.375h1.226a.375.375 0 0 1 .375.375v3.896c0 1.631-.778 2.684-2.83 2.684-2.053 0-2.829-1.053-2.829-2.684zm11.396.008a3.12 3.12 0 0 1 3.109 3.12 3.12 3.12 0 0 1-3.11 3.121 3.12 3.12 0 0 1-3.108-3.12 3.12 3.12 0 0 1 3.109-3.121zm0 1.3a1.82 1.82 0 0 0-1.808 1.82 1.82 1.82 0 0 0 1.808 1.821 1.82 1.82 0 0 0 1.809-1.82 1.82 1.82 0 0 0-1.809-1.821z" />
           </svg>
         );
       case "docker":
@@ -38,6 +83,7 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = tru
           </svg>
         );
       case "postgres":
+      case "postgresql":
         return (
           <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.17 17.5c-.5.3-1.2.5-2 .5-1.8 0-3.2-1.1-3.2-2.8 0-1.4 1-2.4 2.5-2.4.6 0 1.2.1 1.7.3v-1.1c0-1.1-.7-1.7-1.9-1.7-.8 0-1.6.2-2.2.6l-.4-1.2c.8-.5 1.8-.7 2.9-.7 2.1 0 3.3 1.1 3.3 3.1v5.4h-1.7v-1zm-1-3.2c-.3-.1-.7-.2-1.1-.2-.8 0-1.4.5-1.4 1.3 0 .8.6 1.3 1.4 1.3.4 0 .8-.1 1.1-.3v-2.1z" />
@@ -49,20 +95,30 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = tru
             <path d="M5.483 21.3h10.608L12.016 11.2h-6.22l-.313.916zM13.684 2.7L7.697 19.866h2.95l4.896-13.882zM14.618 2.7l4.137 12.062L24 21.3H16.89z" />
           </svg>
         );
+      case "fastapi":
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 0a12 12 0 100 24 12 12 0 000-24zm0 2.18a9.82 9.82 0 110 19.64 9.82 9.82 0 010-19.64zm-.82 3.64v5.45l-3.27-3.27-1.54 1.54 5.91 5.91 5.91-5.91-1.54-1.54-3.27 3.27V5.82z" />
+          </svg>
+        );
       default:
         return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <circle cx="12" cy="12" r="10" />
-            <path d="M12 8v8M8 12h8" />
-          </svg>
+          <span className="font-mono text-[10px] font-extrabold uppercase tracking-tighter text-cyan-400">
+            {name.slice(0, 3)}
+          </span>
         );
     }
   };
 
   return (
-    <span className={`tech-badge-item inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono font-medium border border-slate-700/60 bg-slate-900/60 text-slate-200 transition-colors hover:border-cyan-500/50 hover:bg-slate-800/80 ${className}`}>
-      <span className="text-cyan-400 opacity-90">{renderSvg()}</span>
-      {showLabel ? <span>{name}</span> : null}
+    <span
+      title={String(name)}
+      className={`tech-badge-item inline-flex items-center justify-center ${
+        showLabel ? "px-2.5 py-1 gap-1.5" : "w-8 h-8 rounded-lg"
+      } border border-slate-700/60 bg-slate-900/80 text-slate-200 transition-all hover:border-cyan-400/80 hover:bg-slate-800 hover:scale-105 shadow-sm ${className}`}
+    >
+      <span className="text-cyan-400 inline-flex items-center justify-center">{renderContent()}</span>
+      {showLabel ? <span className="text-xs font-mono font-medium">{name}</span> : null}
     </span>
   );
 }

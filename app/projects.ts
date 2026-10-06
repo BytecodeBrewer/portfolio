@@ -31,7 +31,7 @@ export type Diagram = {
   nodes: DiagramNode[];
 };
 
-export type TechIcon = "python" | "typescript" | "go" | "docker" | "pandas" | "numpy" | "nextjs" | "electron" | "pytorch" | "azure" | "databricks" | "snowflake" | "mcp" | "playwright" | "fastapi" | "postgres" | "redis" | "yfinance" | "pytest" | "pydantic";
+export type TechIcon = "python" | "django" | "typescript" | "go" | "docker" | "pandas" | "numpy" | "nextjs" | "electron" | "pytorch" | "azure" | "databricks" | "snowflake" | "mcp" | "playwright" | "fastapi" | "postgres" | "redis" | "yfinance" | "pytest" | "pydantic" | "supabase" | "vercel" | "ai";
 
 export type Project = {
   slug: string;
@@ -43,9 +43,11 @@ export type Project = {
   status: ProjectStatus;
   aiAugmented?: boolean;
   aiBadgeText?: { en: string; de: string };
+  isPrivateRepo?: boolean;
   techStack: TechIcon[];
+  secondaryTechStack?: TechIcon[];
   tags: string[];
-  href: string;
+  href?: string;
   tone: ProjectTone;
   signal: number[];
   introduction: { en: string; de: string };
@@ -74,28 +76,25 @@ export const defaultProjects: Project[] = [
       de: "Eine Python Markt-Datenpipeline, die sich vom FX-Utility zu einer vielschichtigen Analytik- und Monitoring-Plattform entwickelt."
     },
     contribution: {
-      en: "Independent project · Active development with team analytics focus",
-      de: "Eigenständiges Projekt · Aktive Entwicklung mit Fokus auf Teamanalytik"
+      en: "Independent Side-Quest · Team analytics & market telemetry focus",
+      de: "Eigenständiges Side-Quest · Teamanalytik & Markt-Telemetrie"
     },
     status: "active",
-    aiAugmented: true,
-    aiBadgeText: {
-      en: "⚡ AI-Augmented Anomaly Detection",
-      de: "⚡ AI-Gestützte Anomalieerkennung"
-    },
-    techStack: ["python", "pandas", "numpy", "yfinance", "pytest", "fastapi"],
-    tags: ["Python", "pandas", "NumPy", "yfinance", "FastAPI", "pytest"],
-    href: "https://github.com/BytecodeBrewer/argus",
+    aiAugmented: false,
+    techStack: ["python", "django", "pandas"],
+    secondaryTechStack: ["fastapi", "numpy", "yfinance", "pytest"],
+    tags: ["Python", "Django", "pandas", "FastAPI", "yfinance"],
+    href: "https://github.com/BytecodeBrewer/ARGUS",
     tone: "cyan",
     signal: [32, 44, 38, 57, 52, 73, 68, 88],
     introduction: {
-      en: "ARGUS bridges raw financial feeds with modular transformation engines, turning volatile market tickers into structured analytical signals.",
-      de: "ARGUS verbindet rohe Finanzdaten-Feeds mit modularen Transformations-Engines, um volatile Marktticker in strukturierte Analysesignale zu verwandeln."
+      en: "ARGUS bridges raw financial feeds with modular transformation engines, turning volatile market tickers into structured analytical signals without external AI shortcuts.",
+      de: "ARGUS verbindet rohe Finanzdaten-Feeds mit modularen Transformations-Engines, um volatile Marktticker ohne KI-Abkürzungen in strukturierte Analysesignale zu verwandeln."
     },
     backgroundType: "market_gap",
     background: {
-      en: "Built to spot financial market opportunities without paying thousands for bloated enterprise terminals. Started as a personal tool to track FX & equities, now evolving into a robust open platform for quantitative market monitoring.",
-      de: "Entwickelt, um Marktchancen auf Finanzmärkten zu erkennen, ohne Tausende für überladene Enterprise-Terminals auszugeben. Begann als persönliches Tool für FX & Aktien und wächst zu einer robusten Plattform für quantitatives Marktmonitoring."
+      en: "Built to spot financial market opportunities without paying thousands for bloated enterprise terminals. Developed collaboratively as an independent side-quest to track FX & equities.",
+      de: "Entwickelt, um Marktchancen auf Finanzmärkten zu erkennen, ohne Tausende für überladene Enterprise-Terminals auszugeben. Begann als kollaboratives Side-Quest für FX & Aktien."
     },
     storySections: [
       {
@@ -126,7 +125,7 @@ export const defaultProjects: Project[] = [
         { title: { en: "Live Market APIs", de: "Live-Markt-APIs" }, text: { en: "yfinance & FX currency feeds", de: "yfinance & FX Währungs-Feeds" } },
         { title: { en: "Validation & Normalization", de: "Validierung & Normalisierung" }, text: { en: "Pydantic schema checks & missing data interpolation", de: "Pydantic Schemaprüfungen & Lückenfüllung" } },
         { title: { en: "Pandas Analytics Engine", de: "Pandas Analytics Engine" }, text: { en: "Vectorized moving averages, volatility metrics & EV", de: "Vektorisierte Gleitende Durchschnitte & Volatilität" } },
-        { title: { en: "AI Anomaly Guard", de: "AI-Anomalie-Wächter" }, text: { en: "Pattern recognition for abnormal market spikes", de: "Mustererkennung für unübliche Markt-Ausschläge" } }
+        { title: { en: "Alert Engine", de: "Alert Engine" }, text: { en: "Rule-based pattern recognition for abnormal spikes", de: "Regelbasierte Mustererkennung für unübliche Markt-Ausschläge" } }
       ]
     },
     roadmapTitle: { en: "Sprint Execution", de: "Sprint-Umsetzung" },
@@ -149,18 +148,15 @@ export const defaultProjects: Project[] = [
       de: "Eine modulare Quant Engine für Arbitrage-Erkennung, Strategiesimulation, Liquiditätsmessung und risikogesteuerte Ausführung."
     },
     contribution: {
-      en: "Independent project · Core domain & mathematical engine stage",
-      de: "Eigenständiges Projekt · Kern-Domain & Mathematische Engine"
+      en: "Quantitative Developer & Pipeline Architect · Private Repository",
+      de: "Quant-Entwickler & Pipeline-Architekt · Privates Repository"
     },
     status: "active",
-    aiAugmented: true,
-    aiBadgeText: {
-      en: "⚡ AI-Augmented Strategy Simulation",
-      de: "⚡ AI-Gestützte Strategiesimulation"
-    },
-    techStack: ["python", "pydantic", "pytest", "numpy", "postgres"],
-    tags: ["Python", "Pydantic", "pytest", "NumPy", "Quant Modeling", "Data Pipelines"],
-    href: "https://github.com/BytecodeBrewer/Q-Bet",
+    aiAugmented: false,
+    isPrivateRepo: true,
+    techStack: ["python", "vercel", "supabase"],
+    secondaryTechStack: ["pydantic", "postgres", "numpy", "pytest"],
+    tags: ["Python", "Vercel", "Supabase", "Pydantic", "PostgreSQL", "Quant Engine"],
     tone: "green",
     signal: [26, 35, 46, 42, 59, 66, 73, 91],
     introduction: {
@@ -230,11 +226,12 @@ export const defaultProjects: Project[] = [
     status: "active",
     aiAugmented: true,
     aiBadgeText: {
-      en: "🤖 Agentic Autonomous Orchestration",
-      de: "🤖 Autonome Agenten-Orchestrierung"
+      en: "🤖 Autonomous Agent System",
+      de: "🤖 Autonomes Agenten-System"
     },
-    techStack: ["python", "docker", "fastapi", "postgres", "redis"],
-    tags: ["Python", "Docker", "Agentic Workflows", "FastAPI", "RunPod", "Local LLMs"],
+    techStack: ["python", "ai", "docker"],
+    secondaryTechStack: ["fastapi", "postgres", "redis"],
+    tags: ["Python", "Docker", "Agentic AI", "FastAPI", "RunPod", "vLLM"],
     href: "https://github.com/BytecodeBrewer/MAS",
     tone: "emerald",
     signal: [20, 38, 55, 62, 78, 85, 92, 98],
@@ -303,13 +300,14 @@ export const defaultProjects: Project[] = [
       de: "Persönliches Forschungs-Repo · Fundament & Proof of Work"
     },
     status: "active",
-    aiAugmented: false,
+    aiAugmented: true,
     aiBadgeText: {
-      en: "⚡ Pure Foundation & Proof of Work",
-      de: "⚡ Reine Grundlagen & Proof of Work"
+      en: "⚡ AI Data Transformation Experiments",
+      de: "⚡ AI Daten-Transformation Experimente"
     },
-    techStack: ["python", "numpy", "pytorch", "azure", "databricks", "snowflake"],
-    tags: ["Python", "NumPy", "PyTorch", "Azure", "Databricks", "Snowflake", "RAG Systems"],
+    techStack: ["python", "azure", "databricks"],
+    secondaryTechStack: ["snowflake", "pytorch", "numpy"],
+    tags: ["Python", "Azure", "Databricks", "Snowflake", "PyTorch", "RAG Systems"],
     href: "https://github.com/BytecodeBrewer/Data-Lab",
     tone: "blue",
     signal: [30, 45, 60, 70, 82, 88, 94, 99],
@@ -366,36 +364,37 @@ export const defaultProjects: Project[] = [
     index: "05",
     name: "Notion Sync",
     label: {
-      en: "Multi-Database Workflow Automation",
-      de: "Multi-Datenbank Workflow Automatisierung"
+      en: "Multi-Database Workflow Automation Pipeline",
+      de: "Multi-Datenbank Workflow-Automatisierungs-Pipeline"
     },
     summary: {
-      en: "A desktop and background automation service that mirrors records from fragmented Notion databases into one unified operational workspace.",
-      de: "Eine Desktop- und Hintergrund-Automatisierung, die Einträge aus getrennten Notion-Datenbanken in einer operativen Ansicht zusammenführt."
+      en: "A continuous integration script & automation service syncing documentation, technical notes, and structured metadata into Notion workspaces.",
+      de: "Ein CI-Skript & Automatisierungsdienst zur Synchronisation von Doku, technischen Notizen und Metadaten in Notion Workspaces."
     },
     contribution: {
-      en: "Independent project · Working automation prototype",
-      de: "Eigenständiges Projekt · Funktionierender Automatisierungs-Prototyp"
+      en: "Automation Engineer · Maintenance Mode",
+      de: "Automatisierungs-Ingenieur · Wartungsmodus"
     },
-    status: "side-quest",
-    aiAugmented: false,
+    status: "paused",
+    aiAugmented: true,
     aiBadgeText: {
-      en: "⚡ Background Pipeline Worker",
-      de: "⚡ Hintergrund Pipeline-Worker"
+      en: "🤖 AI-Assisted Knowledge Pipeline",
+      de: "🤖 KI-Gestützte Wissens-Pipeline"
     },
-    techStack: ["electron", "typescript", "postgres"],
-    tags: ["Electron", "TypeScript", "Node.js", "Notion API", "Workflow Automation"],
-    href: "https://github.com/BytecodeBrewer/notion-sync",
+    techStack: ["typescript", "electron"],
+    secondaryTechStack: ["postgres"],
+    tags: ["TypeScript", "Electron", "Node.js", "Notion API", "Workflow Automation"],
+    href: "https://github.com/BytecodeBrewer/Notion-Sync",
     tone: "amber",
     signal: [24, 34, 42, 55, 47, 62, 74, 80],
     introduction: {
       en: "Notion Sync solves a real-world productivity gap: unifying multi-table databases into a real operational master table without manual copy-pasting.",
-      de: "Notion Sync löst ein eխtes Produktivitätsproblem: Zusammenführung mehrerer Notion-Tabellen in eine zentrale operative Master-Tabelle."
+      de: "Notion Sync löst ein echtes Produktivitätsproblem: Zusammenführung mehrerer Notion-Tabellen in eine zentrale operative Master-Tabelle."
     },
     backgroundType: "market_gap",
     background: {
-      en: "Notion allows linked views, but lacks a true native multi-database aggregation engine that keeps writeable records synchronized. Notion Sync closes this market gap by running a continuous delta-sync worker that tracks creations, edits, and deletions across source databases.",
-      de: "Notion bietet verknüpfte Ansichten, aber keine echte native Aggregations-Engine. Notion Sync schließt diese Marktlücke mit einem kontinuierlichen Delta-Sync Worker, der Änderungen und Löschungen live abgleicht."
+      en: "Notion allows linked views, but lacks a true native multi-database aggregation engine that keeps writeable records synchronized. Built with AI workflow assistance, Notion Sync runs a continuous delta-sync worker.",
+      de: "Notion bietet verknüpfte Ansichten, aber keine echte native Aggregations-Engine. Mit KI-Unterstützung entwickelt, führt Notion Sync einen kontinuierlichen Delta-Sync Worker aus."
     },
     storySections: [
       {
@@ -441,74 +440,60 @@ export const defaultProjects: Project[] = [
     index: "06",
     name: "SMART",
     label: {
-      en: "AI-Assisted Test Infrastructure",
-      de: "AI-Gestützte Test-Infrastruktur"
+      en: "System Monitoring, Analysis & Resource Tracking",
+      de: "System Monitoring, Analysis & Resource Tracking"
     },
     summary: {
-      en: "A student team project converting natural-language test prompts into reviewable Playwright code with mockserver feedback loops.",
-      de: "Ein studentisches Teamprojekt, das natürliche Sprachanweisungen in überprüfbaren Playwright-Code mit Mockserver-Feedback umwandelt."
+      en: "A lightweight Linux system telemetry suite monitoring CPU, memory, background daemons, and system health.",
+      de: "Eine kompakte Linux-Systemtelemetrie-Suite zur Überwachung von CPU, Speicher, Hintergrund-Daemons und Systemzustand."
     },
     contribution: {
-      en: "Student team project · Completed showcase & LLM integration",
-      de: "Studentisches Teamprojekt · Abgeschlossener Showcase & LLM-Integration"
+      en: "Systems Developer · Long-term background tool (Side-Quest)",
+      de: "System-Entwickler · Langfristiges Hintergrund-Tool (Side-Quest)"
     },
-    status: "paused",
-    aiAugmented: true,
-    aiBadgeText: {
-      en: "🤖 LLM Code Generation & Playwright Validation",
-      de: "🤖 LLM Codegenerierung & Playwright Validierung"
-    },
-    techStack: ["typescript", "go", "mcp", "playwright", "docker"],
-    tags: ["TypeScript", "Go", "MCP", "Playwright", "Mockserver", "Docker"],
-    href: "https://github.com/BytecodeBrewer/smart-showcase",
+    status: "side-quest",
+    aiAugmented: false,
+    techStack: ["typescript", "go"],
+    secondaryTechStack: ["docker", "mcp"],
+    tags: ["TypeScript", "Go", "Docker", "System Telemetry"],
+    href: "https://github.com/BytecodeBrewer/SMART",
     tone: "violet",
     signal: [28, 40, 48, 43, 65, 58, 77, 84],
     introduction: {
-      en: "SMART bridges prompt engineering with automated frontend E2E testing, letting users describe scenarios in plain language before generating runnable Playwright scripts.",
-      de: "SMART verbindet Prompt Engineering mit automatisierten E2E-Frontend-Tests: Szenarien werden in natürlicher Sprache beschrieben und in Playwright-Skripte konvertiert."
+      en: "SMART is a minimalist system telemetry tool for tracking CPU, memory, and process health on Linux nodes without artificial AI bloat.",
+      de: "SMART ist ein minimalistisches System-Telemetrie-Tool zur Überwachung von CPU, Speicher und Prozessen auf Linux-Knoten ganz ohne künstlichen KI-Overhead."
     },
     backgroundType: "academic",
     background: {
-      en: "Built as a student team project to explore LLM capabilities in automated QA testing. While no longer under active feature development, SMART remains a key demonstration of chat-based code generation workflows and Model Context Protocol (MCP) server integrations.",
-      de: "Entwickelt als studentisches Teamprojekt zur Erforschung von LLMs im automatisierten QA-Testing. Auch wenn es derzeit pausiert ist, bleibt es ein wichtiges Anschauungsobjekt für LLM-Codegenerierung und MCP-Server-Integrationen."
+      en: "Created during foundational systems studies to gain deep visibility into server resource consumption and daemon health.",
+      de: "Entwickelt während der System-Grundlagen, um tiefe Einblicke in Server-Ressourcennutzung und Daemon-Zustände zu erlangen."
     },
     storySections: [
       {
-        eyebrow: { en: "Concept Gap", de: "Konzept-Lücke" },
-        title: { en: "Prompts are only useful if tests actually run", de: "Prompts nützen nur, wenn Tests auch laufen" },
+        eyebrow: { en: "System Reliability", de: "System-Zuverlässigkeit" },
+        title: { en: "Lightweight background telemetry", de: "Leichtgewichtige Hintergrund-Telemetrie" },
         body: {
-          en: "Generating test scripts with AI is trivial; ensuring they execute reliably against mock servers requires structured feedback loops.",
-          de: "Testskripte mit KI zu generieren ist leicht; die zuverlässige Ausführung gegen Mockserver erfordert jedoch strukturierte Feedback-Schleifen."
-        }
-      },
-      {
-        eyebrow: { en: "My Contribution", de: "Mein Beitrag" },
-        title: { en: "Frontend chat flow & prompt validation", de: "Frontend Chat-Flow & Prompt-Validierung" },
-        body: {
-          en: "I engineered the interactive chat UI, code review panels, prompt validation logic, and execution status displays.",
-          de: "Ich habe die interaktive Chat-UI, die Code-Review-Panels, die Prompt-Validierungslogik und die Ausführungs-Anzeigen entwickelt."
+          en: "Simple, battle-tested, and quietly running in the background as an essential long-term side-quest utility.",
+          de: "Einfach, erprobt und leise im Hintergrund als zuverlässiges Side-Quest-Tool im Einsatz."
         }
       }
     ],
     diagram: {
       label: { en: "Workflow Flow", de: "Workflow Ablauf" },
-      title: { en: "From Natural Language Prompt to Verified Test Run", de: "Vom Prompt zum verifizierten Testlauf" },
+      title: { en: "From Linux Kernel Metrics to Console HUD", de: "Von Kernel-Metriken zur Konsole" },
       intro: {
-        en: "Controlled seven-step pipeline ensuring user code review before test execution.",
-        de: "Kontrollierte Pipeline mit Code-Review vor der eigentlichen Testausführung."
+        en: "Minimal overhead pipeline streaming Linux telemetry directly to log sinks.",
+        de: "Minimalistische Pipeline, die Linux-Telemetrie direkt an Log-Sinks überträgt."
       },
       nodes: [
-        { title: { en: "Prompt Input", de: "Prompt-Eingabe" }, text: { en: "User describes test scenario in natural language", de: "Nutzer beschreibt Testfall in natürlicher Sprache" } },
-        { title: { en: "Prompt Validation", de: "Prompt-Validierung" }, text: { en: "Checks for required user actions and entities", de: "Prüft auf erforderliche Aktionen & Entitäten" } },
-        { title: { en: "Playwright Generation", de: "Playwright-Generierung" }, text: { en: "LLM emits clean Playwright TypeScript code", de: "LLM erzeugt sauberen Playwright TypeScript-Code" } },
-        { title: { en: "Execution & Feedback", de: "Ausführung & Feedback" }, text: { en: "Runs inside isolated Docker runner with mockserver", de: "Läuft im isolierten Docker-Runner mit Mockserver" } }
+        { title: { en: "Linux Metrics", de: "Linux-Metriken" }, text: { en: "CPU, RAM and systemd process polling", de: "CPU, RAM & systemd Prozess-Polling" } },
+        { title: { en: "Telemetry Daemon", de: "Telemetrie Daemon" }, text: { en: "Formats logs & tracks anomalies", de: "Formatiert Logs & erkennt Abweichungen" } },
+        { title: { en: "Console HUD", de: "Konsolen HUD" }, text: { en: "Terminal status display", de: "Terminal Statusanzeige" } }
       ]
     },
     roadmapTitle: { en: "Project Status", de: "Projekt-Status" },
     roadmap: [
-      { title: "Sprint 1-3", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Core architecture, prompt validation & Playwright engine.", de: "Kernarchitektur, Prompt-Validierung & Playwright Engine." } },
-      { title: "Sprint 4", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "MCP server integration & chat UI polish.", de: "MCP Server-Integration & Chat-UI Feinschliff." } },
-      { title: "Future", status: { en: "Paused", de: "Pausiert" }, text: { en: "Preserved as academic showcase & LLM integration reference.", de: "Erhalten als akademisches Showcase & LLM-Referenz." } }
+      { title: "v1.0 Release", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Core daemon & systemd integration.", de: "Kern-Daemon & systemd Integration." } }
     ]
   }
 ];

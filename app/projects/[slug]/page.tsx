@@ -71,7 +71,9 @@ export default function ProjectPage() {
   };
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950">
+    <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 relative">
+      <AmbientCanvas className="z-0" />
+
       {/* Navigation */}
       <header className="shell flex items-center justify-between py-5 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
         <Link className="wordmark text-lg font-bold font-mono tracking-tight text-white hover:text-cyan-400 transition-colors" href="/">
@@ -93,7 +95,7 @@ export default function ProjectPage() {
         </nav>
       </header>
 
-      <article className="shell py-12 md:py-16 space-y-12">
+      <article className="shell relative z-10 py-12 md:py-16 space-y-12">
         {/* Hero Section */}
         <div className="space-y-6">
           <div className="flex items-center gap-3">
@@ -118,27 +120,10 @@ export default function ProjectPage() {
           </p>
         </div>
 
-        {/* Ambient Visual Banner */}
-        <div className="relative w-full h-40 md:h-52 rounded-2xl border border-slate-800 bg-slate-900/60 overflow-hidden">
-          <AmbientCanvas
-            variant={
-              project.slug === "q-bet"
-                ? "quant"
-                : project.slug === "mas"
-                ? "agent"
-                : project.slug === "data-lab"
-                ? "lab"
-                : "etl"
-            }
-            className="absolute inset-0 w-full h-full"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-transparent to-transparent opacity-90" />
-        </div>
-
         {/* Mandatory Sections: Introduction, Tech Stack, Background */}
         <div className="grid md:grid-cols-3 gap-8 pt-4">
           {/* Section 1: Introduction */}
-          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+          <section className="p-6 rounded-2xl bg-slate-900/60 backdrop-blur-sm border border-slate-800 space-y-3">
             <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">
               {t({ en: "01. Introduction", de: "01. Einleitung" })}
             </p>
@@ -147,20 +132,20 @@ export default function ProjectPage() {
           </section>
 
           {/* Section 2: Tech Stack (Logo Icons) */}
-          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-4">
+          <section className="p-6 rounded-2xl bg-slate-900/60 backdrop-blur-sm border border-slate-800 space-y-4">
             <p className="text-xs font-mono text-indigo-400 uppercase tracking-widest">
               {t({ en: "02. Tech Stack", de: "02. Technologie-Stack" })}
             </p>
             <h2 className="text-xl font-bold text-white">{t({ en: "Engine & Tools", de: "Tools & Frameworks" })}</h2>
             <div className="flex flex-wrap gap-2">
               {project.techStack.map((tech) => (
-                <TechIconBadge key={tech} name={tech} size={20} />
+                <TechIconBadge key={tech} name={tech} size={20} showLabel={true} />
               ))}
             </div>
           </section>
 
           {/* Section 3: Background */}
-          <section className="p-6 rounded-2xl bg-slate-900/40 border border-slate-800 space-y-3">
+          <section className="p-6 rounded-2xl bg-slate-900/60 backdrop-blur-sm border border-slate-800 space-y-3">
             <p className="text-xs font-mono text-emerald-400 uppercase tracking-widest">
               {t({ en: "03. Background", de: "03. Hintergrund" })}
             </p>
@@ -172,7 +157,7 @@ export default function ProjectPage() {
         {/* Story Sections */}
         <section className="grid md:grid-cols-2 gap-8 py-8 border-t border-slate-900">
           {project.storySections.map((sec, i) => (
-            <div key={i} className="space-y-2 p-6 rounded-2xl bg-slate-900/30 border border-slate-800/80">
+            <div key={i} className="space-y-2 p-6 rounded-2xl bg-slate-900/50 backdrop-blur-sm border border-slate-800/80">
               <span className="text-xs font-mono text-slate-400">{sec.eyebrow[lang]}</span>
               <h3 className="text-lg font-bold text-white">{sec.title[lang]}</h3>
               <p className="text-sm text-slate-300 leading-relaxed">{sec.body[lang]}</p>
