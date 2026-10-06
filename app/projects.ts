@@ -91,7 +91,7 @@ export const defaultProjects: Project[] = [
       en: "ARGUS bridges raw financial feeds with modular transformation engines, turning volatile market tickers into structured analytical signals without external AI shortcuts.",
       de: "ARGUS verbindet rohe Finanzdaten-Feeds mit modularen Transformations-Engines, um volatile Marktticker ohne KI-Abkürzungen in strukturierte Analysesignale zu verwandeln."
     },
-    backgroundType: "market_gap",
+    backgroundType: "proof_of_work",
     background: {
       en: "Built to spot financial market opportunities without paying thousands for bloated enterprise terminals. Developed collaboratively as an independent side-quest to track FX & equities.",
       de: "Entwickelt, um Marktchancen auf Finanzmärkten zu erkennen, ohne Tausende für überladene Enterprise-Terminals auszugeben. Begann als kollaboratives Side-Quest für FX & Aktien."
@@ -152,7 +152,11 @@ export const defaultProjects: Project[] = [
       de: "Quant-Entwickler & Pipeline-Architekt · Privates Repository"
     },
     status: "active",
-    aiAugmented: false,
+    aiAugmented: true,
+    aiBadgeText: {
+      en: "🤖 AI-Driven Quantitative Workflow",
+      de: "🤖 KI-Gestützter Quant-Workflow"
+    },
     isPrivateRepo: true,
     techStack: ["python", "vercel", "supabase"],
     secondaryTechStack: ["pydantic", "postgres", "numpy", "pytest"],
@@ -300,11 +304,7 @@ export const defaultProjects: Project[] = [
       de: "Persönliches Forschungs-Repo · Fundament & Proof of Work"
     },
     status: "active",
-    aiAugmented: true,
-    aiBadgeText: {
-      en: "⚡ AI Data Transformation Experiments",
-      de: "⚡ AI Daten-Transformation Experimente"
-    },
+    aiAugmented: false,
     techStack: ["python", "azure", "databricks"],
     secondaryTechStack: ["snowflake", "pytorch", "numpy"],
     tags: ["Python", "Azure", "Databricks", "Snowflake", "PyTorch", "RAG Systems"],
@@ -391,7 +391,7 @@ export const defaultProjects: Project[] = [
       en: "Notion Sync solves a real-world productivity gap: unifying multi-table databases into a real operational master table without manual copy-pasting.",
       de: "Notion Sync löst ein echtes Produktivitätsproblem: Zusammenführung mehrerer Notion-Tabellen in eine zentrale operative Master-Tabelle."
     },
-    backgroundType: "market_gap",
+    backgroundType: "heavy_workload",
     background: {
       en: "Notion allows linked views, but lacks a true native multi-database aggregation engine that keeps writeable records synchronized. Built with AI workflow assistance, Notion Sync runs a continuous delta-sync worker.",
       de: "Notion bietet verknüpfte Ansichten, aber keine echte native Aggregations-Engine. Mit KI-Unterstützung entwickelt, führt Notion Sync einen kontinuierlichen Delta-Sync Worker aus."

@@ -4,6 +4,7 @@ import { useEffect, useRef } from "react";
 
 interface Props {
   className?: string;
+  projectSlug?: string;
 }
 
 interface FloatingNode {
@@ -18,7 +19,7 @@ interface FloatingNode {
   pulseOffset: number;
 }
 
-export function AmbientCanvas({ className = "" }: Props) {
+export function AmbientCanvas({ className = "", projectSlug }: Props) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
@@ -39,18 +40,69 @@ export function AmbientCanvas({ className = "" }: Props) {
 
     window.addEventListener("resize", handleResize);
 
-    const labels = [
-      { text: "ETL", type: "node", color: "#38bdf8" },
-      { text: "PostgreSQL", type: "db", color: "#34d399" },
-      { text: "Django", type: "code", color: "#818cf8" },
-      { text: "Next.js", type: "code", color: "#f472b6" },
-      { text: "Supabase", type: "db", color: "#34d399" },
-      { text: "Vercel", type: "cloud", color: "#a78bfa" },
-      { text: "Agentic AI", type: "ai", color: "#fbbf24" },
-      { text: "DuckDB", type: "db", color: "#fb7185" },
-      { text: "Pipeline", type: "node", color: "#38bdf8" },
-      { text: "PyTorch", type: "ai", color: "#fbbf24" },
-    ] as const;
+    const getLabelsForSlug = (slug?: string) => {
+      switch (slug) {
+        case "q-bet":
+          return [
+            { text: "EV Engine", type: "node", color: "#10b981" },
+            { text: "Arbitrage", type: "node", color: "#34d399" },
+            { text: "Liquidity", type: "db", color: "#059669" },
+            { text: "Pydantic", type: "code", color: "#6ee7b7" },
+            { text: "Risk Lockup", type: "ai", color: "#10b981" },
+          ] as const;
+        case "mas":
+          return [
+            { text: "Agent Bob", type: "ai", color: "#10b981" },
+            { text: "Orchestrator", type: "node", color: "#34d399" },
+            { text: "RunPod GPU", type: "cloud", color: "#6ee7b7" },
+            { text: "vLLM", type: "ai", color: "#059669" },
+            { text: "Task Graph", type: "code", color: "#a7f3d0" },
+          ] as const;
+        case "argus":
+          return [
+            { text: "FX Stream", type: "node", color: "#38bdf8" },
+            { text: "yfinance", type: "db", color: "#0284c7" },
+            { text: "pandas EV", type: "code", color: "#0ea5e9" },
+            { text: "Anomaly Alert", type: "ai", color: "#38bdf8" },
+          ] as const;
+        case "notion-sync":
+          return [
+            { text: "Notion API", type: "cloud", color: "#f59e0b" },
+            { text: "Delta Sync", type: "node", color: "#d97706" },
+            { text: "Master DB", type: "db", color: "#b45309" },
+            { text: "Electron Tray", type: "code", color: "#fbbf24" },
+          ] as const;
+        case "smart":
+          return [
+            { text: "CPU Telemetry", type: "node", color: "#8b5cf6" },
+            { text: "RAM Daemon", type: "db", color: "#7c3aed" },
+            { text: "Linux Kernel", type: "code", color: "#a78bfa" },
+            { text: "Systemd", type: "cloud", color: "#c084fc" },
+          ] as const;
+        case "data-lab":
+          return [
+            { text: "NumPy Math", type: "code", color: "#3b82f6" },
+            { text: "RAG Vector Search", type: "ai", color: "#2563eb" },
+            { text: "Databricks", type: "cloud", color: "#1d4ed8" },
+            { text: "Azure Pipeline", type: "node", color: "#60a5fa" },
+          ] as const;
+        default:
+          return [
+            { text: "ETL", type: "node", color: "#38bdf8" },
+            { text: "PostgreSQL", type: "db", color: "#34d399" },
+            { text: "Django", type: "code", color: "#818cf8" },
+            { text: "Next.js", type: "code", color: "#f472b6" },
+            { text: "Supabase", type: "db", color: "#34d399" },
+            { text: "Vercel", type: "cloud", color: "#a78bfa" },
+            { text: "Agentic AI", type: "ai", color: "#fbbf24" },
+            { text: "DuckDB", type: "db", color: "#fb7185" },
+            { text: "Pipeline", type: "node", color: "#38bdf8" },
+            { text: "PyTorch", type: "ai", color: "#fbbf24" },
+          ] as const;
+      }
+    };
+
+    const labels = getLabelsForSlug(projectSlug);
 
     const nodes: FloatingNode[] = Array.from({ length: 22 }, (_, i) => {
       const meta = labels[i % labels.length];
