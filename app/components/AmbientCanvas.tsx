@@ -27,19 +27,25 @@ export function useCanvasAnimation(
 
     window.addEventListener("resize", handleResize);
 
-    // Create side-only columns for data streams to keep central text areas clear and legible
-    const leftMarginWidth = Math.max(80, (width - 1180) / 2 + 100);
-    const rightMarginStart = width - leftMarginWidth;
+    // Calculate content bounds based on `.shell` container (`width: min(1180px, calc(100% - 48px))`)
+    const shellWidth = Math.min(1180, width - 48);
+    const shellLeft = (width - shellWidth) / 2;
+    const shellRight = shellLeft + shellWidth;
 
-    const leftColCount = 4;
-    const rightColCount = 4;
+    // Gutter width on left and right
+    const gutterLeftWidth = Math.max(shellLeft - 10, 40);
+    const gutterRightStart = shellRight + 10;
+    const gutterRightWidth = Math.max(width - shellRight - 10, 40);
+
+    const numLeftCols = Math.max(Math.floor(gutterLeftWidth / 28), 2);
+    const numRightCols = Math.max(Math.floor(gutterRightWidth / 28), 2);
 
     const streamColumns: number[] = [];
-    for (let i = 0; i < leftColCount; i++) {
-      streamColumns.push(16 + (leftMarginWidth / leftColCount) * i);
+    for (let i = 0; i < numLeftCols; i++) {
+      streamColumns.push(8 + (gutterLeftWidth / numLeftCols) * i);
     }
-    for (let i = 0; i < rightColCount; i++) {
-      streamColumns.push(rightMarginStart + (leftMarginWidth / rightColCount) * i);
+    for (let i = 0; i < numRightCols; i++) {
+      streamColumns.push(gutterRightStart + (gutterRightWidth / numRightCols) * i);
     }
 
     const particles = streamColumns.map((colX, idx) => ({
@@ -50,12 +56,15 @@ export function useCanvasAnimation(
       colorIdx: idx % 3,
     }));
 
-    // Server rack locations placed strictly in the outer side margins
+    // Server rack locations placed strictly in the visible outer side gutters
+    const leftRackX = Math.max(4, shellLeft - 76);
+    const rightRackX = Math.min(width - 72, shellRight + 8);
+
     const serverRacks = [
-      { x: 15, y: 120 },
-      { x: 15, y: 380 },
-      { x: Math.max(width - 95, 10), y: 160 },
-      { x: Math.max(width - 95, 10), y: 500 },
+      { x: leftRackX, y: 110 },
+      { x: leftRackX, y: 370 },
+      { x: rightRackX, y: 150 },
+      { x: rightRackX, y: 490 },
     ];
 
     let step = 0;
@@ -126,16 +135,17 @@ export function useCanvasAnimation(
         }
       });
 
-      // 4. Main Page Gamified Pixel ETL HUD (Rendered in right outer margin on wider displays)
-      if (width >= 1280) {
-        const hudX = width - 210;
+      // 4. Main Page Gamified Pixel ETL HUD (Rendered in outer side margin when gutter is wide enough)
+      const hudWidth = 180;
+      if (width - shellRight >= hudWidth + 16) {
+        const hudX = shellRight + 10;
         const hudY = height * 0.32;
 
         ctx.fillStyle = isDark ? "rgba(15, 23, 42, 0.85)" : "rgba(255, 255, 255, 0.9)";
         ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.7)" : "rgba(2, 132, 199, 0.7)";
         ctx.lineWidth = 2;
-        ctx.fillRect(hudX, hudY, 190, 110);
-        ctx.strokeRect(hudX, hudY, 190, 110);
+        ctx.fillRect(hudX, hudY, hudWidth, 110);
+        ctx.strokeRect(hudX, hudY, hudWidth, 110);
 
         ctx.fillStyle = isDark ? "#38bdf8" : "#0284c7";
         ctx.font = "8px 'Press Start 2P', monospace";
@@ -145,7 +155,7 @@ export function useCanvasAnimation(
           for (let col = 0; col < 3; col++) {
             const val = (Math.floor(Math.sin(step + row + col) * 50 + 50) / 100).toFixed(2);
             ctx.fillStyle = isDark ? "rgba(147, 197, 253, 0.85)" : "rgba(29, 78, 216, 0.85)";
-            ctx.fillText(val, hudX + 12 + col * 55, hudY + 45 + row * 20);
+            ctx.fillText(val, hudX + 12 + col * 52, hudY + 45 + row * 20);
           }
         }
       }

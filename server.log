@@ -6,3 +6,4 @@ $ next dev
 
  HEAD / 200 in 3.9s (next.js: 3.4s, application-code: 535ms)
  GET / 200 in 180ms (next.js: 16ms, application-code: 164ms)
+ GET / 200 in 297ms (next.js: 14ms, application-code: 282ms)
