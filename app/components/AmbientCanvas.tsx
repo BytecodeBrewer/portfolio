@@ -27,23 +27,35 @@ export function useCanvasAnimation(
 
     window.addEventListener("resize", handleResize);
 
-    // Pixel particles for full-screen retro data streams
-    const colWidth = 36;
-    const numColumns = Math.floor(width / colWidth);
-    const particles = Array.from({ length: Math.max(numColumns, 25) }, (_, i) => ({
-      x: i * colWidth + 12,
+    // Create side-only columns for data streams to keep central text areas clear and legible
+    const leftMarginWidth = Math.max(80, (width - 1180) / 2 + 100);
+    const rightMarginStart = width - leftMarginWidth;
+
+    const leftColCount = 4;
+    const rightColCount = 4;
+
+    const streamColumns: number[] = [];
+    for (let i = 0; i < leftColCount; i++) {
+      streamColumns.push(16 + (leftMarginWidth / leftColCount) * i);
+    }
+    for (let i = 0; i < rightColCount; i++) {
+      streamColumns.push(rightMarginStart + (leftMarginWidth / rightColCount) * i);
+    }
+
+    const particles = streamColumns.map((colX, idx) => ({
+      x: colX,
       y: Math.random() * height,
       speed: 1.5 + Math.random() * 2.5,
       char: String.fromCharCode(0x30 + Math.floor(Math.random() * 10)),
-      colorIdx: i % 3,
+      colorIdx: idx % 3,
     }));
 
-    // Server rack locations
+    // Server rack locations placed strictly in the outer side margins
     const serverRacks = [
-      { x: 30, y: 100 },
-      { x: 30, y: 360 },
-      { x: width - 110, y: 140 },
-      { x: width - 110, y: 480 },
+      { x: 15, y: 120 },
+      { x: 15, y: 380 },
+      { x: Math.max(width - 95, 10), y: 160 },
+      { x: Math.max(width - 95, 10), y: 500 },
     ];
 
     let step = 0;
@@ -114,25 +126,27 @@ export function useCanvasAnimation(
         }
       });
 
-      // 4. Main Page Right-Side Gamified Pixel ETL HUD
-      const centerX = width * 0.8;
-      const centerY = height * 0.36;
+      // 4. Main Page Gamified Pixel ETL HUD (Rendered in right outer margin on wider displays)
+      if (width >= 1280) {
+        const hudX = width - 210;
+        const hudY = height * 0.32;
 
-      ctx.fillStyle = isDark ? "rgba(15, 23, 42, 0.85)" : "rgba(255, 255, 255, 0.9)";
-      ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.7)" : "rgba(2, 132, 199, 0.7)";
-      ctx.lineWidth = 2;
-      ctx.fillRect(centerX - 120, centerY - 60, 240, 120);
-      ctx.strokeRect(centerX - 120, centerY - 60, 240, 120);
+        ctx.fillStyle = isDark ? "rgba(15, 23, 42, 0.85)" : "rgba(255, 255, 255, 0.9)";
+        ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.7)" : "rgba(2, 132, 199, 0.7)";
+        ctx.lineWidth = 2;
+        ctx.fillRect(hudX, hudY, 190, 110);
+        ctx.strokeRect(hudX, hudY, 190, 110);
 
-      ctx.fillStyle = isDark ? "#38bdf8" : "#0284c7";
-      ctx.font = "9px 'Press Start 2P', monospace";
-      ctx.fillText("DATA LAB: NUMPY & DUCKDB", centerX - 105, centerY - 38);
+        ctx.fillStyle = isDark ? "#38bdf8" : "#0284c7";
+        ctx.font = "8px 'Press Start 2P', monospace";
+        ctx.fillText("DATA LAB", hudX + 12, hudY + 20);
 
-      for (let row = 0; row < 3; row++) {
-        for (let col = 0; col < 4; col++) {
-          const val = (Math.floor(Math.sin(step + row + col) * 50 + 50) / 100).toFixed(2);
-          ctx.fillStyle = isDark ? "rgba(147, 197, 253, 0.85)" : "rgba(29, 78, 216, 0.85)";
-          ctx.fillText(val, centerX - 95 + col * 48, centerY - 10 + row * 22);
+        for (let row = 0; row < 3; row++) {
+          for (let col = 0; col < 3; col++) {
+            const val = (Math.floor(Math.sin(step + row + col) * 50 + 50) / 100).toFixed(2);
+            ctx.fillStyle = isDark ? "rgba(147, 197, 253, 0.85)" : "rgba(29, 78, 216, 0.85)";
+            ctx.fillText(val, hudX + 12 + col * 55, hudY + 45 + row * 20);
+          }
         }
       }
 

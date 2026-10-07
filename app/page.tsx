@@ -126,7 +126,7 @@ export default function Home() {
           <span className="text-cyan-500 text-base">🗄️</span>
           <span className="font-mono text-cyan-400 font-bold group-hover:text-cyan-300">
             &gt;_
-            <span className="animate-ping inline-block w-1.5 h-4 bg-cyan-400 ml-0.5 align-middle opacity-75" />
+            <span className="animate-pulse inline-block w-1.5 h-4 bg-cyan-400 ml-0.5 align-middle opacity-80" />
           </span>
         </Link>
         <nav className={`flex items-center gap-3 md:gap-5 text-xs md:text-sm font-medium ${darkMode ? "text-slate-300" : "text-slate-700"}`} aria-label="Main navigation">
