@@ -51,7 +51,7 @@ function AiBadge({ text, aiAugmented }: { text?: { en: string; de: string }; aiA
       className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-semibold text-cyan-400 hover:text-cyan-300 transition-colors cursor-help group/ai relative"
       title={text ? text[lang] : "Supported by Agentic Workflows & AI Agents"}
     >
-      <TechSvgIcon id="ai" size={16} className="text-cyan-400 drop-shadow-[0_0_8px_rgba(34,211,238,0.6)]" />
+      <TechSvgIcon id="ai" size={18} className="drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]" />
       <span className="hidden sm:inline-block text-[11px] font-mono text-cyan-300/80 group-hover/ai:text-cyan-200 transition-colors">
         {text ? text[lang] : "AI Agents"}
       </span>
@@ -158,11 +158,11 @@ export default function Home() {
         <div className="space-y-4 max-w-4xl">
           <h1 className={`text-3xl sm:text-4xl md:text-6xl font-extrabold tracking-tight ${darkMode ? "text-white" : "text-slate-900"} leading-tight`}>
             {t({
-              en: "Obsessively building data pipelines & ",
-              de: "Wie vom Teufel besessen Datenbändigung & "
+              en: "Turn messy data streams into ",
+              de: "Verwandle ungeordnete Datenströme in "
             })}
             <em className="not-italic text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-sky-400 to-emerald-400">
-              {t({ en: "high-performance systems.", de: "High-Performance Pipelines." })}
+              {t({ en: "bulletproof systems.", de: "kugelsichere Systeme." })}
             </em>
           </h1>
           <p className={`text-base md:text-xl ${darkMode ? "text-slate-300" : "text-slate-600"} max-w-3xl font-light leading-relaxed`}>

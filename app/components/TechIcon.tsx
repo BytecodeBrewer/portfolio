@@ -48,6 +48,42 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
   const iconKey = id.toLowerCase().replace(/[^a-z0-9]/g, "");
 
   switch (iconKey) {
+    case "ai":
+    case "agents":
+    case "sparkle":
+      return (
+        <svg width={size} height={size} viewBox="0 0 100 100" fill="none" className={className}>
+          <defs>
+            <linearGradient id="sparkleGradLarge" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#38bdf8" />
+              <stop offset="50%" stopColor="#3b82f6" />
+              <stop offset="100%" stopColor="#d946ef" />
+            </linearGradient>
+            <linearGradient id="sparkleGradSmall" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#22d3ee" />
+              <stop offset="100%" stopColor="#3b82f6" />
+            </linearGradient>
+          </defs>
+
+          {/* Large Main Sparkle Right */}
+          <path
+            d="M 68 30 Q 68 58 98 58 Q 68 58 68 86 Q 68 58 38 58 Q 68 58 68 30 Z"
+            fill="url(#sparkleGradLarge)"
+          />
+
+          {/* Medium Sparkle Top Left */}
+          <path
+            d="M 35 10 Q 35 25 52 25 Q 35 25 35 40 Q 35 25 18 25 Q 35 25 35 10 Z"
+            fill="url(#sparkleGradSmall)"
+          />
+
+          {/* Small Sparkle Bottom Left */}
+          <path
+            d="M 28 65 Q 28 73 36 73 Q 28 73 28 81 Q 28 73 20 73 Q 28 73 28 65 Z"
+            fill="url(#sparkleGradSmall)"
+          />
+        </svg>
+      );
     case "python":
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
