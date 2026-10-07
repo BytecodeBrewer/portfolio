@@ -53,7 +53,6 @@ export default function ProjectPage() {
   const { lang, t } = useLanguage();
   const { isDark } = useTheme();
   const [projectsList, setProjectsList] = useState<Project[]>(defaultProjects);
-  const [showSecondaryTech, setShowSecondaryTech] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem("portfolio_projects_override");
@@ -161,7 +160,7 @@ export default function ProjectPage() {
             <p className={`text-sm leading-relaxed ${isDark ? "text-slate-300" : "text-slate-700"}`}>{project.introduction[lang]}</p>
           </section>
 
-          {/* Section 2: Tech Stack (Primary Logos + Popover for Secondary) */}
+          {/* Section 2: Tech Stack (All Logos Displayed Directly) */}
           <section className={`p-6 rounded-2xl backdrop-blur-sm border space-y-4 ${
             isDark ? "bg-slate-900/60 border-slate-800" : "bg-slate-50/90 border-slate-200"
           }`}>
@@ -170,30 +169,9 @@ export default function ProjectPage() {
             </p>
             <h2 className={`text-xl font-bold ${isDark ? "text-white" : "text-slate-900"}`}>{t({ en: "Engine & Tools", de: "Tools & Frameworks" })}</h2>
             <div className="flex flex-wrap items-center gap-2">
-              {project.techStack.map((tech) => (
+              {[...project.techStack, ...(project.secondaryTechStack || [])].map((tech) => (
                 <TechIconBadge key={tech} name={tech} size={20} showLabel={true} />
               ))}
-              {project.secondaryTechStack && project.secondaryTechStack.length > 0 && (
-                <div className="relative inline-block">
-                  <button
-                    onClick={() => setShowSecondaryTech(!showSecondaryTech)}
-                    className={`px-2.5 py-1.5 rounded-lg border text-xs font-mono font-bold transition-all ${
-                      isDark ? "bg-slate-800 border-slate-700 text-cyan-400 hover:bg-slate-700" : "bg-white border-slate-300 text-cyan-700 hover:bg-slate-100"
-                    }`}
-                  >
-                    + More ({project.secondaryTechStack.length})
-                  </button>
-                  {showSecondaryTech && (
-                    <div className={`absolute top-full left-0 mt-2 p-3 rounded-xl border shadow-xl z-30 min-w-[200px] flex flex-wrap gap-2 ${
-                      isDark ? "bg-slate-900 border-slate-700" : "bg-white border-slate-300"
-                    }`}>
-                      {project.secondaryTechStack.map((sec) => (
-                        <TechIconBadge key={sec} name={sec} size={16} showLabel={true} />
-                      ))}
-                    </div>
-                  )}
-                </div>
-              )}
             </div>
           </section>
 
