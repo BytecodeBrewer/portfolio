@@ -16,3 +16,7 @@
  GET / 200 in 526ms (next.js: 54ms, application-code: 472ms)
  GET /projects/argus 200 in 152ms (next.js: 46ms, application-code: 106ms)
 [browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+✓ Compiled in 220ms
+ GET / 200 in 500ms (next.js: 59ms, application-code: 442ms)
+ GET /projects/argus 200 in 244ms (next.js: 56ms, application-code: 188ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior

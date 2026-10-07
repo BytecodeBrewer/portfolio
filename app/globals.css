@@ -1,11 +1,53 @@
 @import "tailwindcss";
 
-:root{--ink:#10110f;--paper:#0f172a;--muted:#666760;--line:#1e293b;--acid:#c9ff3d;--cyan:#22b8b2;--green:#79a83b;--violet:#8769ff;--amber:#ff9f1c}
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{margin:0;background:#020617;color:#f8fafc;font-family:ui-sans-serif, system-ui, sans-serif}
-a{color:inherit;text-decoration:none}
-.shell{width:min(1180px,calc(100% - 48px));margin-inline:auto}
+:root {
+  --ink: #10110f;
+  --paper: #0f172a;
+  --muted: #666760;
+  --line: #1e293b;
+  --acid: #c9ff3d;
+  --cyan: #22b8b2;
+  --green: #79a83b;
+  --violet: #8769ff;
+  --amber: #ff9f1c;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #020617;
+  color: #f8fafc;
+  font-family: 'Fira Code', 'VT323', monospace;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.shell {
+  width: min(1180px, calc(100% - 48px));
+  margin-inline: auto;
+}
+
+/* Retro Pixel Art Card Styling */
+.pixel-box {
+  border-width: 2px;
+  box-shadow: 4px 4px 0px 0px rgba(34, 211, 238, 0.3);
+  transition: all 0.2s ease-in-out;
+}
+
+.pixel-box:hover {
+  box-shadow: 6px 6px 0px 0px rgba(34, 211, 238, 0.6);
+  transform: translate(-2px, -2px);
+}
 
 @keyframes fadeIn {
   from { opacity: 0; transform: scale(0.98); }
