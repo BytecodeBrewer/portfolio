@@ -41,41 +41,60 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = fal
         );
       case "python":
         return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className="text-amber-400">
             <path d="M11.927 0C6.012 0 6.368 2.57 6.368 2.57v2.664h5.672v.81H3.928S0 5.602 0 11.588c0 5.985 3.42 5.768 3.42 5.768h2.046v-2.871s-.112-3.42 3.364-3.42h5.728s3.253.056 3.253-3.14V3.193S18.257 0 11.927 0zM8.887 1.838a1.05 1.05 0 1 1 0 2.101 1.05 1.05 0 0 1 0-2.101zm3.186 22.162c5.915 0 5.559-2.57 5.559-2.57v-2.664h-5.672v-.81h8.112S24 18.398 24 12.412c0-5.985-3.42-5.768-3.42-5.768h-2.046v2.871s.112 3.42-3.364 3.42H9.442s-3.253-.056-3.253 3.14v5.372S5.743 24 12.073 24zm3.04-1.838a1.05 1.05 0 1 1 0-2.101 1.05 1.05 0 0 1 0 2.101z" />
           </svg>
         );
       case "typescript":
       case "ts":
         return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className="text-blue-400">
             <path d="M1.125 0C.502 0 0 .502 0 1.125v21.75C0 23.498.502 24 1.125 24h21.75c.623 0 1.125-.502 1.125-1.125V1.125C24 .502 23.498 0 22.875 0zm17.363 9.75c.612 0 1.154.037 1.627.111a6.38 6.38 0 0 1 1.306.34v2.458a3.95 3.95 0 0 0-.643-.361 5.093 5.093 0 0 0-.782-.245 4.965 4.965 0 0 0-.846-.075c-.43 0-.783.076-1.058.228a.801.801 0 0 0-.413.738c0 .215.059.395.178.539.12.143.298.271.536.383.238.113.541.221.91.325l.84.237c.602.168 1.103.385 1.503.65.4.266.702.593.906.98.204.388.306.868.306 1.442 0 .783-.225 1.455-.675 2.016-.45.56-1.072.973-1.868 1.238-.795.265-1.716.398-2.761.398-.707 0-1.385-.067-2.034-.201a8.43 8.43 0 0 1-1.73-.556v-2.578c.62.333 1.23.585 1.83.756.6.172 1.182.258 1.747.258.483 0 .878-.08 1.185-.24.307-.16.46-.402.46-.725 0-.258-.088-.47-.264-.636-.176-.167-.432-.308-.768-.423a10.96 10.96 0 0 0-1.066-.307l-.873-.232c-.612-.162-1.11-.371-1.493-.628a2.53 2.53 0 0 1-.848-.923 2.72 2.72 0 0 1-.293-1.324c0-.752.222-1.398.667-1.938.445-.54 1.052-.94 1.821-1.2 0-.001.769-.39 2.518-.39zM8.99 10.012v2.302H6.551V21h-2.82V12.314H1.32V10.012z" />
           </svg>
         );
       case "docker":
         return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className="text-sky-400">
             <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.954-5.43h2.118a.185.185 0 00.186-.186V3.574a.185.185 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .103.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .103.083.186.185.186zm-2.956 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.144a.185.185 0 00-.185.185v1.887c0 .103.083.186.185.186zm5.886 2.714h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.186v1.887c0 .102.082.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186H8.1a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.956 0h2.119a.186.186 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.144a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186H2.214a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zM23.73 11.531c-.347-.252-.894-.378-1.503-.357a4.912 4.912 0 00-1.89.54c-.131.066-.255.143-.372.228a7.01 7.01 0 00-2.325-1.077c-.173-.043-.35-.078-.528-.103V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.887a13.33 13.33 0 00-.73-.016c-.344 0-.687.015-1.028.043V9.006a.186.186 0 00-.186-.186H7.362a.185.185 0 00-.185.186v1.98a18.3 18.3 0 00-1.12.222V9.006a.186.186 0 00-.186-.186H3.938a.185.185 0 00-.185.186v2.336c-.461.162-.912.355-1.348.577C.868 12.72 0 14.195 0 15.932c0 3.73 3.86 5.868 9.531 5.868 5.176 0 8.784-1.815 10.37-4.631a4.935 4.935 0 002.729-.861c.451-.31.81-.72 1.053-1.206a2.128 2.128 0 00.047-3.571z" />
           </svg>
         );
       case "postgres":
       case "postgresql":
         return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className="text-blue-500">
             <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.17 17.5c-.5.3-1.2.5-2 .5-1.8 0-3.2-1.1-3.2-2.8 0-1.4 1-2.4 2.5-2.4.6 0 1.2.1 1.7.3v-1.1c0-1.1-.7-1.7-1.9-1.7-.8 0-1.6.2-2.2.6l-.4-1.2c.8-.5 1.8-.7 2.9-.7 2.1 0 3.3 1.1 3.3 3.1v5.4h-1.7v-1zm-1-3.2c-.3-.1-.7-.2-1.1-.2-.8 0-1.4.5-1.4 1.3 0 .8.6 1.3 1.4 1.3.4 0 .8-.1 1.1-.3v-2.1z" />
           </svg>
         );
       case "azure":
         return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className="text-blue-400">
             <path d="M5.483 21.3h10.608L12.016 11.2h-6.22l-.313.916zM13.684 2.7L7.697 19.866h2.95l4.896-13.882zM14.618 2.7l4.137 12.062L24 21.3H16.89z" />
           </svg>
         );
       case "fastapi":
         return (
-          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor">
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className="text-emerald-400">
             <path d="M12 0a12 12 0 100 24 12 12 0 000-24zm0 2.18a9.82 9.82 0 110 19.64 9.82 9.82 0 010-19.64zm-.82 3.64v5.45l-3.27-3.27-1.54 1.54 5.91 5.91 5.91-5.91-1.54-1.54-3.27 3.27V5.82z" />
           </svg>
+        );
+      case "go":
+      case "golang":
+        return (
+          <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className="text-cyan-400">
+            <path d="M1.811 10.231c-.045.244-.068.502-.068.775 0 2.378 1.517 4.148 3.829 4.148 1.42 0 2.502-.686 2.986-1.74h-2.585v-1.637h4.428c.05.295.074.582.074.887 0 3.393-2.103 5.432-5.11 5.432C2.183 18.096 0 15.228 0 11.391c0-3.805 2.213-6.684 5.385-6.684 2.522 0 4.293 1.583 4.88 3.646l-1.85.553c-.392-1.282-1.425-2.222-2.99-2.222-2.124 0-3.565 1.776-3.614 3.547zm13.116-5.289c3.084 0 5.289 2.24 5.289 5.378 0 3.14-2.205 5.38-5.289 5.38-3.085 0-5.289-2.24-5.289-5.38 0-3.138 2.204-5.378 5.289-5.378zm0 8.94c1.848 0 3.218-1.458 3.218-3.562 0-2.103-1.37-3.56-3.218-3.56-1.847 0-3.217 1.457-3.217 3.56 0 2.104 1.37 3.562 3.217 3.562z" />
+          </svg>
+        );
+      case "pandas":
+        return (
+          <span className="font-mono text-xs font-black text-indigo-400 tracking-tighter">
+            pd
+          </span>
+        );
+      case "databricks":
+        return (
+          <span className="font-mono text-xs font-black text-red-400 tracking-tighter">
+            DB
+          </span>
         );
       default:
         return (
@@ -90,11 +109,11 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = fal
     <span
       title={String(name)}
       className={`tech-badge-item inline-flex items-center justify-center ${
-        showLabel ? "px-2.5 py-1 gap-1.5" : "w-8 h-8 rounded-lg"
-      } border border-slate-700/60 bg-slate-900/80 text-slate-200 transition-all hover:border-cyan-400/80 hover:bg-slate-800 hover:scale-105 shadow-sm ${className}`}
+        showLabel ? "px-3 py-1.5 gap-2" : "w-8 h-8 rounded-lg"
+      } border border-slate-700/60 bg-slate-900/90 text-slate-100 dark:border-slate-700/60 dark:bg-slate-900/90 dark:text-slate-100 transition-all hover:border-cyan-400 hover:scale-105 shadow-sm ${className}`}
     >
-      <span className="text-cyan-400 inline-flex items-center justify-center">{renderContent()}</span>
-      {showLabel ? <span className="text-xs font-mono font-medium">{name}</span> : null}
+      <span className="inline-flex items-center justify-center">{renderContent()}</span>
+      {showLabel ? <span className="text-xs font-mono font-semibold capitalize">{name}</span> : null}
     </span>
   );
 }
