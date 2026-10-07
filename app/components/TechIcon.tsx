@@ -175,33 +175,42 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
       );
     case "pydantic":
       return (
-        <span className="font-mono text-xs font-black tracking-tighter text-pink-400">
-          [P]
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="currentColor" strokeWidth="2" />
+          <path d="M8 6h5a3.5 3.5 0 0 1 0 7H8V6zm0 7h4a3.5 3.5 0 0 1 0 7H8v-7z" stroke="currentColor" strokeWidth="2" fill="none" />
+        </svg>
       );
     case "pandas":
       return (
-        <span className="font-mono text-xs font-black tracking-tighter text-indigo-400">
-          pd
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <rect x="4" y="3" width="3" height="18" rx="1.5" />
+          <rect x="17" y="3" width="3" height="18" rx="1.5" />
+          <rect x="10.5" y="6" width="3" height="12" rx="1.5" />
+        </svg>
       );
     case "databricks":
       return (
-        <span className="font-mono text-xs font-black tracking-tighter text-red-400">
-          DB
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M12 2L1 8l11 6 11-6-11-6zm0 8L3.5 6 12 1.5 20.5 6 12 10zm-11 3l11 6 11-6v3l-11 6-11-6v-3z" />
+        </svg>
       );
     case "snowflake":
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93" strokeLinecap="round" />
+          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93M12 6l-2-2m4 0l-2 2M12 18l-2 2m4 0l-2-2M6 12l-2-2m0 4l2-2M18 12l2-2m0 4l-2-2" strokeLinecap="round" />
+        </svg>
+      );
+    case "excel":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM8.8 13.5l1.7 2.6 1.7-2.6h1.8l-2.6 3.8 2.7 4h-1.8l-1.8-2.8-1.8 2.8H7.1l2.7-4-2.6-3.8h1.6z" />
         </svg>
       );
     case "bootstrap":
       return (
-        <span className="font-mono text-xs font-extrabold text-purple-400">
-          B
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M18.8 3a3.2 3.2 0 0 1 3.2 3.2v11.6a3.2 3.2 0 0 1-3.2 3.2H5.2A3.2 3.2 0 0 1 2 17.8V6.2A3.2 3.2 0 0 1 5.2 3h13.6zm-6.3 5.3H8v7.4h4.6c1.6 0 2.7-.9 2.7-2.2 0-.9-.5-1.6-1.4-1.9.7-.3 1.2-.9 1.2-1.7 0-1.2-1-1.6-2.6-1.6zm-2.4 1.5h2.1c.7 0 1.2.2 1.2.8 0 .5-.5.8-1.2.8H10.1V9.8zm0 2.8h2.3c.8 0 1.3.3 1.3.9 0 .6-.5.9-1.3.9H10.1v-1.8z" />
+        </svg>
       );
     case "figma":
       return (
@@ -211,21 +220,22 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
       );
     case "bun":
       return (
-        <span className="font-mono text-xs font-bold text-amber-200">
-          bun
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M12 3c-4.97 0-9 4.03-9 9 0 4.14 2.8 7.62 6.6 8.65.65.12 1.15-.35 1.15-.95v-.8c-2.45.52-3.05-1.05-3.05-1.05-.42-1.05-1.02-1.33-1.02-1.33-.8-.55.06-.54.06-.54.88.06 1.35.91 1.35.91.78 1.34 2.05.95 2.55.73.08-.57.31-.95.56-1.17-2.05-.23-4.2-.82-4.2-4.56 0-1.06.38-1.93 1-2.61-.1-.25-.43-1.23.1-2.57 0 0 .82-.26 2.7 1.01.78-.22 1.62-.33 2.45-.33s1.67.11 2.45.33c1.88-1.27 2.7-1.01 2.7-1.01.53 1.34.2 2.32.1 2.57.62.68 1 .28 1 2.61 0 3.75-2.15 4.33-4.2 4.56.32.28.61.83.61 1.67v2.48c0 .6.5 1.07 1.15.95C20.2 19.62 23 16.14 23 12c0-4.97-4.03-9-9-9z" />
+        </svg>
       );
     case "express":
       return (
-        <span className="font-mono text-xs font-bold text-slate-200">
-          ex
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M22 6L12 1 2 6v12l10 5 10-5V6zm-10 1.8L18.5 11 12 14.2 5.5 11 12 7.8zM4 8.8l7 3.5v7.4l-7-3.5V8.8zm16 7.4l-7 3.5v-7.4l7-3.5v7.4z" />
+        </svg>
       );
     case "mcp":
       return (
-        <span className="font-mono text-xs font-bold text-purple-400">
-          MCP
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+          <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="2" />
+          <path d="M7 16V8l5 4 5-4v8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       );
     default:
       return (

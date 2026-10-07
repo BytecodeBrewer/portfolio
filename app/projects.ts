@@ -55,6 +55,9 @@ export type TechIcon =
   | "pydantic"
   | "supabase"
   | "vercel"
+  | "bun"
+  | "express"
+  | "excel"
   | "ai";
 
 export type Project = {
@@ -191,8 +194,8 @@ export const defaultProjects: Project[] = [
       de: "KI-Agenten & Quant-Workflow"
     },
     isPrivateRepo: true,
-    techStack: ["python", "vercel", "supabase", "postgres", "pydantic"],
-    secondaryTechStack: ["numpy", "pytest"],
+    techStack: ["python", "pydantic", "supabase", "postgres", "excel"],
+    secondaryTechStack: ["numpy", "pytest", "vercel"],
     tags: ["Python", "Vercel", "Supabase", "Pydantic", "PostgreSQL", "Quant Engine"],
     tone: "green",
     signal: [26, 35, 46, 42, 59, 66, 73, 91],
@@ -426,8 +429,8 @@ export const defaultProjects: Project[] = [
       en: "AI Agents & Knowledge Pipeline",
       de: "KI-Agenten & Wissens-Pipeline"
     },
-    techStack: ["typescript", "electron", "nextjs", "postgres", "redis", "ai"],
-    secondaryTechStack: [],
+    techStack: ["typescript", "bun", "electron", "nextjs", "postgres", "ai"],
+    secondaryTechStack: ["redis"],
     tags: ["TypeScript", "Electron", "Node.js", "Notion API", "Workflow Automation"],
     href: "https://github.com/BytecodeBrewer/Notion-Sync",
     tone: "amber",
