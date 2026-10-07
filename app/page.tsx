@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { AdminModal } from "./components/AdminModal";
 import { AmbientCanvas } from "./components/AmbientCanvas";
 import { LanguageToggle } from "./components/LanguageToggle";
-import { TechIconBadge } from "./components/TechIcon";
+import { GlobalTechStackGrid, TechIconBadge, TechSvgIcon } from "./components/TechIcon";
 import { useLanguage } from "./context/LanguageContext";
 import { useTheme } from "./context/ThemeContext";
 import { Project, defaultProjects } from "./projects";
@@ -33,16 +33,26 @@ function StatusBadge({ status }: { status: Project["status"] }) {
   );
 }
 
+function ClassificationBadge({ classification }: { classification: { en: string; de: string } }) {
+  const { lang } = useLanguage();
+  return (
+    <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-indigo-950/60 text-indigo-300 border border-indigo-500/40 shadow-sm">
+      <span>{classification[lang]}</span>
+    </span>
+  );
+}
+
 function AiBadge({ text, aiAugmented }: { text?: { en: string; de: string }; aiAugmented?: boolean }) {
   const { lang } = useLanguage();
   if (!aiAugmented) return null;
 
   return (
     <span
-      className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-cyan-950/60 text-cyan-300 border border-cyan-500/40 shadow-sm"
-      title="Agentic & AI-assisted development workflow"
+      className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-cyan-950/80 text-cyan-300 border border-cyan-500/50 shadow-sm group/ai relative cursor-help"
+      title="Powered by AI Agents & Agentic Workflows"
     >
-      <span>{text ? text[lang] : "⚡ AI-Augmented"}</span>
+      <TechSvgIcon id="ai" size={14} className="text-cyan-400" />
+      <span>{text ? text[lang] : "AI Agents & Workflows"}</span>
     </span>
   );
 }
@@ -75,40 +85,6 @@ function PrivateRepoModal({ isOpen, onClose }: { isOpen: boolean; onClose: () =>
           </button>
         </div>
       </div>
-    </div>
-  );
-}
-
-function TechStackPopover({ techList, secondaryTechList }: { techList: Project["techStack"]; secondaryTechList?: Project["secondaryTechStack"] }) {
-  const [showMore, setShowMore] = useState(false);
-  const { t } = useLanguage();
-
-  const extraTechs = secondaryTechList || [];
-
-  return (
-    <div className="relative flex flex-wrap items-center gap-2 pt-2">
-      {techList.map((tech) => (
-        <TechIconBadge key={tech} name={tech} showLabel={false} />
-      ))}
-
-      {extraTechs.length > 0 ? (
-        <div className="relative">
-          <button
-            onClick={() => setShowMore(!showMore)}
-            className="px-2.5 py-1 rounded-lg border border-slate-700/80 bg-slate-900/90 text-xs font-mono font-semibold text-cyan-400 hover:border-cyan-400 hover:bg-slate-800 transition-colors"
-          >
-            +{extraTechs.length} {t({ en: "More", de: "Mehr" })}
-          </button>
-
-          {showMore ? (
-            <div className="absolute left-0 top-full mt-2 z-30 p-3 rounded-xl bg-slate-900 border border-slate-700 shadow-xl flex flex-wrap gap-2 max-w-xs">
-              {extraTechs.map((tech) => (
-                <TechIconBadge key={tech} name={tech} showLabel={true} />
-              ))}
-            </div>
-          ) : null}
-        </div>
-      ) : null}
     </div>
   );
 }
@@ -150,6 +126,7 @@ export default function Home() {
         </Link>
         <nav className={`flex items-center gap-3 md:gap-5 text-xs md:text-sm font-medium ${darkMode ? "text-slate-300" : "text-slate-700"}`} aria-label="Main navigation">
           <a href="#work" className="hover:text-cyan-500 transition-colors">{t({ en: "Projects", de: "Projekte" })}</a>
+          <a href="#stack" className="hover:text-cyan-500 transition-colors">{t({ en: "Tech Stack", de: "Tech Stack" })}</a>
           <a href="#approach" className="hover:text-cyan-500 transition-colors">{t({ en: "Approach", de: "Ansatz" })}</a>
           <a href="#footer-links" className="hover:text-cyan-500 transition-colors">{t({ en: "Contact", de: "Kontakt" })}</a>
           <LanguageToggle />
@@ -213,6 +190,7 @@ export default function Home() {
                 <div className="space-y-4 flex-1">
                   <div className="flex items-center gap-2 md:gap-3 flex-wrap">
                     <span className="text-xs font-mono font-bold text-cyan-500">{project.index}</span>
+                    <ClassificationBadge classification={project.classification} />
                     <StatusBadge status={project.status} />
                     <AiBadge text={project.aiBadgeText} aiAugmented={project.aiAugmented} />
                   </div>
@@ -231,8 +209,6 @@ export default function Home() {
                   <p className={`text-xs font-mono ${darkMode ? "text-slate-400" : "text-slate-500"}`}>
                     {project.contribution[lang]}
                   </p>
-
-                  <TechStackPopover techList={project.techStack} secondaryTechList={project.secondaryTechStack} />
                 </div>
 
                 <div className={`flex flex-wrap items-center justify-between md:flex-col md:items-end gap-4 shrink-0 pt-2 md:pt-0 border-t md:border-t-0 ${darkMode ? "border-slate-800/60" : "border-slate-200"}`}>
@@ -271,6 +247,22 @@ export default function Home() {
             </article>
           ))}
         </div>
+      </section>
+
+      {/* Categorized Global Tech Stack Section */}
+      <section className="stack shell relative z-10 py-8 md:py-12 space-y-6 md:space-y-8" id="stack">
+        <div className={`border-b ${darkMode ? "border-slate-900" : "border-slate-200"} pb-4`}>
+          <p className="text-xs font-mono text-cyan-500 uppercase tracking-widest">{t({ en: "Technical Ecosystem", de: "Technologisches Ökosystem" })}</p>
+          <h2 className={`text-xl md:text-2xl font-bold ${darkMode ? "text-white" : "text-slate-900"} tracking-tight mt-1`}>{t({ en: "Complete Tech Stack", de: "Gesamter Tech Stack" })}</h2>
+          <p className={`text-xs md:text-sm mt-1 ${darkMode ? "text-slate-400" : "text-slate-600"}`}>
+            {t({
+              en: "Hover over tools to reveal brand accents. Cleanly separated across domain tiers.",
+              de: "Fahre über Werkzeuge für Markenfarben. Saubere Trennung nach Systemebenen."
+            })}
+          </p>
+        </div>
+
+        <GlobalTechStackGrid darkMode={darkMode} />
       </section>
 
       {/* Approach Section */}
