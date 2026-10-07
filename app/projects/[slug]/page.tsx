@@ -14,7 +14,7 @@ function FlowDiagram({ project }: { project: Project }) {
   const { diagram } = project;
 
   return (
-    <section className="py-12 border-t border-slate-900 space-y-6">
+    <section className="py-12 border-t border-slate-900 dark:border-slate-800 space-y-6">
       <div className="space-y-1">
         <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest">{diagram.label[lang]}</p>
         <h2 className="text-2xl font-bold text-white tracking-tight">{diagram.title[lang]}</h2>
@@ -27,7 +27,7 @@ function FlowDiagram({ project }: { project: Project }) {
           return (
             <div
               key={index}
-              className="p-5 rounded-xl bg-slate-900/60 border border-slate-800 space-y-2 relative overflow-hidden group hover:border-slate-700 transition-colors"
+              className="p-5 rounded-xl bg-slate-900/60 dark:bg-slate-900/60 border border-slate-800 dark:border-slate-800 space-y-2 relative overflow-hidden group hover:border-slate-700 transition-colors"
             >
               <div className="flex items-center justify-between">
                 <span className="text-xs font-mono font-bold text-cyan-400">0{index + 1}</span>
@@ -65,11 +65,11 @@ export default function ProjectPage() {
   if (!project) return notFound();
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 relative">
+    <main className="min-h-screen bg-slate-950 text-slate-100 dark:bg-slate-950 dark:text-slate-100 font-sans selection:bg-cyan-500 selection:text-slate-950 relative">
       <AmbientCanvas className="z-0" projectSlug={project.slug} />
 
       {/* Header Navigation */}
-      <header className="shell flex items-center justify-between py-5 border-b border-slate-900 sticky top-0 bg-slate-950/90 backdrop-blur-md z-40">
+      <header className="shell flex items-center justify-between py-5 border-b border-slate-900 dark:border-slate-800 sticky top-0 bg-slate-950/90 dark:bg-slate-950/90 backdrop-blur-md z-40">
         <Link className="wordmark text-lg font-bold font-mono tracking-tight text-white hover:text-cyan-400 transition-colors" href="/">
           LB<span className="text-cyan-400">/data</span>
         </Link>
@@ -177,7 +177,7 @@ export default function ProjectPage() {
         </div>
 
         {/* Story Sections */}
-        <section className="grid md:grid-cols-2 gap-8 py-8 border-t border-slate-900">
+        <section className="grid md:grid-cols-2 gap-8 py-8 border-t border-slate-900 dark:border-slate-800">
           {project.storySections.map((sec, i) => (
             <div key={i} className="space-y-2 p-6 rounded-2xl bg-slate-900/50 backdrop-blur-sm border border-slate-800/80">
               <span className="text-xs font-mono text-slate-400">{sec.eyebrow[lang]}</span>
@@ -191,7 +191,7 @@ export default function ProjectPage() {
         <FlowDiagram project={project} />
 
         {/* Roadmap / Future Goals Section */}
-        <section className="py-12 border-t border-slate-900 space-y-6">
+        <section className="py-12 border-t border-slate-900 dark:border-slate-800 space-y-6">
           <div className="space-y-1">
             <p className="text-xs font-mono text-indigo-400 uppercase tracking-widest">{t({ en: "Roadmap & Direction", de: "Roadmap & Ausblick" })}</p>
             <h2 className="text-2xl font-bold text-white tracking-tight">{project.roadmapTitle[lang]}</h2>
@@ -211,7 +211,7 @@ export default function ProjectPage() {
         </section>
 
         {/* Footer Link back */}
-        <div className="pt-8 border-t border-slate-900 flex justify-between items-center text-xs font-mono text-slate-400">
+        <div className="pt-8 border-t border-slate-900 dark:border-slate-800 flex justify-between items-center text-xs font-mono text-slate-400">
           <Link href="/#work" className="hover:text-cyan-400 transition-colors">
             ← {t({ en: "Back to selected work", de: "Zurück zur Übersicht" })}
           </Link>
