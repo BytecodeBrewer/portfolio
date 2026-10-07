@@ -18,66 +18,54 @@ export function useCanvasAnimation(
     let width = (canvas.width = window.innerWidth);
     let height = (canvas.height = window.innerHeight);
 
+    // Characters / tokens for Data Engineering pixel streams
+    const dataTokens = ["0", "1", "ETL", "SQL", "PY", "RAW", "DB", ">>", "PARQUET", "S3", "DAG", "LOG"];
+
+    // Initialize particles across full width
+    const colStep = 32;
+    let particles = createParticles(width, height, colStep, dataTokens);
+
+    function createParticles(w: number, h: number, step: number, tokens: string[]) {
+      const numCols = Math.max(Math.floor(w / step), 4);
+      const items = [];
+      for (let i = 0; i < numCols; i++) {
+        items.push({
+          x: i * step + 8 + (Math.random() * 8 - 4),
+          y: Math.random() * h,
+          speed: 1.2 + Math.random() * 2.2,
+          char: tokens[Math.floor(Math.random() * tokens.length)],
+          colorIdx: i % 3,
+        });
+      }
+      return items;
+    }
+
     const handleResize = () => {
       if (!canvas) return;
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
       ctx.imageSmoothingEnabled = false;
+      particles = createParticles(width, height, colStep, dataTokens);
     };
 
     window.addEventListener("resize", handleResize);
 
-    // Calculate content bounds based on `.shell` container (`width: min(1180px, calc(100% - 48px))`)
-    const shellWidth = Math.min(1180, width - 48);
-    const shellLeft = (width - shellWidth) / 2;
-    const shellRight = shellLeft + shellWidth;
-
-    // Gutter width on left and right
-    const gutterLeftWidth = Math.max(shellLeft - 10, 40);
-    const gutterRightStart = shellRight + 10;
-    const gutterRightWidth = Math.max(width - shellRight - 10, 40);
-
-    const numLeftCols = Math.max(Math.floor(gutterLeftWidth / 28), 2);
-    const numRightCols = Math.max(Math.floor(gutterRightWidth / 28), 2);
-
-    const streamColumns: number[] = [];
-    for (let i = 0; i < numLeftCols; i++) {
-      streamColumns.push(8 + (gutterLeftWidth / numLeftCols) * i);
-    }
-    for (let i = 0; i < numRightCols; i++) {
-      streamColumns.push(gutterRightStart + (gutterRightWidth / numRightCols) * i);
-    }
-
-    const particles = streamColumns.map((colX, idx) => ({
-      x: colX,
-      y: Math.random() * height,
-      speed: 1.5 + Math.random() * 2.5,
-      char: String.fromCharCode(0x30 + Math.floor(Math.random() * 10)),
-      colorIdx: idx % 3,
-    }));
-
-    // Server rack locations placed strictly in the visible outer side gutters
-    const leftRackX = Math.max(4, shellLeft - 76);
-    const rightRackX = Math.min(width - 72, shellRight + 8);
-
-    const serverRacks = [
-      { x: leftRackX, y: 110 },
-      { x: leftRackX, y: 370 },
-      { x: rightRackX, y: 150 },
-      { x: rightRackX, y: 490 },
-    ];
-
     let step = 0;
 
     const render = () => {
-      step += 0.02;
+      step += 0.025;
       ctx.clearRect(0, 0, width, height);
 
       const isDark = document.documentElement.classList.contains("dark");
 
-      // 1. Pixel Grid Background Texture
-      ctx.fillStyle = isDark ? "rgba(30, 41, 59, 0.4)" : "rgba(203, 213, 225, 0.4)";
-      const pixelGridSize = 20;
+      // Calculate container bounds for flanking server racks
+      const shellWidth = Math.min(1180, width - 48);
+      const shellLeft = (width - shellWidth) / 2;
+      const shellRight = shellLeft + shellWidth;
+
+      // 1. Retro Pixel Grid Background Texture
+      ctx.fillStyle = isDark ? "rgba(30, 41, 59, 0.35)" : "rgba(203, 213, 225, 0.35)";
+      const pixelGridSize = 24;
       for (let x = 0; x < width; x += pixelGridSize) {
         for (let y = 0; y < height; y += pixelGridSize) {
           if ((x / pixelGridSize + y / pixelGridSize) % 2 === 0) {
@@ -86,78 +74,113 @@ export function useCanvasAnimation(
         }
       }
 
-      // 2. High-Contrast 8-Bit Pixel Data Streams (Top-to-Bottom)
-      particles.forEach((p, idx) => {
+      // 2. Full-Screen 8-Bit Pixel Data Streams (Top-to-Bottom)
+      particles.forEach((p) => {
         p.y += p.speed;
-        if (p.y > height) {
+        if (p.y > height + 20) {
           p.y = -20;
-          p.speed = 1.5 + Math.random() * 2.5;
-          p.char = String.fromCharCode(0x30 + Math.floor(Math.random() * 10));
+          p.speed = 1.2 + Math.random() * 2.2;
+          p.char = dataTokens[Math.floor(Math.random() * dataTokens.length)];
         }
 
-        ctx.font = "12px 'Fira Code', 'VT323', monospace";
+        ctx.font = "11px 'Fira Code', 'VT323', monospace";
         if (isDark) {
-          ctx.fillStyle = p.colorIdx === 0 ? "rgba(56, 189, 248, 0.6)" : p.colorIdx === 1 ? "rgba(52, 211, 153, 0.55)" : "rgba(168, 85, 247, 0.55)";
+          ctx.fillStyle =
+            p.colorIdx === 0
+              ? "rgba(56, 189, 248, 0.5)"
+              : p.colorIdx === 1
+              ? "rgba(52, 211, 153, 0.5)"
+              : "rgba(168, 85, 247, 0.45)";
         } else {
-          ctx.fillStyle = p.colorIdx === 0 ? "rgba(2, 132, 199, 0.45)" : p.colorIdx === 1 ? "rgba(5, 150, 105, 0.45)" : "rgba(126, 34, 206, 0.45)";
+          ctx.fillStyle =
+            p.colorIdx === 0
+              ? "rgba(2, 132, 199, 0.4)"
+              : p.colorIdx === 1
+              ? "rgba(5, 150, 105, 0.4)"
+              : "rgba(126, 34, 206, 0.35)";
         }
 
-        // Character and trailing pixel particle
+        // Draw character token & trailing pixel bit
         ctx.fillText(p.char, p.x, p.y);
-        ctx.fillRect(p.x + 2, p.y - 14, 5, 5);
+        ctx.fillRect(p.x + 2, p.y - 12, 4, 4);
       });
 
-      // 3. Server Racks with Blinking Pixel LEDs
+      // 3. Server Racks with Blinking Pixel LEDs (Safely placed in visible gutters or edges)
+      const rackWidth = 64;
+      const rackHeight = 130;
+      const leftRackX = Math.max(10, Math.min(shellLeft - rackWidth - 8, 30));
+      const rightRackX = Math.min(width - rackWidth - 10, Math.max(shellRight + 8, width - rackWidth - 30));
+
+      const serverRacks = [
+        { x: leftRackX, y: 120 },
+        { x: leftRackX, y: 380 },
+        { x: rightRackX, y: 160 },
+        { x: rightRackX, y: 480 },
+      ];
+
       serverRacks.forEach((rack) => {
+        // Ensure rack stays strictly inside canvas bounds
+        if (rack.x < 0 || rack.x + rackWidth > width) return;
+
         ctx.fillStyle = isDark ? "rgba(15, 23, 42, 0.85)" : "rgba(241, 245, 249, 0.9)";
         ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.6)" : "rgba(2, 132, 199, 0.6)";
         ctx.lineWidth = 2;
-        ctx.fillRect(rack.x, rack.y, 68, 140);
-        ctx.strokeRect(rack.x, rack.y, 68, 140);
+        ctx.fillRect(rack.x, rack.y, rackWidth, rackHeight);
+        ctx.strokeRect(rack.x, rack.y, rackWidth, rackHeight);
 
-        // Slots and LEDs
+        // Rack slots and LEDs
         for (let slot = 0; slot < 4; slot++) {
-          const slotY = rack.y + 12 + slot * 30;
+          const slotY = rack.y + 10 + slot * 28;
           ctx.fillStyle = isDark ? "rgba(30, 41, 59, 0.9)" : "rgba(226, 232, 240, 0.95)";
-          ctx.fillRect(rack.x + 6, slotY, 56, 22);
+          ctx.fillRect(rack.x + 5, slotY, rackWidth - 10, 20);
 
           const led1Active = Math.sin(step * 4 + slot + rack.x) > 0;
           const led2Active = Math.cos(step * 5 + slot) > 0.1;
 
           ctx.fillStyle = led1Active ? "#34d399" : "rgba(52, 211, 153, 0.25)";
-          ctx.fillRect(rack.x + 12, slotY + 7, 7, 7);
+          ctx.fillRect(rack.x + 10, slotY + 6, 6, 6);
 
           ctx.fillStyle = led2Active ? "#38bdf8" : "rgba(56, 189, 248, 0.25)";
-          ctx.fillRect(rack.x + 26, slotY + 7, 7, 7);
+          ctx.fillRect(rack.x + 22, slotY + 6, 6, 6);
 
           ctx.fillStyle = isDark ? "rgba(148, 163, 184, 0.6)" : "rgba(71, 85, 105, 0.6)";
-          ctx.fillRect(rack.x + 40, slotY + 10, 16, 2);
+          ctx.fillRect(rack.x + 34, slotY + 8, 18, 2);
         }
       });
 
-      // 4. Main Page Gamified Pixel ETL HUD (Rendered in outer side margin when gutter is wide enough)
-      const hudWidth = 180;
-      if (width - shellRight >= hudWidth + 16) {
-        const hudX = shellRight + 10;
-        const hudY = height * 0.32;
+      // 4. Retro Data Terminal / Pipeline HUD Widget
+      const hudWidth = 150;
+      const hudHeight = 85;
+      const hudX = Math.min(width - hudWidth - 12, Math.max(shellRight + 12, width - hudWidth - 20));
+      const hudY = 80;
 
-        ctx.fillStyle = isDark ? "rgba(15, 23, 42, 0.85)" : "rgba(255, 255, 255, 0.9)";
+      if (hudX >= 10 && hudX + hudWidth <= width) {
+        ctx.fillStyle = isDark ? "rgba(15, 23, 42, 0.88)" : "rgba(255, 255, 255, 0.92)";
         ctx.strokeStyle = isDark ? "rgba(56, 189, 248, 0.7)" : "rgba(2, 132, 199, 0.7)";
         ctx.lineWidth = 2;
-        ctx.fillRect(hudX, hudY, hudWidth, 110);
-        ctx.strokeRect(hudX, hudY, hudWidth, 110);
+        ctx.fillRect(hudX, hudY, hudWidth, hudHeight);
+        ctx.strokeRect(hudX, hudY, hudWidth, hudHeight);
 
+        // Header
         ctx.fillStyle = isDark ? "#38bdf8" : "#0284c7";
         ctx.font = "8px 'Press Start 2P', monospace";
-        ctx.fillText("DATA LAB", hudX + 12, hudY + 20);
+        ctx.fillText("DATA PIPELINE", hudX + 10, hudY + 18);
 
-        for (let row = 0; row < 3; row++) {
-          for (let col = 0; col < 3; col++) {
-            const val = (Math.floor(Math.sin(step + row + col) * 50 + 50) / 100).toFixed(2);
-            ctx.fillStyle = isDark ? "rgba(147, 197, 253, 0.85)" : "rgba(29, 78, 216, 0.85)";
-            ctx.fillText(val, hudX + 12 + col * 52, hudY + 45 + row * 20);
-          }
-        }
+        // Status indicator LED
+        const statusPulse = Math.sin(step * 3) > 0;
+        ctx.fillStyle = statusPulse ? "#34d399" : "rgba(52, 211, 153, 0.3)";
+        ctx.fillRect(hudX + 130, hudY + 11, 6, 6);
+
+        // Terminal text lines
+        ctx.fillStyle = isDark ? "#94a3b8" : "#475569";
+        ctx.font = "9px 'Fira Code', 'VT323', monospace";
+        ctx.fillText("> STATUS: RUNNING", hudX + 10, hudY + 38);
+
+        const latVal = (12 + Math.sin(step * 2) * 3).toFixed(0);
+        ctx.fillText(`> LATENCY: ${latVal}ms`, hudX + 10, hudY + 54);
+
+        const rowCount = (100 + Math.floor(step * 10) % 50).toString();
+        ctx.fillText(`> ROWS: ${rowCount}k/s`, hudX + 10, hudY + 70);
       }
 
       animationFrameId = requestAnimationFrame(render);

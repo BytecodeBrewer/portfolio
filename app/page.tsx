@@ -115,18 +115,18 @@ export default function Home() {
   };
 
   return (
-    <main className={`min-h-screen ${darkMode ? "bg-slate-950 text-slate-100" : "bg-slate-50 text-slate-900"} font-sans selection:bg-cyan-500 selection:text-slate-950 transition-colors relative`}>
+    <main className={`min-h-screen ${darkMode ? "bg-slate-950/60 text-slate-100" : "bg-slate-50/60 text-slate-900"} font-sans selection:bg-cyan-500 selection:text-slate-950 transition-colors relative`}>
       <AmbientCanvas className="z-0" />
       <AdminModal projects={projectList} onProjectsChange={handleProjectsChange} />
       <PrivateRepoModal isOpen={privateModalOpen} onClose={() => setPrivateModalOpen(false)} />
 
       {/* Header Nav */}
-      <header className={`nav shell flex flex-wrap items-center justify-between gap-3 py-4 border-b ${darkMode ? "border-slate-900 bg-slate-950/90" : "border-slate-200 bg-slate-50/90"} backdrop-blur-md sticky top-0 z-40`}>
+      <header className={`nav shell flex flex-wrap items-center justify-between gap-3 py-4 border-b ${darkMode ? "border-slate-900 bg-slate-950/80" : "border-slate-200 bg-slate-50/80"} backdrop-blur-md sticky top-0 z-40`}>
         <Link className={`wordmark flex items-center gap-2 text-lg md:text-xl font-extrabold font-mono tracking-tight ${darkMode ? "text-white" : "text-slate-900"} group transition-colors shrink-0`} href="/">
           <span className="text-cyan-500 text-base">🗄️</span>
           <span className="font-mono text-cyan-400 font-bold group-hover:text-cyan-300">
             &gt;_
-            <span className="animate-terminal-cursor inline-block w-2 h-4 bg-cyan-400 ml-0.5 align-middle" />
+            <span className="animate-ping inline-block w-1.5 h-4 bg-cyan-400 ml-0.5 align-middle opacity-75" />
           </span>
         </Link>
         <nav className={`flex items-center gap-3 md:gap-5 text-xs md:text-sm font-medium ${darkMode ? "text-slate-300" : "text-slate-700"}`} aria-label="Main navigation">
