@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { AdminModal } from "./components/AdminModal";
 import { AmbientCanvas } from "./components/AmbientCanvas";
 import { LanguageToggle } from "./components/LanguageToggle";
-import { GlobalTechStackGrid, TechIconBadge, TechSvgIcon } from "./components/TechIcon";
+import { GlobalTechStackGrid, TechSvgIcon } from "./components/TechIcon";
 import { useLanguage } from "./context/LanguageContext";
 import { useTheme } from "./context/ThemeContext";
 import { Project, defaultProjects } from "./projects";
@@ -48,11 +48,13 @@ function AiBadge({ text, aiAugmented }: { text?: { en: string; de: string }; aiA
 
   return (
     <span
-      className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-mono font-semibold bg-cyan-950/80 text-cyan-300 border border-cyan-500/50 shadow-sm group/ai relative cursor-help"
-      title="Powered by AI Agents & Agentic Workflows"
+      className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-mono font-semibold text-cyan-400 hover:text-cyan-300 transition-colors cursor-help group/ai relative"
+      title={text ? text[lang] : "Supported by Agentic Workflows & AI Agents"}
     >
-      <TechSvgIcon id="ai" size={14} className="text-cyan-400" />
-      <span>{text ? text[lang] : "AI Agents & Workflows"}</span>
+      <TechSvgIcon id="ai" size={18} className="drop-shadow-[0_0_8px_rgba(56,189,248,0.6)]" />
+      <span className="hidden sm:inline-block text-[11px] font-mono text-cyan-300/80 group-hover/ai:text-cyan-200 transition-colors">
+        {text ? text[lang] : "AI Agents"}
+      </span>
     </span>
   );
 }
@@ -120,14 +122,17 @@ export default function Home() {
 
       {/* Header Nav */}
       <header className={`nav shell flex flex-wrap items-center justify-between gap-3 py-4 border-b ${darkMode ? "border-slate-900 bg-slate-950/90" : "border-slate-200 bg-slate-50/90"} backdrop-blur-md sticky top-0 z-40`}>
-        <Link className={`wordmark flex items-center gap-2 text-lg md:text-xl font-extrabold font-mono tracking-tight ${darkMode ? "text-white" : "text-slate-900"} hover:text-cyan-500 transition-colors shrink-0`} href="/">
-          <span className="w-3 h-3 rounded-sm bg-cyan-500 inline-block" />
-          LB<span className="text-cyan-500">/data</span>
+        <Link className={`wordmark flex items-center gap-2 text-lg md:text-xl font-extrabold font-mono tracking-tight ${darkMode ? "text-white" : "text-slate-900"} group transition-colors shrink-0`} href="/">
+          <span className="text-cyan-500 text-base">🗄️</span>
+          <span className="font-mono text-cyan-400 font-bold group-hover:text-cyan-300">
+            &gt;_
+            <span className="animate-ping inline-block w-1.5 h-4 bg-cyan-400 ml-0.5 align-middle opacity-75" />
+          </span>
         </Link>
         <nav className={`flex items-center gap-3 md:gap-5 text-xs md:text-sm font-medium ${darkMode ? "text-slate-300" : "text-slate-700"}`} aria-label="Main navigation">
           <a href="#work" className="hover:text-cyan-500 transition-colors">{t({ en: "Projects", de: "Projekte" })}</a>
+          <a href="#principles" className="hover:text-cyan-500 transition-colors">{t({ en: "Principles", de: "Prinzipien" })}</a>
           <a href="#stack" className="hover:text-cyan-500 transition-colors">{t({ en: "Tech Stack", de: "Tech Stack" })}</a>
-          <a href="#approach" className="hover:text-cyan-500 transition-colors">{t({ en: "Approach", de: "Ansatz" })}</a>
           <a href="#footer-links" className="hover:text-cyan-500 transition-colors">{t({ en: "Contact", de: "Kontakt" })}</a>
           <LanguageToggle />
           <button
@@ -145,8 +150,8 @@ export default function Home() {
         <div className={`inline-flex items-center gap-2 px-3 py-1 rounded-full border text-[11px] md:text-xs font-mono ${darkMode ? "bg-slate-900 border-slate-800 text-cyan-400" : "bg-white border-slate-200 text-cyan-700 shadow-sm"}`}>
           <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
           {t({
-            en: "Informatics · Data Engineering · Autonomous Systems",
-            de: "Informatik · Data Engineering · Autonome Systeme"
+            en: "Data Engineer · Pipeline Architect · Autonomous Systems",
+            de: "Data Engineer · Pipeline-Architekt · Autonome Systeme"
           })}
         </div>
 
@@ -156,14 +161,14 @@ export default function Home() {
               en: "Turn messy data streams into ",
               de: "Verwandle ungeordnete Datenströme in "
             })}
-            <em className="not-italic text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-sky-500 to-indigo-600">
+            <em className="not-italic text-transparent bg-clip-text bg-gradient-to-r from-cyan-500 via-sky-400 to-emerald-400">
               {t({ en: "bulletproof systems.", de: "kugelsichere Systeme." })}
             </em>
           </h1>
-          <p className={`text-base md:text-xl ${darkMode ? "text-slate-300" : "text-slate-600"} max-w-2xl font-light leading-relaxed`}>
+          <p className={`text-base md:text-xl ${darkMode ? "text-slate-300" : "text-slate-600"} max-w-3xl font-light leading-relaxed`}>
             {t({
-              en: "I’m Lev, an Informatics student in Leipzig engineering data pipelines, quantitative engines, and cost-effective multi-agent workflows. Dry humor, structured discipline, zero fluff.",
-              de: "Ich bin Lev, Informatikstudent in Leipzig. Ich baue Data-Pipelines, Quant-Engines und kosteneffiziente Multi-Agenten-Systeme. Trockener Humor, klares Systemverständnis, kein Blabla."
+              en: "I am a Data Engineer who loves to experiment, tinker, and optimize every data flow until it runs deterministically. I build custom pipelines, quantitative calculation engines, and agentic workflows. High technical ambition, dry humor, zero fluff.",
+              de: "Ich bin Data Engineer mit Leidenschaft fürs Experimentieren und Optimieren. Wenn ein Datenstrom unsauber ist, beiße ich mich fest, bis die Pipeline deterministisch und effizient läuft. Hier zeige ich meine gebauten Projekte, Tools und Vorhaben."
             })}
           </p>
         </div>
@@ -249,6 +254,60 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Engineering Principles Section */}
+      <section className="principles shell relative z-10 py-12 md:py-16 space-y-8 md:space-y-10" id="principles">
+        <div className={`border-b ${darkMode ? "border-slate-900" : "border-slate-200"} pb-4`}>
+          <p className="text-xs font-mono text-indigo-500 uppercase tracking-widest">{t({ en: "Engineering Discipline", de: "Ingenieursprinzipien" })}</p>
+          <h2 className={`text-xl md:text-2xl font-bold ${darkMode ? "text-white" : "text-slate-900"} tracking-tight`}>{t({ en: "Engineering Principles", de: "Meine Entwicklungs-Philosophie" })}</h2>
+        </div>
+
+        <div className="grid md:grid-cols-2 gap-6">
+          <div className={`p-6 rounded-2xl backdrop-blur-sm border space-y-3 ${darkMode ? "bg-slate-900/60 border-slate-800" : "bg-white/80 border-slate-200 shadow-md"}`}>
+            <span className="text-xs font-mono text-cyan-500 font-bold">01</span>
+            <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-slate-900"}`}>{t({ en: "Keep It Simple", de: "Keep It Simple" })}</h3>
+            <p className={`text-xs md:text-sm ${darkMode ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
+              {t({
+                en: "Simple tools and clear algorithms solve most problems best. You don't need heavy cloud infrastructure everywhere when a well-configured server does the job faster and cheaper.",
+                de: "Einfache Tools und klare Algorithmen lösen meist das bestehende Problem am besten. Man braucht nicht sofort überall unübersichtliche Cloud-Monster, wenn ein gut abgestimmter Server schlanker, schneller und verlässlicher ist."
+              })}
+            </p>
+          </div>
+
+          <div className={`p-6 rounded-2xl backdrop-blur-sm border space-y-3 ${darkMode ? "bg-slate-900/60 border-slate-800" : "bg-white/80 border-slate-200 shadow-md"}`}>
+            <span className="text-xs font-mono text-indigo-500 font-bold">02</span>
+            <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-slate-900"}`}>{t({ en: "Step by Step", de: "Step by Step" })}</h3>
+            <p className={`text-xs md:text-sm ${darkMode ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
+              {t({
+                en: "Instead of diving in blindly without a roadmap, build a clear, agile staged plan. Iterate systematically from core data schemas to full pipeline resilience.",
+                de: "Statt ohne festen Plan loszurennen, wird mit agiler Arbeitsweise ein strukturierter Stufenplan aufgebaut. Jeder Schritt validiert die Schnittstellen, bevor das System erweitert wird."
+              })}
+            </p>
+          </div>
+
+          <div className={`p-6 rounded-2xl backdrop-blur-sm border space-y-3 ${darkMode ? "bg-slate-900/60 border-slate-800" : "bg-white/80 border-slate-200 shadow-md"}`}>
+            <span className="text-xs font-mono text-emerald-500 font-bold">03</span>
+            <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-slate-900"}`}>{t({ en: "MVP First – Then Perfection", de: "MVP First – Then Perfection" })}</h3>
+            <p className={`text-xs md:text-sm ${darkMode ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
+              {t({
+                en: "Build an end-to-end working prototype first instead of endlessly over-refining components in isolation. Real integration feedback reveals what tests can never predict.",
+                de: "Lieber früh ein funktionierendes Minimal Viable Product aufbauen als ewig an Einzelteilen zu feilen. Erst im echten Zusammenspiel aller Komponenten sieht man, wie gut das System wirklich funktioniert."
+              })}
+            </p>
+          </div>
+
+          <div className={`p-6 rounded-2xl backdrop-blur-sm border space-y-3 ${darkMode ? "bg-slate-900/60 border-slate-800" : "bg-white/80 border-slate-200 shadow-md"}`}>
+            <span className="text-xs font-mono text-amber-500 font-bold">04</span>
+            <h3 className={`text-lg font-bold ${darkMode ? "text-white" : "text-slate-900"}`}>{t({ en: "Solid Understanding Over Vibe Coding", de: "Solides Verständnis statt Vibe Coding" })}</h3>
+            <p className={`text-xs md:text-sm ${darkMode ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
+              {t({
+                en: "AI agents accelerate workflows, but my golden rule applies: Never let AI handle code you don't fully understand yourself. It saves money, time, and nerve-wracking debugging hours.",
+                de: "Ja, ich nutze autonome AI-Agenten für Routine-Workloads, aber meine eiserne Regel gilt: Lass nichts von AI erledigen, wovon du keine Ahnung hast. Das spart Geld, Zeit und Nerven."
+              })}
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Categorized Global Tech Stack Section */}
       <section className="stack shell relative z-10 py-8 md:py-12 space-y-6 md:space-y-8" id="stack">
         <div className={`border-b ${darkMode ? "border-slate-900" : "border-slate-200"} pb-4`}>
@@ -256,56 +315,13 @@ export default function Home() {
           <h2 className={`text-xl md:text-2xl font-bold ${darkMode ? "text-white" : "text-slate-900"} tracking-tight mt-1`}>{t({ en: "Complete Tech Stack", de: "Gesamter Tech Stack" })}</h2>
           <p className={`text-xs md:text-sm mt-1 ${darkMode ? "text-slate-400" : "text-slate-600"}`}>
             {t({
-              en: "Hover over tools to reveal brand accents. Cleanly separated across domain tiers.",
-              de: "Fahre über Werkzeuge für Markenfarben. Saubere Trennung nach Systemebenen."
+              en: "Cleanly categorized across system levels with subtle background cards and full brand saturation on hover.",
+              de: "Sauber nach Systemebenen gegliedert. Dezente Icons im Ruhezustand, volle Markenfarben bei Hover."
             })}
           </p>
         </div>
 
         <GlobalTechStackGrid darkMode={darkMode} />
-      </section>
-
-      {/* Approach Section */}
-      <section className="approach shell relative z-10 py-12 md:py-16 space-y-8 md:space-y-10" id="approach">
-        <div className={`border-b ${darkMode ? "border-slate-900" : "border-slate-200"} pb-4`}>
-          <p className="text-xs font-mono text-indigo-500 uppercase tracking-widest">{t({ en: "Engineering Discipline", de: "Ingenieursprinzipien" })}</p>
-          <h2 className={`text-xl md:text-2xl font-bold ${darkMode ? "text-white" : "text-slate-900"} tracking-tight`}>{t({ en: "How I Frame Projects", de: "Wie ich Projekte angehe" })}</h2>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className={`p-5 md:p-6 rounded-2xl backdrop-blur-sm border space-y-3 ${darkMode ? "bg-slate-900/60 border-slate-800" : "bg-white/80 border-slate-200 shadow-md"}`}>
-            <span className="text-xs font-mono text-cyan-500 font-bold">01</span>
-            <h3 className={`text-base md:text-lg font-bold ${darkMode ? "text-white" : "text-slate-900"}`}>{t({ en: "Domain First", de: "Domain Zuerst" })}</h3>
-            <p className={`text-xs ${darkMode ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
-              {t({
-                en: "Model risks, EV, data schemas, and mathematical constraints in strict code objects before running heavy compute or risky trades.",
-                de: "Modelliere Risiken, EV, Schemas und mathematische Schranken in klarem Code, bevor schweres Compute gestartet wird."
-              })}
-            </p>
-          </div>
-
-          <div className={`p-5 md:p-6 rounded-2xl backdrop-blur-sm border space-y-3 ${darkMode ? "bg-slate-900/60 border-slate-800" : "bg-white/80 border-slate-200 shadow-md"}`}>
-            <span className="text-xs font-mono text-indigo-500 font-bold">02</span>
-            <h3 className={`text-base md:text-lg font-bold ${darkMode ? "text-white" : "text-slate-900"}`}>{t({ en: "Cost & Token Efficiency", de: "Kosten- & Token-Effizienz" })}</h3>
-            <p className={`text-xs ${darkMode ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
-              {t({
-                en: "Don't burn thousands on generic commercial API tokens. Offload heavy workloads to tailored agent orchestrators, local LLMs, and RunPods.",
-                de: "Verschwende nicht Tausende für generische API-Tokens. Lager schwere Tasks auf eigene Agenten, lokale LLMs & RunPods aus."
-              })}
-            </p>
-          </div>
-
-          <div className={`p-5 md:p-6 rounded-2xl backdrop-blur-sm border space-y-3 ${darkMode ? "bg-slate-900/60 border-slate-800" : "bg-white/80 border-slate-200 shadow-md"}`}>
-            <span className="text-xs font-mono text-emerald-500 font-bold">03</span>
-            <h3 className={`text-base md:text-lg font-bold ${darkMode ? "text-white" : "text-slate-900"}`}>{t({ en: "Proof of Work", de: "Proof of Work" })}</h3>
-            <p className={`text-xs ${darkMode ? "text-slate-300" : "text-slate-600"} leading-relaxed`}>
-              {t({
-                en: "Ground theoretical informatics knowledge into runnable code, vector search benchmarks, and cloud data warehouse certifications.",
-                de: "Verankere Informatiktheorie in ausführbarem Code, Vektorsuch-Benchmarks und Cloud Data Warehouse Zertifizierungen."
-              })}
-            </p>
-          </div>
-        </div>
       </section>
 
       {/* Footer & Socials Section */}
@@ -345,7 +361,7 @@ export default function Home() {
         </div>
 
         <div className={`pt-8 border-t ${darkMode ? "border-slate-900 text-slate-500" : "border-slate-200 text-slate-500"} flex flex-col md:flex-row items-center justify-between text-xs font-mono gap-4 text-center md:text-left`}>
-          <p>© {new Date().getFullYear()} Lev · Informatics & Data Engineering · Leipzig, Germany.</p>
+          <p>© {new Date().getFullYear()} Lev · Data Engineering & Pipeline Systems · Leipzig, Germany.</p>
           <p>{t({ en: "Built with curiosity & an unreasonable number of terminal tabs.", de: "Gebaut mit Neugier & unverschämt vielen Terminal-Tabs." })}</p>
         </div>
       </footer>

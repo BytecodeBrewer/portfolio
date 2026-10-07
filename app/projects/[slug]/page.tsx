@@ -78,10 +78,14 @@ export default function ProjectPage() {
       <header className={`shell flex items-center justify-between py-5 border-b ${
         isDark ? "border-slate-900 bg-slate-950/90" : "border-slate-200 bg-white/90"
       } backdrop-blur-md sticky top-0 z-40`}>
-        <Link className={`wordmark text-lg font-bold font-mono tracking-tight hover:text-cyan-400 transition-colors ${
+        <Link className={`wordmark flex items-center gap-2 text-lg font-extrabold font-mono tracking-tight ${
           isDark ? "text-white" : "text-slate-900"
-        }`} href="/">
-          LB<span className="text-cyan-400">/data</span>
+        } group transition-colors shrink-0`} href="/">
+          <span className="text-cyan-500 text-base">🗄️</span>
+          <span className="font-mono text-cyan-400 font-bold group-hover:text-cyan-300">
+            &gt;_
+            <span className="animate-ping inline-block w-1.5 h-4 bg-cyan-400 ml-0.5 align-middle opacity-75" />
+          </span>
         </Link>
         <nav className={`flex items-center gap-6 text-sm font-medium ${isDark ? "text-slate-300" : "text-slate-700"}`}>
           <Link href="/#work" className="hover:text-cyan-400 transition-colors">

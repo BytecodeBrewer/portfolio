@@ -37,21 +37,24 @@ export type TechIcon =
   | "typescript"
   | "go"
   | "docker"
-  | "nextjs"
-  | "electron"
-  | "pytorch"
-  | "databricks"
-  | "snowflake"
-  | "mcp"
   | "fastapi"
   | "postgres"
   | "supabase"
   | "vercel"
-  | "bun"
-  | "express"
-  | "excel"
   | "aws"
-  | "ai";
+  | "electron"
+  | "duckdb"
+  | "java"
+  | "cpp"
+  | "html"
+  | "css"
+  | "js"
+  | "git"
+  | "vscode"
+  | "claudecode"
+  | "codex"
+  | "githubactions"
+  | "nodejs";
 
 export type Project = {
   slug: string;
@@ -189,9 +192,9 @@ export const defaultProjects: Project[] = [
       de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
     isPrivateRepo: true,
-    techStack: ["python", "supabase", "postgres", "excel", "vercel"],
+    techStack: ["python", "supabase", "postgres", "vercel"],
     secondaryTechStack: [],
-    tags: ["Python", "Supabase", "PostgreSQL", "Excel", "Vercel"],
+    tags: ["Python", "Supabase", "PostgreSQL", "Vercel"],
     tone: "green",
     signal: [26, 35, 46, 42, 59, 66, 73, 91],
     introduction: {
@@ -268,9 +271,9 @@ export const defaultProjects: Project[] = [
       en: "Supported by Agentic Workflows & AI Agents",
       de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
-    techStack: ["python", "docker", "fastapi", "postgres", "ai"],
+    techStack: ["python", "docker", "fastapi", "postgres"],
     secondaryTechStack: [],
-    tags: ["Python", "Docker", "FastAPI", "PostgreSQL", "AI Agent"],
+    tags: ["Python", "Docker", "FastAPI", "PostgreSQL"],
     href: "https://github.com/BytecodeBrewer/MAS",
     tone: "emerald",
     signal: [20, 38, 55, 62, 78, 85, 92, 98],
@@ -335,8 +338,8 @@ export const defaultProjects: Project[] = [
       de: "Single-Lernprojekt"
     },
     summary: {
-      en: "A personal research repository implementing numerical algorithms, classical AI search, RAG vector retrieval, and cloud data architecture patterns from scratch.",
-      de: "Ein persönliches Forschungs-Repo für selbstgeschriebene Numerik-Algorithmen, klassische KI-Suche, RAG Vektor-Retrieval und Cloud-Datenarchitekturen."
+      en: "A personal research repository implementing numerical algorithms, classical AI search, RAG vector retrieval, and data architecture patterns from scratch.",
+      de: "Ein persönliches Forschungs-Repo für selbstgeschriebene Numerik-Algorithmen, klassische KI-Suche, RAG Vektor-Retrieval und Datenarchitekturen."
     },
     contribution: {
       en: "Personal Research & Proof of Work · Deep Fundamentals",
@@ -344,20 +347,20 @@ export const defaultProjects: Project[] = [
     },
     status: "active",
     aiAugmented: false,
-    techStack: ["python", "databricks", "snowflake", "pytorch"],
+    techStack: ["python", "duckdb", "postgres"],
     secondaryTechStack: [],
-    tags: ["Python", "Databricks", "Snowflake", "PyTorch"],
+    tags: ["Python", "DuckDB", "PostgreSQL"],
     href: "https://github.com/BytecodeBrewer/Data-Lab",
     tone: "blue",
     signal: [30, 45, 60, 70, 82, 88, 94, 99],
     introduction: {
-      en: "Data Lab is a single-developer learning repository designed to master data engineering fundamentals from first principles. Rather than relying on high-level wrappers, it implements numerical solvers, graph search algorithms, vector embeddings, and cloud warehouse blueprints directly in Python.",
-      de: "Data Lab ist ein persönliches Lernprojekt zur Vertiefung von Data-Engineering-Grundlagen. Statt sich auf fertige Frameworks zu verlassen, werden numerische Verfahren, Graphsuche, Vektor-Retrieval und Cloud-Warehouse-Blueprints von Grund auf selbst entwickelt."
+      en: "Data Lab is a single-developer learning repository designed to master data engineering fundamentals from first principles. Rather than relying on high-level wrappers, it implements numerical solvers, graph search algorithms, vector embeddings, and database blueprints directly in Python.",
+      de: "Data Lab ist ein persönliches Lernprojekt zur Vertiefung von Data-Engineering-Grundlagen. Statt sich auf fertige Frameworks zu verlassen, werden numerische Verfahren, Graphsuche, Vektor-Retrieval und Datenbank-Blueprints von Grund auf selbst entwickelt."
     },
     backgroundType: "proof_of_work",
     background: {
-      en: "Solid engineering requires understanding how algorithms operate under the hood. Data Lab houses custom implementations of numerical solvers, classical AI search (BFS, DFS, A*), PyTorch mechanics, RAG vector indexing, and enterprise data warehouse blueprints for Databricks Delta Lake and Snowflake.",
-      de: "Fundiertes Engineering erfordert tiefes Verständnis der mathematischen Grundlagen. Data Lab vereint selbst entwickelte Numerik-Löser, klassische KI-Suche (BFS, DFS, A*), PyTorch-Mechaniken, RAG-Indexierung sowie Blueprints für Databricks Delta Lake und Snowflake."
+      en: "Solid engineering requires understanding how algorithms operate under the hood. Data Lab houses custom implementations of numerical solvers, classical AI search (BFS, DFS, A*), RAG vector indexing, and analytical DuckDB/PostgreSQL architectures.",
+      de: "Fundiertes Engineering erfordert tiefes Verständnis der mathematischen Grundlagen. Data Lab vereint selbst entwickelte Numerik-Löser, klassische KI-Suche (BFS, DFS, A*), RAG-Indexierung sowie analytische DuckDB- & PostgreSQL-Muster."
     },
     storySections: [
       {
@@ -369,33 +372,33 @@ export const defaultProjects: Project[] = [
         }
       },
       {
-        eyebrow: { en: "Cloud Data Engineering", de: "Cloud Data Engineering" },
-        title: { en: "Enterprise Cloud Warehouse Blueprints", de: "Enterprise Cloud Warehouse Blueprints" },
+        eyebrow: { en: "Data Engineering", de: "Data Engineering" },
+        title: { en: "Analytical Data Patterns with DuckDB", de: "Analytische Datenmuster mit DuckDB" },
         body: {
-          en: "Translates core algorithms into cloud warehouse architectures, Delta Lake storage patterns, and scalable ETL pipeline templates on Databricks and Snowflake.",
-          de: "Übersetzt Grundlagen-Algorithmen in Cloud Data Warehouse Architekturmuster, Delta Lake Tabellen und ETL-Pipelines auf Databricks und Snowflake."
+          en: "Translates core algorithms into analytical processing patterns and fast in-memory query pipelines using DuckDB and PostgreSQL.",
+          de: "Übersetzt Grundlagen-Algorithmen in schnelle In-Memory-Abfrage-Pipelines und analytische Datenmuster mit DuckDB und PostgreSQL."
         }
       }
     ],
     diagram: {
       label: { en: "Knowledge Pipeline", de: "Wissens-Pipeline" },
-      title: { en: "From Fundamental Numerics to Cloud Blueprints", de: "Von Grundlagen-Numerik bis zu Cloud-Blueprints" },
+      title: { en: "From Fundamental Numerics to Analytics Blueprints", de: "Von Grundlagen-Numerik bis zu Analytik-Blueprints" },
       intro: {
-        en: "Progressive engineering depth: low-level numerical solvers expanding into vector search and enterprise cloud data pipelines.",
-        de: "Fortschreitende Tiefe: von mathematischen Numerik-Lösern über Vektorsuche bis zu Enterprise Cloud Data Pipelines."
+        en: "Progressive engineering depth: low-level numerical solvers expanding into vector search and analytical DuckDB queries.",
+        de: "Fortschreitende Tiefe: von mathematischen Numerik-Lösern über Vektorsuche bis zu analytischen DuckDB-Pipelines."
       },
       nodes: [
         { title: { en: "01. Numerical Algorithms", de: "01. Numerische Algorithmen" }, text: { en: "Linear systems, root finding, optimization & error analysis", de: "Lineare Systeme, Nullstellen, Optimierung & Fehleranalyse" } },
         { title: { en: "02. Classical AI & Graph Search", de: "02. Klassische KI & Graph-Suche" }, text: { en: "BFS, DFS, A* heuristics & graph data structures", de: "BFS, DFS, A* Heuristiken & Graph-Datenstrukturen" } },
         { title: { en: "03. Vector Retrieval & RAG", de: "03. Vektor-Retrieval & RAG" }, text: { en: "Embeddings, vector indexing & semantic search", de: "Embeddings, Vektor-Indexierung & Semantische Suche" } },
-        { title: { en: "04. Cloud Data Warehouse", de: "04. Cloud Data Warehouse" }, text: { en: "Databricks Delta Lake & Snowflake pipeline patterns", de: "Databricks Delta Lake & Snowflake Pipeline-Muster" } }
+        { title: { en: "04. Analytical Pipeline Blueprints", de: "04. Analytische Pipeline-Blueprints" }, text: { en: "DuckDB & PostgreSQL query architecture patterns", de: "DuckDB & PostgreSQL Abfrage-Architekturmuster" } }
       ]
     },
     roadmapTitle: { en: "Zukunftsperspektiven & Forschungsschwerpunkte", de: "Future Perspectives & Research Focus" },
     roadmap: [
       { title: "Forschungsschwerpunkt 1: Numerik", status: { en: "Active", de: "Aktiv" }, text: { en: "Core numerical algorithms, linear system solvers, and classical AI graph search implementation.", de: "Implementierung von Numerik-Lösern, linearen Systemen und klassischer Graph-Suche." } },
       { title: "Forschungsschwerpunkt 2: Vektorsuche", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Lightweight vector indexing experiments, embedding storage, and RAG pipelines.", de: "Vektor-Indexierungs-Experimente, Embedding-Speicher & RAG-Pipelines." } },
-      { title: "Forschungsschwerpunkt 3: Cloud Blueprints", status: { en: "Planned", de: "Geplant" }, text: { en: "Databricks Delta Lake & Snowflake deployment templates for enterprise data processing.", de: "Databricks Delta Lake & Snowflake Deployment-Templates für Enterprise ETL." } }
+      { title: "Forschungsschwerpunkt 3: DuckDB Pipelines", status: { en: "Planned", de: "Geplant" }, text: { en: "High-performance analytical pipeline templates with DuckDB & PostgreSQL.", de: "High-Performance Analytik-Pipelines mit DuckDB & PostgreSQL." } }
     ]
   },
   {
@@ -424,9 +427,9 @@ export const defaultProjects: Project[] = [
       en: "Supported by Agentic Workflows & AI Agents",
       de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
-    techStack: ["typescript", "bun", "electron", "nextjs", "postgres", "ai"],
+    techStack: ["typescript", "electron", "postgres"],
     secondaryTechStack: [],
-    tags: ["TypeScript", "Bun", "Electron", "Next.js", "PostgreSQL", "AI Agent"],
+    tags: ["TypeScript", "Electron", "PostgreSQL"],
     href: "https://github.com/BytecodeBrewer/Notion-Sync",
     tone: "amber",
     signal: [24, 34, 42, 55, 47, 62, 74, 80],
@@ -494,8 +497,8 @@ export const defaultProjects: Project[] = [
       de: "Eine kollaborative Linux-Systemtelemetrie-Suite in Go & TypeScript zur Echtzeit-Überwachung von Kernel-Speicher, CPU-Last und systemd-Daemons mit AWS Cloud-Anbindung."
     },
     contribution: {
-      en: "Collaborative University Project · Personal Focus: AWS Infrastructure, Docker & MCP Integration",
-      de: "Kollaboratives Uni-Projekt · Persönlicher Fokus: AWS Infrastructure, Docker & MCP Integration"
+      en: "Collaborative University Project · Personal Focus: AWS Infrastructure & Docker Integration",
+      de: "Kollaboratives Uni-Projekt · Persönlicher Fokus: AWS Infrastructure & Docker Integration"
     },
     status: "side-quest",
     aiAugmented: true,
@@ -503,15 +506,15 @@ export const defaultProjects: Project[] = [
       en: "Supported by Agentic Workflows & AI Agents",
       de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
-    techStack: ["go", "typescript", "docker", "aws", "ai"],
+    techStack: ["go", "typescript", "docker", "aws"],
     secondaryTechStack: [],
-    tags: ["Go", "TypeScript", "Docker", "AWS", "AI Agent"],
+    tags: ["Go", "TypeScript", "Docker", "AWS"],
     href: "https://github.com/BytecodeBrewer/SMART",
     tone: "violet",
     signal: [28, 40, 48, 43, 65, 58, 77, 84],
     introduction: {
-      en: "SMART is a collaborative university project engineered to track Linux system health and daemon states with low CPU overhead. Built during computer science systems studies, it explores live AI integration, containerized telemetry daemons, and AWS cloud metric storage.",
-      de: "SMART ist ein kollaboratives Uni-Projekt zur Überwachung von Linux-Systemzuständen und Daemons bei minimaler CPU-Last. Es entstand im Informatikstudium zur Erforschung von KI-Integration, containerisierten Telemetrie-Daemons und AWS Cloud-Metrikspeicherung."
+      en: "SMART is a collaborative university project engineered to track Linux system health and daemon states with low CPU overhead. Built during computer science systems studies, it explores containerized telemetry daemons and AWS cloud metric storage.",
+      de: "SMART ist ein kollaboratives Uni-Projekt zur Überwachung von Linux-Systemzuständen und Daemons bei minimaler CPU-Last. Es entstand im Informatikstudium zur Erforschung von containerisierten Telemetrie-Daemons und AWS Cloud-Metrikspeicherung."
     },
     backgroundType: "academic",
     background: {
@@ -528,33 +531,33 @@ export const defaultProjects: Project[] = [
         }
       },
       {
-        eyebrow: { en: "Cloud & AI Gateway", de: "Cloud & KI-Gateway" },
-        title: { en: "AWS Infrastructure & MCP Diagnostics", de: "AWS Infrastruktur & MCP-Diagnose" },
+        eyebrow: { en: "Cloud Gateway", de: "Cloud Gateway" },
+        title: { en: "AWS Infrastructure & Telemetry Gateway", de: "AWS Infrastruktur & Telemetrie-Gateway" },
         body: {
-          en: "Connects raw telemetry logs with AI monitoring agents via Model Context Protocol (MCP) and persists diagnostic data onto AWS Cloud infrastructure.",
-          de: "Verbindet Telemetrie-Logs über das Model Context Protocol (MCP) mit KI-Agenten und sichert Diagnosedaten in der AWS Cloud."
+          en: "Connects raw telemetry logs with automated diagnostic pipelines and persists metric streams onto AWS Cloud infrastructure.",
+          de: "Verbindet Telemetrie-Logs mit automatisierten Analyse-Pipelines und sichert Metrik-Streams in der AWS Cloud."
         }
       }
     ],
     diagram: {
       label: { en: "Telemetry Architecture", de: "Telemetrie Architektur" },
-      title: { en: "From Kernel Metrics to AWS Cloud & MCP Diagnostics", de: "Von Kernel-Metriken zur AWS Cloud & MCP-Diagnose" },
+      title: { en: "From Kernel Metrics to AWS Cloud", de: "Von Kernel-Metriken zur AWS Cloud" },
       intro: {
-        en: "Low-overhead collection loop polling systemd daemons, streaming data to AWS Cloud and MCP AI analyzers.",
-        de: "Minimalistische Abfrageschleife für systemd-Daemons mit Daten-Streaming in die AWS Cloud und zu MCP-KI-Analysetools."
+        en: "Low-overhead collection loop polling systemd daemons, streaming data to AWS Cloud analyzers.",
+        de: "Minimalistische Abfrageschleife für systemd-Daemons mit Daten-Streaming in die AWS Cloud."
       },
       nodes: [
         { title: { en: "Linux Kernel Metrics", de: "Linux-Kernel-Metriken" }, text: { en: "Reads /proc metrics, CPU load & memory allocation", de: "Liest /proc Metriken, CPU-Last & RAM-Belegung" } },
         { title: { en: "Go Telemetry Daemon", de: "Go Telemetrie Daemon" }, text: { en: "High-speed metric collector & log formatter", de: "Schneller Metrik-Sammler & Log-Formatter" } },
         { title: { en: "Docker & AWS Cloud Gateway", de: "Docker & AWS Cloud Gateway" }, text: { en: "Containerized telemetry daemon pushing logs to AWS", de: "Containerisierter Daemon überträgt Logs zu AWS" } },
-        { title: { en: "MCP AI Diagnostic Gateway", de: "MCP KI-Diagnose Gateway" }, text: { en: "Streams telemetry logs to MCP protocol analyzers", de: "Leitet Telemetrie-Logs an MCP-Protokoll-Analyse weiter" } }
+        { title: { en: "Telemetry Analytics Gateway", de: "Telemetrie-Analyse Gateway" }, text: { en: "Streams telemetry logs to cloud analysis dashboards", de: "Leitet Telemetrie-Logs an Cloud-Analyse-Dashboards weiter" } }
       ]
     },
     roadmapTitle: { en: "Universitäre Sprints & Systemfortschritt", de: "University Sprints & System Progress" },
     roadmap: [
       { title: "Sprint 1: Go Collector Daemon", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Core metric collection daemon in Go with systemd integration.", de: "Kern-Metrik-Sammler in Go mit systemd Integration." } },
       { title: "Sprint 2: Terminal HUD Display", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "CLI/Terminal HUD display and log output formatting routines.", de: "Terminal-HUD Anzeige und Log-Formatierungs-Routinen." } },
-      { title: "Sprint 3: Docker & AWS Integration", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Containerization with Docker, AWS cloud telemetry gateway & MCP protocol integration.", de: "Containerisierung mit Docker, AWS Cloud Gateway & MCP-Protokoll-Anbindung." } },
+      { title: "Sprint 3: Docker & AWS Integration", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Containerization with Docker & AWS cloud telemetry gateway integration.", de: "Containerisierung mit Docker & AWS Cloud Gateway-Anbindung." } },
       { title: "Sprint 4: Multi-Node gRPC Aggregation", status: { en: "Planned", de: "Geplant" }, text: { en: "Multi-node gRPC telemetry aggregation across distributed Linux server instances.", de: "Multi-Node gRPC-Telemetrie-Aggregation über verteilte Linux-Server." } }
     ]
   }
