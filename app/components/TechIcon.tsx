@@ -12,36 +12,36 @@ export interface TechItemDef {
 
 export const GLOBAL_TECH_STACK: TechItemDef[] = [
   // Languages
-  { id: "python", name: "Python", category: "languages", colorClass: "text-amber-400 dark:text-amber-300", glowColor: "rgba(251, 191, 36, 0.25)" },
-  { id: "typescript", name: "TypeScript", category: "languages", colorClass: "text-blue-500", glowColor: "rgba(96, 165, 250, 0.25)" },
-  { id: "go", name: "Go", category: "languages", colorClass: "text-cyan-400", glowColor: "rgba(34, 211, 238, 0.25)" },
-  { id: "java", name: "Java", category: "languages", colorClass: "text-red-500", glowColor: "rgba(239, 68, 68, 0.25)" },
-  { id: "cpp", name: "C/C++", category: "languages", colorClass: "text-sky-500", glowColor: "rgba(14, 165, 233, 0.25)" },
+  { id: "python", name: "Python", category: "languages", colorClass: "text-[#3776AB]", glowColor: "rgba(55, 118, 171, 0.35)" },
+  { id: "typescript", name: "TypeScript", category: "languages", colorClass: "text-[#3178C6]", glowColor: "rgba(49, 120, 198, 0.35)" },
+  { id: "go", name: "Go", category: "languages", colorClass: "text-[#00ADD8]", glowColor: "rgba(0, 173, 216, 0.35)" },
+  { id: "java", name: "Java", category: "languages", colorClass: "text-[#5382A1]", glowColor: "rgba(83, 130, 161, 0.35)" },
+  { id: "cpp", name: "C/C++", category: "languages", colorClass: "text-[#00599C]", glowColor: "rgba(0, 89, 156, 0.35)" },
 
   // Frontend
-  { id: "html", name: "HTML5", category: "frontend", colorClass: "text-orange-500", glowColor: "rgba(249, 115, 22, 0.25)" },
-  { id: "css", name: "CSS3", category: "frontend", colorClass: "text-blue-400", glowColor: "rgba(96, 165, 250, 0.25)" },
-  { id: "js", name: "JavaScript", category: "frontend", colorClass: "text-yellow-400", glowColor: "rgba(250, 204, 21, 0.25)" },
-  { id: "react", name: "React", category: "frontend", colorClass: "text-sky-400", glowColor: "rgba(56, 189, 248, 0.25)" },
-  { id: "electron", name: "Electron", category: "frontend", colorClass: "text-cyan-300", glowColor: "rgba(103, 232, 249, 0.25)" },
+  { id: "html", name: "HTML5", category: "frontend", colorClass: "text-[#E34F26]", glowColor: "rgba(227, 79, 38, 0.35)" },
+  { id: "css", name: "CSS3", category: "frontend", colorClass: "text-[#1572B6]", glowColor: "rgba(21, 114, 182, 0.35)" },
+  { id: "js", name: "JavaScript", category: "frontend", colorClass: "text-[#F7DF1E]", glowColor: "rgba(247, 223, 30, 0.35)" },
+  { id: "react", name: "React", category: "frontend", colorClass: "text-[#61DAFB]", glowColor: "rgba(97, 218, 251, 0.35)" },
+  { id: "electron", name: "Electron", category: "frontend", colorClass: "text-[#47848F]", glowColor: "rgba(71, 132, 143, 0.35)" },
 
   // Backend
-  { id: "duckdb", name: "DuckDB", category: "backend", colorClass: "text-yellow-400 dark:text-yellow-300", glowColor: "rgba(250, 204, 21, 0.25)" },
-  { id: "postgres", name: "PostgreSQL", category: "backend", colorClass: "text-blue-500 dark:text-blue-400", glowColor: "rgba(96, 165, 250, 0.25)" },
-  { id: "supabase", name: "Supabase", category: "backend", colorClass: "text-emerald-500 dark:text-emerald-400", glowColor: "rgba(52, 211, 153, 0.25)" },
-  { id: "fastapi", name: "FastAPI", category: "backend", colorClass: "text-teal-400", glowColor: "rgba(45, 212, 191, 0.25)" },
-  { id: "django", name: "Django", category: "backend", colorClass: "text-emerald-600 dark:text-emerald-400", glowColor: "rgba(16, 185, 129, 0.25)" },
-  { id: "nodejs", name: "Node.js", category: "backend", colorClass: "text-emerald-500", glowColor: "rgba(34, 197, 94, 0.25)" },
+  { id: "duckdb", name: "DuckDB", category: "backend", colorClass: "text-[#FFF000]", glowColor: "rgba(255, 240, 0, 0.35)" },
+  { id: "postgres", name: "PostgreSQL", category: "backend", colorClass: "text-[#4169E1]", glowColor: "rgba(65, 105, 225, 0.35)" },
+  { id: "supabase", name: "Supabase", category: "backend", colorClass: "text-[#3ECF8E]", glowColor: "rgba(62, 207, 142, 0.35)" },
+  { id: "fastapi", name: "FastAPI", category: "backend", colorClass: "text-[#009688]", glowColor: "rgba(0, 150, 136, 0.35)" },
+  { id: "django", name: "Django", category: "backend", colorClass: "text-[#092E20] dark:text-[#44B78B]", glowColor: "rgba(68, 183, 139, 0.35)" },
+  { id: "nodejs", name: "Node.js", category: "backend", colorClass: "text-[#5FA04E]", glowColor: "rgba(95, 160, 78, 0.35)" },
 
   // Tools & DevOps
-  { id: "git", name: "Git", category: "tools", colorClass: "text-orange-600 dark:text-orange-500", glowColor: "rgba(234, 88, 12, 0.25)" },
-  { id: "docker", name: "Docker", category: "tools", colorClass: "text-sky-500", glowColor: "rgba(56, 189, 248, 0.25)" },
-  { id: "aws", name: "AWS", category: "tools", colorClass: "text-amber-500 dark:text-amber-400", glowColor: "rgba(245, 158, 11, 0.25)" },
-  { id: "vercel", name: "Vercel", category: "tools", colorClass: "text-slate-900 dark:text-white", glowColor: "rgba(255, 255, 255, 0.25)" },
-  { id: "vscode", name: "VS Code", category: "tools", colorClass: "text-blue-500", glowColor: "rgba(59, 130, 246, 0.25)" },
-  { id: "claudecode", name: "Claude Code", category: "tools", colorClass: "text-amber-600 dark:text-amber-300", glowColor: "rgba(217, 119, 6, 0.25)" },
-  { id: "codex", name: "Codex", category: "tools", colorClass: "text-emerald-400", glowColor: "rgba(52, 211, 153, 0.25)" },
-  { id: "githubactions", name: "GitHub Actions", category: "tools", colorClass: "text-blue-400", glowColor: "rgba(96, 165, 250, 0.25)" },
+  { id: "git", name: "Git", category: "tools", colorClass: "text-[#F05032]", glowColor: "rgba(240, 80, 50, 0.35)" },
+  { id: "docker", name: "Docker", category: "tools", colorClass: "text-[#2496ED]", glowColor: "rgba(36, 150, 237, 0.35)" },
+  { id: "aws", name: "AWS", category: "tools", colorClass: "text-[#FF9900]", glowColor: "rgba(255, 153, 0, 0.35)" },
+  { id: "vercel", name: "Vercel", category: "tools", colorClass: "text-slate-900 dark:text-white", glowColor: "rgba(255, 255, 255, 0.35)" },
+  { id: "vscode", name: "VS Code", category: "tools", colorClass: "text-[#007ACC]", glowColor: "rgba(0, 122, 204, 0.35)" },
+  { id: "claudecode", name: "Claude Code", category: "tools", colorClass: "text-[#D97706]", glowColor: "rgba(217, 119, 6, 0.35)" },
+  { id: "codex", name: "Codex", category: "tools", colorClass: "text-[#10A37F]", glowColor: "rgba(16, 163, 127, 0.35)" },
+  { id: "githubactions", name: "GitHub Actions", category: "tools", colorClass: "text-[#2088FF]", glowColor: "rgba(32, 136, 255, 0.35)" },
 ];
 
 export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; size?: number; className?: string }) {
@@ -64,24 +64,9 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
               <stop offset="100%" stopColor="#3b82f6" />
             </linearGradient>
           </defs>
-
-          {/* Large Main Sparkle Right */}
-          <path
-            d="M 68 30 Q 68 58 98 58 Q 68 58 68 86 Q 68 58 38 58 Q 68 58 68 30 Z"
-            fill="url(#sparkleGradLarge)"
-          />
-
-          {/* Medium Sparkle Top Left */}
-          <path
-            d="M 35 10 Q 35 25 52 25 Q 35 25 35 40 Q 35 25 18 25 Q 35 25 35 10 Z"
-            fill="url(#sparkleGradSmall)"
-          />
-
-          {/* Small Sparkle Bottom Left */}
-          <path
-            d="M 28 65 Q 28 73 36 73 Q 28 73 28 81 Q 28 73 20 73 Q 28 73 28 65 Z"
-            fill="url(#sparkleGradSmall)"
-          />
+          <path d="M 68 30 Q 68 58 98 58 Q 68 58 68 86 Q 68 58 38 58 Q 68 58 68 30 Z" fill="url(#sparkleGradLarge)" />
+          <path d="M 35 10 Q 35 25 52 25 Q 35 25 35 40 Q 35 25 18 25 Q 35 25 35 10 Z" fill="url(#sparkleGradSmall)" />
+          <path d="M 28 65 Q 28 73 36 73 Q 28 73 28 81 Q 28 73 20 73 Q 28 73 28 65 Z" fill="url(#sparkleGradSmall)" />
         </svg>
       );
     case "python":
@@ -159,8 +144,8 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
     case "duckdb":
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 14.5h-2v-2h2v2zm0-4h-2V7h2v5.5z" />
-          <circle cx="9" cy="9" r="1.5" />
+          <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-1-13h2v6h-2zm0 8h2v2h-2z" />
+          <path d="M8.5 10.5 C8.5 8 15.5 8 15.5 10.5 C15.5 13 8.5 13 8.5 10.5 Z" fill="currentColor" />
         </svg>
       );
     case "postgres":
@@ -203,7 +188,7 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
     case "docker":
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.954-5.43h2.118a.185.185 0 00.186-.186V3.574a.185.185 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .103.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .103.083.186.185.186zm-2.956 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.144a.185.185 0 00-.185.185v1.887c0 .103.083.186.185.186zm5.886 2.714h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.186v1.887c0 .102.082.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186H8.1a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.956 0h2.119a.186.186 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.144a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186H2.214a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zM23.73 11.531c-.347-.252-.894-.378-1.503-.357a4.912 4.912 0 00-1.89.54c-.131.066-.255.143-.372.228a7.01 7.01 0 00-2.325-1.077c-.173-.043-.35-.078-.528-.103V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.887a13.33 13.33 0 00-.73-.016c-.344 0-.687.015-1.028.043V9.006a.186.186 0 00-.186-.186H7.362a.185.185 0 00-.185.186v1.98a18.3 18.3 0 00-1.12.222V9.006a.186.186 0 00-.186-.186H3.938a.185.185 0 00-.185.186v2.336c-.461.162-.912.355-1.348.577C.868 12.72 0 14.195 0 15.932c0 3.73 3.86 5.868 9.531 5.868 5.176 0 8.784-1.815 10.37-4.631a4.935 4.935 0 002.729-.861c.451-.31.81-.72 1.053-1.206a2.128 2.128 0 00.047-3.571z" />
+          <path d="M13.983 11.078h2.119a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.954-5.43h2.118a.185.185 0 00.186-.186V3.574a.185.185 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.888c0 .102.082.185.185.185zm0 2.716h2.118a.187.187 0 00.186-.186V6.29a.186.186 0 00-.186-.185h-2.118a.185.185 0 00-.185.185v1.887c0 .103.082.186.185.186zm-2.93 0h2.12a.186.186 0 00.184-.186V6.29a.185.185 0 00-.185-.185H8.1a.185.185 0 00-.185.185v1.887c0 .103.083.186.185.186zm-2.956 0h2.119a.186.186 0 00.185-.186V6.29a.185.185 0 00-.185-.185H5.144a.185.185 0 00-.185.185v1.887c0 .103.083.186.185.186zm5.886 2.714h2.118a.186.186 0 00.186-.185V9.006a.186.186 0 00-.186-.186h-2.118a.185.185 0 00-.185.186v1.887c0 .102.082.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186H8.1a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.956 0h2.119a.186.186 0 00.185-.185V9.006a.185.185 0 00-.185-.186H5.144a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zm-2.93 0h2.12a.185.185 0 00.184-.185V9.006a.185.185 0 00-.184-.186H2.214a.185.185 0 00-.185.186v1.887c0 .102.083.185.185.185zM23.73 11.531c-.347-.252-.894-.378-1.503-.357a4.912 4.912 0 00-1.89.54c-.131.066-.255.143-.372.228a7.01 7.01 0 00-2.325-1.077c-.173-.043-.35-.078-.528-.103V9.006a.186.186 0 00-.186-.186h-2.119a.185.185 0 00-.185.186v1.887a13.33 13.33 0 00-.73-.016c-.344 0-.687.015-1.028.043V9.006a.186.186 0 00-.186-.186H7.362a.185.185 0 00-.185.186v1.98a18.3 18.3 0 00-1.12.222V9.006a.186.186 0 00-.186-.186H3.938a.185.185 0 00-.185.186v2.336c-.461.162-.912.355-1.348.577C.868 12.72 0 14.195 0 15.932c0 3.73 3.86 5.868 9.531 5.868 5.176 0 8.784-1.815 10.37-4.631a4.935 4.935 0 002.729-.861c.451-.31.81-.72 1.053-1.206a2.128 2.128 0 0 0.047-3.571z" />
         </svg>
       );
     case "aws":
@@ -288,7 +273,7 @@ export function GlobalTechStackGrid({ darkMode }: { darkMode: boolean }) {
             key={cat.key}
             className={`p-5 rounded-2xl border backdrop-blur-md transition-all duration-300 ${
               darkMode
-                ? "bg-slate-900/70 border-slate-800/80 hover:border-slate-700/90"
+                ? "bg-slate-900/80 border-slate-800/80 hover:border-slate-700/90"
                 : "bg-white/80 border-slate-200/90 shadow-lg shadow-slate-200/40"
             }`}
           >
@@ -303,7 +288,7 @@ export function GlobalTechStackGrid({ darkMode }: { darkMode: boolean }) {
                   key={item.id}
                   className={`group relative flex flex-col items-center justify-center p-2.5 rounded-xl border transition-all duration-300 cursor-default ${
                     darkMode
-                      ? "bg-slate-950/60 border-slate-800/60 hover:border-cyan-500/50"
+                      ? "bg-slate-950/70 border-slate-800/70 hover:border-cyan-500/50"
                       : "bg-slate-50 border-slate-200 hover:border-cyan-500/50 shadow-sm"
                   }`}
                   onMouseEnter={(e) => {
@@ -313,8 +298,8 @@ export function GlobalTechStackGrid({ darkMode }: { darkMode: boolean }) {
                     e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
                   }}
                 >
-                  <div className={`transition-all duration-300 opacity-20 group-hover:opacity-100 group-hover:scale-110 ${item.colorClass}`}>
-                    <TechSvgIcon id={item.id} size={22} />
+                  <div className={`transition-all duration-300 opacity-30 group-hover:opacity-100 group-hover:scale-110 ${item.colorClass}`}>
+                    <TechSvgIcon id={item.id} size={24} />
                   </div>
                   <span className={`mt-1.5 text-[10px] font-mono font-medium text-center transition-colors ${
                     darkMode ? "text-slate-400 group-hover:text-slate-100" : "text-slate-600 group-hover:text-slate-900"
