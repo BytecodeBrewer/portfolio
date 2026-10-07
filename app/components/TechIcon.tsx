@@ -12,37 +12,33 @@ export interface TechItemDef {
 
 export const GLOBAL_TECH_STACK: TechItemDef[] = [
   // Frontend
-  { id: "nextjs", name: "Next.js", category: "frontend", colorClass: "text-slate-100 dark:text-white", glowColor: "rgba(255, 255, 255, 0.2)" },
+  { id: "nextjs", name: "Next.js", category: "frontend", colorClass: "text-slate-900 dark:text-white", glowColor: "rgba(255, 255, 255, 0.25)" },
   { id: "react", name: "React", category: "frontend", colorClass: "text-sky-400", glowColor: "rgba(56, 189, 248, 0.25)" },
-  { id: "typescript", name: "TypeScript", category: "frontend", colorClass: "text-blue-400", glowColor: "rgba(96, 165, 250, 0.25)" },
-  { id: "electron", name: "Electron", category: "frontend", colorClass: "text-cyan-300", glowColor: "rgba(103, 232, 249, 0.25)" },
-  { id: "bootstrap", name: "Bootstrap", category: "frontend", colorClass: "text-purple-400", glowColor: "rgba(192, 132, 252, 0.25)" },
+  { id: "typescript", name: "TypeScript", category: "frontend", colorClass: "text-blue-500", glowColor: "rgba(96, 165, 250, 0.25)" },
+  { id: "electron", name: "Electron", category: "frontend", colorClass: "text-cyan-400", glowColor: "rgba(103, 232, 249, 0.25)" },
+  { id: "bootstrap", name: "Bootstrap", category: "frontend", colorClass: "text-purple-500", glowColor: "rgba(192, 132, 252, 0.25)" },
   { id: "figma", name: "Figma", category: "frontend", colorClass: "text-rose-400", glowColor: "rgba(251, 113, 133, 0.25)" },
 
   // Backend
-  { id: "python", name: "Python", category: "backend", colorClass: "text-amber-400", glowColor: "rgba(251, 191, 36, 0.25)" },
-  { id: "nodejs", name: "Node.js", category: "backend", colorClass: "text-emerald-400", glowColor: "rgba(52, 211, 153, 0.25)" },
-  { id: "bun", name: "Bun", category: "backend", colorClass: "text-amber-200", glowColor: "rgba(253, 230, 138, 0.25)" },
-  { id: "express", name: "Express", category: "backend", colorClass: "text-slate-200", glowColor: "rgba(226, 232, 240, 0.2)" },
-  { id: "fastapi", name: "FastAPI", category: "backend", colorClass: "text-teal-400", glowColor: "rgba(45, 212, 191, 0.25)" },
-  { id: "django", name: "Django", category: "backend", colorClass: "text-emerald-500", glowColor: "rgba(16, 185, 129, 0.25)" },
-  { id: "go", name: "Go", category: "backend", colorClass: "text-cyan-400", glowColor: "rgba(34, 211, 238, 0.25)" },
-  { id: "postgres", name: "PostgreSQL", category: "backend", colorClass: "text-blue-400", glowColor: "rgba(96, 165, 250, 0.25)" },
-  { id: "redis", name: "Redis", category: "backend", colorClass: "text-red-500", glowColor: "rgba(239, 68, 68, 0.25)" },
-  { id: "supabase", name: "Supabase", category: "backend", colorClass: "text-emerald-400", glowColor: "rgba(52, 211, 153, 0.25)" },
-  { id: "pydantic", name: "Pydantic", category: "backend", colorClass: "text-pink-400", glowColor: "rgba(244, 114, 182, 0.25)" },
+  { id: "python", name: "Python", category: "backend", colorClass: "text-amber-400 dark:text-amber-300", glowColor: "rgba(251, 191, 36, 0.25)" },
+  { id: "nodejs", name: "Node.js", category: "backend", colorClass: "text-emerald-500", glowColor: "rgba(52, 211, 153, 0.25)" },
+  { id: "bun", name: "Bun", category: "backend", colorClass: "text-amber-600 dark:text-amber-200", glowColor: "rgba(253, 230, 138, 0.25)" },
+  { id: "express", name: "Express", category: "backend", colorClass: "text-slate-700 dark:text-slate-200", glowColor: "rgba(226, 232, 240, 0.2)" },
+  { id: "fastapi", name: "FastAPI", category: "backend", colorClass: "text-teal-500", glowColor: "rgba(45, 212, 191, 0.25)" },
+  { id: "django", name: "Django", category: "backend", colorClass: "text-emerald-600 dark:text-emerald-400", glowColor: "rgba(16, 185, 129, 0.25)" },
+  { id: "go", name: "Go", category: "backend", colorClass: "text-cyan-500", glowColor: "rgba(34, 211, 238, 0.25)" },
+  { id: "postgres", name: "PostgreSQL", category: "backend", colorClass: "text-blue-500 dark:text-blue-400", glowColor: "rgba(96, 165, 250, 0.25)" },
+  { id: "supabase", name: "Supabase", category: "backend", colorClass: "text-emerald-500 dark:text-emerald-400", glowColor: "rgba(52, 211, 153, 0.25)" },
   { id: "pytorch", name: "PyTorch", category: "backend", colorClass: "text-orange-500", glowColor: "rgba(249, 115, 22, 0.25)" },
 
   // Tools & DevOps
-  { id: "git", name: "Git", category: "tools", colorClass: "text-orange-500", glowColor: "rgba(249, 115, 22, 0.25)" },
-  { id: "docker", name: "Docker", category: "tools", colorClass: "text-sky-400", glowColor: "rgba(56, 189, 248, 0.25)" },
-  { id: "linux", name: "Linux", category: "tools", colorClass: "text-amber-300", glowColor: "rgba(252, 211, 77, 0.25)" },
-  { id: "vscode", name: "VS Code", category: "tools", colorClass: "text-blue-500", glowColor: "rgba(59, 130, 246, 0.25)" },
-  { id: "vercel", name: "Vercel", category: "tools", colorClass: "text-slate-100 dark:text-white", glowColor: "rgba(255, 255, 255, 0.25)" },
-  { id: "databricks", name: "Databricks", category: "tools", colorClass: "text-red-400", glowColor: "rgba(248, 113, 113, 0.25)" },
-  { id: "snowflake", name: "Snowflake", category: "tools", colorClass: "text-sky-300", glowColor: "rgba(125, 211, 252, 0.25)" },
-  { id: "azure", name: "Azure", category: "tools", colorClass: "text-blue-400", glowColor: "rgba(96, 165, 250, 0.25)" },
-  { id: "mcp", name: "MCP", category: "tools", colorClass: "text-purple-400", glowColor: "rgba(192, 132, 252, 0.25)" },
+  { id: "docker", name: "Docker", category: "tools", colorClass: "text-sky-500", glowColor: "rgba(56, 189, 248, 0.25)" },
+  { id: "aws", name: "AWS", category: "tools", colorClass: "text-amber-500 dark:text-amber-400", glowColor: "rgba(245, 158, 11, 0.25)" },
+  { id: "vercel", name: "Vercel", category: "tools", colorClass: "text-slate-900 dark:text-white", glowColor: "rgba(255, 255, 255, 0.25)" },
+  { id: "databricks", name: "Databricks", category: "tools", colorClass: "text-red-500", glowColor: "rgba(248, 113, 113, 0.25)" },
+  { id: "snowflake", name: "Snowflake", category: "tools", colorClass: "text-sky-400", glowColor: "rgba(125, 211, 252, 0.25)" },
+  { id: "mcp", name: "MCP Protocol", category: "tools", colorClass: "text-purple-400", glowColor: "rgba(192, 132, 252, 0.25)" },
+  { id: "excel", name: "Excel", category: "tools", colorClass: "text-emerald-600 dark:text-emerald-400", glowColor: "rgba(16, 185, 129, 0.25)" },
   { id: "ai", name: "AI Agents", category: "tools", colorClass: "text-cyan-400", glowColor: "rgba(34, 211, 238, 0.3)" },
 ];
 
@@ -55,8 +51,8 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
     case "agentic":
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="none" className={className} stroke="currentColor" strokeWidth="1.5">
-          <path d="M12 2L14.5 8.5L21 11L14.5 13.5L12 20L9.5 13.5L3 11L9.5 8.5L12 2Z" fill="currentColor" fillOpacity="0.2" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M5 2L6.2 5.2L9.4 6.4L6.2 7.6L5 10.8L3.8 7.6L0.6 6.4L3.8 5.2L5 2Z" fill="currentColor" fillOpacity="0.4" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M12 2L14.5 8.5L21 11L14.5 13.5L12 20L9.5 13.5L3 11L9.5 8.5L12 2Z" fill="currentColor" fillOpacity="0.3" strokeLinecap="round" strokeLinejoin="round" />
+          <path d="M5 2L6.2 5.2L9.4 6.4L6.2 7.6L5 10.8L3.8 7.6L0.6 6.4L3.8 5.2L5 2Z" fill="currentColor" fillOpacity="0.5" strokeLinecap="round" strokeLinejoin="round" />
           <circle cx="12" cy="11" r="2" fill="currentColor" />
         </svg>
       );
@@ -83,7 +79,6 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
     case "react":
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M12 0a12 12 0 1 0 0 24 12 12 0 0 0 0-24zm0 2a10 10 0 1 1 0 20 10 10 0 0 1 0-20zm0 3a7 7 0 1 0 0 14 7 7 0 0 0 0-14z" opacity="0.3" />
           <circle cx="12" cy="12" r="2.5" fill="currentColor" />
           <ellipse cx="12" cy="12" rx="9" ry="3.5" fill="none" stroke="currentColor" strokeWidth="1.5" />
           <ellipse cx="12" cy="12" rx="9" ry="3.5" fill="none" stroke="currentColor" strokeWidth="1.5" transform="rotate(60 12 12)" />
@@ -107,6 +102,12 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
           <path d="M21.362 9.354H12V.312L2.638 14.646H12v9.042l9.362-14.334z" />
+        </svg>
+      );
+    case "aws":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M18.72 13.92c-.18 0-.36.03-.54.08-.68.18-1.23.63-1.46 1.27-.15.42-.14.88.03 1.29.17.41.5.73.91.9.41.17.88.18 1.3.03.42-.15.77-.47.96-.88.19-.41.22-.88.08-1.31a2.03 2.03 0 0 0-1.28-1.38zM24 16.5c0-.66-.23-1.3-.65-1.81-.42-.51-1.01-.84-1.66-.94v-.11c.54-.17 1.01-.52 1.33-.98.32-.47.47-1.03.43-1.6-.08-.98-.65-1.83-1.53-2.25C21.03 8.39 20 8.28 19 8.5V6.75C19 5.23 17.77 4 16.25 4h-8.5C6.23 4 5 5.23 5 6.75v10.5C5 18.77 6.23 20 7.75 20h8.5c1.23 0 2.31-.81 2.66-2 .16-.54.14-1.12-.05-1.65.34.05.69.05 1.04-.01.52-.09 1-.34 1.37-.71.37-.37.62-.85.71-1.37.06-.35.06-.7 0-1.05l.07.29zM12 18.25c-3.45 0-6.25-1.57-6.25-3.5s2.8-3.5 6.25-3.5 6.25 1.57 6.25 3.5-2.8 3.5-6.25 3.5z" />
         </svg>
       );
     case "vercel":
@@ -143,65 +144,29 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
           <path d="M1.811 10.231c-.045.244-.068.502-.068.775 0 2.378 1.517 4.148 3.829 4.148 1.42 0 2.502-.686 2.986-1.74h-2.585v-1.637h4.428c.05.295.074.582.074.887 0 3.393-2.103 5.432-5.11 5.432C2.183 18.096 0 15.228 0 11.391c0-3.805 2.213-6.684 5.385-6.684 2.522 0 4.293 1.583 4.88 3.646l-1.85.553c-.392-1.282-1.425-2.222-2.99-2.222-2.124 0-3.565 1.776-3.614 3.547zm13.116-5.289c3.084 0 5.289 2.24 5.289 5.378 0 3.14-2.205 5.38-5.289 5.38-3.085 0-5.289-2.24-5.289-5.38 0-3.138 2.204-5.378 5.289-5.378zm0 8.94c1.848 0 3.218-1.458 3.218-3.562 0-2.103-1.37-3.56-3.218-3.56-1.847 0-3.217 1.457-3.217 3.56 0 2.104 1.37 3.562 3.217 3.562z" />
         </svg>
       );
-    case "git":
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M23.546 10.93L13.067.452c-.604-.603-1.582-.603-2.188 0L8.708 2.627l2.76 2.76c.645-.215 1.379-.07 1.889.441.516.515.658 1.258.438 1.9l2.658 2.66c.645-.223 1.387-.078 1.9.435.721.72.721 1.884 0 2.604-.719.719-1.881.719-2.6 0-.539-.541-.674-1.337-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348.719.721.719 1.884 0 2.604-.719.719-1.883.719-2.602 0-.719-.72-.719-1.883 0-2.604.183-.183.398-.313.627-.394V8.847a1.996 1.996 0 0 1-.627-.394c-.537-.539-.675-1.332-.407-1.988L7.54 3.738.452 10.825c-.603.605-.603 1.582 0 2.188l10.479 10.478c.605.604 1.582.604 2.188 0l10.427-10.373c.604-.605.604-1.582 0-2.188z" />
-        </svg>
-      );
-    case "vscode":
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M23.15 2.587L18.21.21a1.494 1.494 0 0 0-1.705.29l-9.46 8.63-4.12-3.12a.999.999 0 0 0-1.276.04L.36 7.21a.999.999 0 0 0-.08 1.44l3.54 3.82-3.54 3.82a.999.999 0 0 0 .08 1.44l1.28 1.16a.999.999 0 0 0 1.276.04l4.12-3.12 9.46 8.63a1.494 1.494 0 0 0 1.705.29l4.94-2.377A1.5 1.5 0 0 0 24 21.84V3.82a1.5 1.5 0 0 0-.85-1.233zM18 16.5l-5.5-4.5L18 7.5v9z" />
-        </svg>
-      );
-    case "linux":
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M12 0c-2.3 0-4.3 1.2-5.4 3.1-.3.5-.5 1-.6 1.6-.1.6 0 1.2.2 1.8l.1.3c.3.8.8 1.5 1.5 2 .2.2.4.3.7.5-.1.4-.2.9-.2 1.3 0 2.2 1.2 4.1 3 5.1-1.2.6-2.1 1.7-2.5 3-.1.3-.2.7-.2 1.1 0 1.8 1.3 3.2 3 3.2s3-1.4 3-3.2c0-.4-.1-.8-.2-1.1-.4-1.3-1.3-2.4-2.5-3 1.8-1 3-2.9 3-5.1 0-.4-.1-.9-.2-1.3.3-.2.5-.3.7-.5.7-.5 1.2-1.2 1.5-2 .2-.6.3-1.2.2-1.8-.1-.6-.3-1.1-.6-1.6C16.3 1.2 14.3 0 12 0z" />
-        </svg>
-      );
-    case "azure":
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M5.483 21.3h10.608L12.016 11.2h-6.22l-.313.916zM13.684 2.7L7.697 19.866h2.95l4.896-13.882zM14.618 2.7l4.137 12.062L24 21.3H16.89z" />
-        </svg>
-      );
-    case "redis":
-      return (
-        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
-          <path d="M12 0L1.6 6v12L12 24l10.4-6V6L12 0zm0 3.2l7.2 4.15v3.3L12 6.5 4.8 10.65v-3.3L12 3.2zm-7.2 9.5l7.2 4.15 7.2-4.15v3.3L12 20.2 4.8 16v-3.3z" />
-        </svg>
-      );
-    case "pydantic":
-      return (
-        <span className="font-mono text-xs font-black tracking-tighter text-pink-400">
-          [P]
-        </span>
-      );
-    case "pandas":
-      return (
-        <span className="font-mono text-xs font-black tracking-tighter text-indigo-400">
-          pd
-        </span>
-      );
     case "databricks":
       return (
-        <span className="font-mono text-xs font-black tracking-tighter text-red-400">
-          DB
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M12 2L1 8l11 6 11-6-11-6zm0 8L3.5 6 12 1.5 20.5 6 12 10zm-11 3l11 6 11-6v3l-11 6-11-6v-3z" />
+        </svg>
       );
     case "snowflake":
       return (
         <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
-          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93" strokeLinecap="round" />
+          <path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07L19.07 4.93M12 6l-2-2m4 0l-2 2M12 18l-2 2m4 0l-2-2M6 12l-2-2m0 4l2-2M18 12l2-2m0 4l-2-2" strokeLinecap="round" />
+        </svg>
+      );
+    case "excel":
+      return (
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 7V3.5L18.5 9H13zM8.8 13.5l1.7 2.6 1.7-2.6h1.8l-2.6 3.8 2.7 4h-1.8l-1.8-2.8-1.8 2.8H7.1l2.7-4-2.6-3.8h1.6z" />
         </svg>
       );
     case "bootstrap":
       return (
-        <span className="font-mono text-xs font-extrabold text-purple-400">
-          B
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M18.8 3a3.2 3.2 0 0 1 3.2 3.2v11.6a3.2 3.2 0 0 1-3.2 3.2H5.2A3.2 3.2 0 0 1 2 17.8V6.2A3.2 3.2 0 0 1 5.2 3h13.6zm-6.3 5.3H8v7.4h4.6c1.6 0 2.7-.9 2.7-2.2 0-.9-.5-1.6-1.4-1.9.7-.3 1.2-.9 1.2-1.7 0-1.2-1-1.6-2.6-1.6zm-2.4 1.5h2.1c.7 0 1.2.2 1.2.8 0 .5-.5.8-1.2.8H10.1V9.8zm0 2.8h2.3c.8 0 1.3.3 1.3.9 0 .6-.5.9-1.3.9H10.1v-1.8z" />
+        </svg>
       );
     case "figma":
       return (
@@ -211,28 +176,25 @@ export function TechSvgIcon({ id, size = 20, className = "" }: { id: string; siz
       );
     case "bun":
       return (
-        <span className="font-mono text-xs font-bold text-amber-200">
-          bun
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M12 3c-4.97 0-9 4.03-9 9 0 4.14 2.8 7.62 6.6 8.65.65.12 1.15-.35 1.15-.95v-.8c-2.45.52-3.05-1.05-3.05-1.05-.42-1.05-1.02-1.33-1.02-1.33-.8-.55.06-.54.06-.54.88.06 1.35.91 1.35.91.78 1.34 2.05.95 2.55.73.08-.57.31-.95.56-1.17-2.05-.23-4.2-.82-4.2-4.56 0-1.06.38-1.93 1-2.61-.1-.25-.43-1.23.1-2.57 0 0 .82-.26 2.7 1.01.78-.22 1.62-.33 2.45-.33s1.67.11 2.45.33c1.88-1.27 2.7-1.01 2.7-1.01.53 1.34.2 2.32.1 2.57.62.68 1 .28 1 2.61 0 3.75-2.15 4.33-4.2 4.56.32.28.61.83.61 1.67v2.48c0 .6.5 1.07 1.15.95C20.2 19.62 23 16.14 23 12c0-4.97-4.03-9-9-9z" />
+        </svg>
       );
     case "express":
       return (
-        <span className="font-mono text-xs font-bold text-slate-200">
-          ex
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor" className={className}>
+          <path d="M22 6L12 1 2 6v12l10 5 10-5V6zm-10 1.8L18.5 11 12 14.2 5.5 11 12 7.8zM4 8.8l7 3.5v7.4l-7-3.5V8.8zm16 7.4l-7 3.5v-7.4l7-3.5v7.4z" />
+        </svg>
       );
     case "mcp":
       return (
-        <span className="font-mono text-xs font-bold text-purple-400">
-          MCP
-        </span>
+        <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className={className}>
+          <rect x="3" y="3" width="18" height="18" rx="3" stroke="currentColor" strokeWidth="2" />
+          <path d="M7 16V8l5 4 5-4v8" strokeLinecap="round" strokeLinejoin="round" />
+        </svg>
       );
     default:
-      return (
-        <span className="font-mono text-[10px] font-black uppercase text-cyan-400 tracking-tighter">
-          {id.slice(0, 3)}
-        </span>
-      );
+      return null;
   }
 }
 
@@ -250,7 +212,7 @@ export function TechIconBadge({ name, size = 18, className = "", showLabel = fal
       title={item.name}
       className={`tech-badge-item inline-flex items-center justify-center ${
         showLabel ? "px-3 py-1.5 gap-2 rounded-xl" : "w-8 h-8 rounded-lg"
-      } border border-slate-700/60 bg-slate-900/90 text-slate-100 transition-all hover:border-cyan-400 hover:scale-105 shadow-sm ${className}`}
+      } border border-slate-200 dark:border-slate-800 bg-slate-100/80 dark:bg-slate-900/90 text-slate-900 dark:text-slate-100 transition-all hover:border-cyan-500 hover:scale-105 shadow-sm ${className}`}
     >
       <span className={`inline-flex items-center justify-center ${item.colorClass}`}>
         <TechSvgIcon id={item.id} size={size} />
@@ -280,7 +242,7 @@ export function GlobalTechStackGrid({ darkMode }: { darkMode: boolean }) {
                 : "bg-white/80 border-slate-200/90 shadow-lg shadow-slate-200/40"
             }`}
           >
-            <div className="flex items-center gap-2.5 mb-5 pb-3 border-b border-slate-800/60 dark:border-slate-800/60">
+            <div className="flex items-center gap-2.5 mb-5 pb-3 border-b border-slate-200/80 dark:border-slate-800/60">
               <span className="text-lg">{cat.icon}</span>
               <h3 className={`text-base font-bold font-mono ${darkMode ? "text-white" : "text-slate-900"}`}>{cat.title}</h3>
             </div>
@@ -289,15 +251,11 @@ export function GlobalTechStackGrid({ darkMode }: { darkMode: boolean }) {
               {items.map((item) => (
                 <div
                   key={item.id}
-                  group-hover="true"
                   className={`group relative flex flex-col items-center justify-center p-3 rounded-xl border transition-all duration-300 cursor-default ${
                     darkMode
                       ? "bg-slate-950/60 border-slate-800/60 hover:border-cyan-500/50"
-                      : "bg-slate-50 border-slate-200 hover:border-cyan-500/50"
+                      : "bg-slate-50 border-slate-200 hover:border-cyan-500/50 shadow-sm"
                   }`}
-                  style={{
-                    boxShadow: "0 0 0 0 transparent",
-                  }}
                   onMouseEnter={(e) => {
                     e.currentTarget.style.boxShadow = `0 0 16px ${item.glowColor}`;
                   }}
@@ -305,12 +263,11 @@ export function GlobalTechStackGrid({ darkMode }: { darkMode: boolean }) {
                     e.currentTarget.style.boxShadow = "0 0 0 0 transparent";
                   }}
                 >
-                  {/* Icon: Monochrome by default (grayscale + opacity), Full Color on Hover */}
-                  <div className={`transition-all duration-300 grayscale opacity-40 group-hover:grayscale-0 group-hover:opacity-100 group-hover:scale-110 ${item.colorClass}`}>
+                  <div className={`transition-all duration-300 opacity-80 group-hover:opacity-100 group-hover:scale-110 ${item.colorClass}`}>
                     <TechSvgIcon id={item.id} size={24} />
                   </div>
                   <span className={`mt-2 text-[11px] font-mono font-medium text-center transition-colors ${
-                    darkMode ? "text-slate-400 group-hover:text-slate-100" : "text-slate-500 group-hover:text-slate-900"
+                    darkMode ? "text-slate-400 group-hover:text-slate-100" : "text-slate-600 group-hover:text-slate-900"
                   }`}>
                     {item.name}
                   </span>

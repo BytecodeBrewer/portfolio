@@ -37,24 +37,20 @@ export type TechIcon =
   | "typescript"
   | "go"
   | "docker"
-  | "pandas"
-  | "numpy"
   | "nextjs"
   | "electron"
   | "pytorch"
-  | "azure"
   | "databricks"
   | "snowflake"
   | "mcp"
-  | "playwright"
   | "fastapi"
   | "postgres"
-  | "redis"
-  | "yfinance"
-  | "pytest"
-  | "pydantic"
   | "supabase"
   | "vercel"
+  | "bun"
+  | "express"
+  | "excel"
+  | "aws"
   | "ai";
 
 export type Project = {
@@ -93,75 +89,77 @@ export const defaultProjects: Project[] = [
     index: "01",
     name: "ARGUS",
     label: {
-      en: "Market Analytics & Financial Telemetry Pipeline",
-      de: "Markt-Analyse & Finanzdaten-Pipeline"
+      en: "Market Analytics & Financial Strategy Backtesting Pipeline",
+      de: "Markt-Analyse & Finanzstrategie Backtesting Pipeline"
     },
     classification: {
       en: "Collaborative Learning Project",
       de: "Kollaboratives Lernprojekt"
     },
     summary: {
-      en: "A collaborative data engineering pipeline that ingests live currency rates and historical market trends, performing pandas vectorized calculations and rule-based volatility alerts.",
-      de: "Eine kollaborative Data-Engineering-Pipeline für Live-Devisen und historische Marktdaten mit pandas-Vektorisierung und regelbasierten Volatilitäts-Alerts."
+      en: "A collaborative financial engineering platform to analyze FX rates, develop quantitative trading strategies, execute historical backtests, and monitor live volatility risks.",
+      de: "Eine kollaborative Finanz-Engineering-Plattform zur FX-Datenanalyse, Entwicklung quantitativer Handelsstrategien, Durchführen historischer Backtests und Überwachung von Volatilitätsrisiken."
     },
     contribution: {
-      en: "Collaborative Side-Quest · Financial Data & Telemetry Pipeline",
-      de: "Kollaboratives Side-Quest · Finanzdaten & Telemetrie Pipeline"
+      en: "Collaborative Side-Quest · Financial Data & Strategy Analytics",
+      de: "Kollaboratives Side-Quest · Finanzdaten & Strategie-Analyse"
     },
     status: "active",
     aiAugmented: false,
-    techStack: ["python", "django", "fastapi", "pandas", "postgres", "pydantic"],
-    secondaryTechStack: ["numpy", "yfinance", "pytest"],
-    tags: ["Python", "Django", "FastAPI", "pandas", "yfinance", "Pydantic", "PostgreSQL"],
+    techStack: ["python", "django", "fastapi", "postgres"],
+    secondaryTechStack: [],
+    tags: ["Python", "Django", "FastAPI", "PostgreSQL"],
     href: "https://github.com/BytecodeBrewer/ARGUS",
     tone: "cyan",
     signal: [32, 44, 38, 57, 52, 73, 68, 88],
     introduction: {
-      en: "ARGUS is a collaborative financial data pipeline built to ingest, validate, and analyze market data without relying on proprietary black-box software or expensive enterprise terminals. It combines live ExchangeRate APIs with yfinance market history into structured transformation workflows.",
-      de: "ARGUS ist eine kollaborative Finanzdaten-Pipeline zur Ingestion, Validierung und Analyse von Marktdaten – ohne proprietäre Black-Box-Tools oder teure Terminals. Es verbindet Live ExchangeRate-APIs und yfinance-Historien in strukturierte Transformations-Workflows."
+      en: "ARGUS is a collaborative financial analytics and backtesting framework built to ingest, validate, and analyze market data without expensive enterprise terminals. It serves as an open research harness for quantitative strategy development, risk scoring, and automated alerts.",
+      de: "ARGUS ist ein kollaboratives Finanzanalyse- und Backtesting-Framework zur Erfassung, Validierung und Auswertung von Marktdaten ohne teure Terminal-Software. Es dient als offene Forschungsplattform für quantitative Handelsstrategien, Risiko-Scoring und automatisierte Alerts."
     },
     backgroundType: "proof_of_work",
     background: {
-      en: "Financial analytics systems often hide calculation logic behind expensive paywalls. ARGUS was launched as a collaborative learning project to explore end-to-end data processing, strict Pydantic schema validation, pandas vectorized moving volatility metrics, and deterministic anomaly alerting.",
-      de: "Finanzanalyse-Systeme verbergen Berechnungen oft hinter teuren Paywalls. ARGUS wurde als kollaboratives Lernprojekt ins Leben gerufen, um tiefgründige Datenverarbeitung, strikte Pydantic-Schema-Validierung, pandas-Vektorisierung und regelbasierte Anomalie-Alerts von Grund auf zu entwickeln."
+      en: "Financial analytics systems often hide calculation logic behind proprietary black boxes. ARGUS was launched as a collaborative learning project to master end-to-end data processing, strict Pydantic validation, vectorized volatility metrics, historical backtesting, and rule-based risk triggers from first principles.",
+      de: "Finanzanalyse-Systeme verbergen Berechnungen oft hinter proprietären Black-Boxes. ARGUS wurde als kollaboratives Lernprojekt ins Leben gerufen, um tiefgründige Datenverarbeitung, strikte Pydantic-Schema-Validierung, vektorisierte Volatilitätsmetriken, historisches Backtesting und regelbasierte Risk-Trigger grundlegend zu entwickeln."
     },
     storySections: [
       {
         eyebrow: { en: "Architecture", de: "Architektur" },
-        title: { en: "Modular Data Pipeline & Ingestion", de: "Modulare Data-Pipeline & Ingestion" },
+        title: { en: "Modular Ingestion & Analytical Engine", de: "Modulare Ingestion & Analyse-Engine" },
         body: {
-          en: "Data collectors, schema validators, and calculation layers are strictly separated. Ingestion modules validate API payloads before passing clean dataframes to analytical downstream workers.",
-          de: "Data Collector, Schema-Validatoren und Berechnungslayer sind strikt getrennt. Ingestion-Module validieren API-Payloads, bevor saubere Dataframes an Analyse-Worker übergeben werden."
+          en: "Data collectors, schema validators, and strategy computation layers are strictly separated. Ingestion modules validate API payloads before passing sanitized dataframes to analytical downstream workers.",
+          de: "Data Collector, Schema-Validatoren und Strategie-Berechnungslayer sind strikt getrennt. Ingestion-Module validieren API-Payloads, bevor bereinigte Dataframes an Analyse-Worker übergeben werden."
         }
       },
       {
-        eyebrow: { en: "Telemetry Direction", de: "Telemetrie-Ausrichtung" },
-        title: { en: "Volatility Signals & Anomaly Detection", de: "Volatilitätssignale & Anomalie-Erkennung" },
+        eyebrow: { en: "Strategy & Risk", de: "Strategie & Risiko" },
+        title: { en: "Volatility Signals & Strategy Backtesting", de: "Volatilitätssignale & Strategie-Backtesting" },
         body: {
-          en: "Calculates rolling moving averages, variance spikes, and market spread deviations. Anomaly flags automatically prepare structured payloads for persistent storage and alert dispatchers.",
-          de: "Berechnet gleitende Durchschnitte, Varianzspitzen und Spreads. Anomalie-Flags bereiten strukturierte Payloads für persistente Datenbanken und Alert-Dispatcher vor."
+          en: "Calculates rolling moving averages, variance spikes, and market spread deviations. Backtesting runs evaluate trading strategies against market history before deploying paper trading sandboxes.",
+          de: "Berechnet gleitende Durchschnitte, Varianzspitzen und Spreads. Backtesting-Läufe evaluieren Handelsstrategien an historischen Daten vor dem Test in Paper-Trading-Umgebungen."
         }
       }
     ],
     diagram: {
       label: { en: "Data Engineering Flow", de: "Data Engineering Ablauf" },
-      title: { en: "From Market Ticker Ingestion to Anomaly Alert", de: "Vom Marktticker-Import zur Anomalieerkennung" },
+      title: { en: "From Ticker Ingestion to Strategy Backtesting & Alerting", de: "Vom Ticker-Import zum Strategie-Backtesting & Alerting" },
       intro: {
-        en: "Market data streams sequentially through currency fetchers, Pydantic schema validation, pandas vectorization, and rule-based alert sinks.",
-        de: "Finanzdaten fließen sequenziell durch Ingestion-Fetcher, Pydantic-Validierung, pandas-Vektorisierung und regelbasierte Alert-Sinks."
+        en: "Market data streams sequentially through currency fetchers, Pydantic validation, strategy backtesting routines, and risk alert sinks.",
+        de: "Finanzdaten fließen sequenziell durch Ingestion-Fetcher, Pydantic-Validierung, Strategie-Backtesting-Routinen und Risiko-Alert-Sinks."
       },
       nodes: [
-        { title: { en: "ExchangeRate & yfinance Ingestion", de: "ExchangeRate & yfinance Ingestion" }, text: { en: "Ingest live FX rates & historical ticker series", de: "Import von Live-Devisen & Aktienhistorien" } },
-        { title: { en: "Pydantic Schema Guard", de: "Pydantic Schema-Schutz" }, text: { en: "Validates rate types & interpolates missing intervals", de: "Validiert Kurstypen & interpoliert Lücken" } },
-        { title: { en: "Pandas Analytics Engine", de: "Pandas Analytics Engine" }, text: { en: "Vectorized moving volatility & variance metrics", de: "Vektorisierte Durchschnitte & Volatilitätsmetriken" } },
-        { title: { en: "Persistent Storage & Alert Sink", de: "Persistenter Speicher & Alert Sink" }, text: { en: "Stores historical trends & dispatches anomaly alerts", de: "Speichert Trends & löst präzise Alerts aus" } }
+        { title: { en: "FX & Ticker Ingestion", de: "FX & Ticker Ingestion" }, text: { en: "Ingest live FX rates & historical market feeds", de: "Import von Live-Devisen & historischen Marktdaten" } },
+        { title: { en: "Pydantic Schema Guard", de: "Pydantic Schema-Schutz" }, text: { en: "Validates rate types & interpolates gaps", de: "Validiert Kurstypen & interpoliert Lücken" } },
+        { title: { en: "Vectorized Analytics & Backtesting", de: "Vektorisierte Analyse & Backtesting" }, text: { en: "Evaluates trading rules & calculates drawdown metrics", de: "Prüft Regelwerke & berechnet Drawdown-Metriken" } },
+        { title: { en: "Persistent PostgreSQL Storage", de: "Persistenter PostgreSQL Speicher" }, text: { en: "Stores historical trends & dispatches volatility alerts", de: "Speichert Trends & löst präzise Alerts aus" } }
       ]
     },
-    roadmapTitle: { en: "Ziele & Zukunftsperspektiven", de: "Ziele & Zukunftsperspektiven" },
+    roadmapTitle: { en: "Sprint Roadmap & Entwicklungsfortschritt", de: "Sprint Roadmap & Development Progress" },
     roadmap: [
-      { title: "Sprint 1", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Modular pipeline architecture, live FX conversion, Tkinter testing harness & pytest suite.", de: "Modulare Pipeline-Architektur, Live-FX-Umrechnung, Tkinter Test-Harness & Pytest-Suite." } },
-      { title: "Sprint 2", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "yfinance historical market ingestion, rolling volatility metrics & pandas vectorization.", de: "yfinance Markt-Ingestion, Volatilitätsmetriken & pandas-Vektorisierung." } },
-      { title: "Sprint 3", status: { en: "Planned", de: "Geplant" }, text: { en: "Persistent PostgreSQL storage layer, automated batch schedules & Discord alert Webhooks.", de: "Persistente PostgreSQL-Datenbank, Batch-Schedules & Discord Alert Webhooks." } }
+      { title: "Sprint 1: Architecture Core", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Modular pipeline architecture, live FX conversion, Tkinter testing harness & pytest suite.", de: "Modulare Pipeline-Architektur, Live-FX-Umrechnung, Tkinter Test-Harness & Pytest-Suite." } },
+      { title: "Sprint 2: Historical Analytics", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Historical market ingestion, rolling volatility metrics & vectorized trend calculations.", de: "Historische Markt-Ingestion, Volatilitätsmetriken & vektorisierte Trendberechnungen." } },
+      { title: "Sprint 3: Persistence & Automation", status: { en: "Planned", de: "Geplant" }, text: { en: "Persistent PostgreSQL database schema, automated batch schedules & alert webhooks.", de: "Persistente PostgreSQL-Datenbank, Batch-Schedules & Webhook-Alerts." } },
+      { title: "Sprint 4: Strategy Backtesting Engine", status: { en: "Planned", de: "Geplant" }, text: { en: "Backtesting module to simulate historical trading strategies, drawdowns & risk scores.", de: "Backtesting-Modul zur Simulation historischer Handelsstrategien & Drawdowns." } },
+      { title: "Sprint 5: Paper Trading Sandbox", status: { en: "Planned", de: "Geplant" }, text: { en: "Paper trading environment for risk-free strategy evaluation with live telemetry.", de: "Paper-Trading-Umgebung zur risikofreien Strategiebewertung mit Live-Telemetrie." } }
     ]
   },
   {
@@ -187,30 +185,30 @@ export const defaultProjects: Project[] = [
     status: "active",
     aiAugmented: true,
     aiBadgeText: {
-      en: "AI Agents & Quantitative Workflow",
-      de: "KI-Agenten & Quant-Workflow"
+      en: "Supported by Agentic Workflows & AI Agents",
+      de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
     isPrivateRepo: true,
-    techStack: ["python", "vercel", "supabase", "postgres", "pydantic"],
-    secondaryTechStack: ["numpy", "pytest"],
-    tags: ["Python", "Vercel", "Supabase", "Pydantic", "PostgreSQL", "Quant Engine"],
+    techStack: ["python", "supabase", "postgres", "excel", "vercel"],
+    secondaryTechStack: [],
+    tags: ["Python", "Supabase", "PostgreSQL", "Excel", "Vercel"],
     tone: "green",
     signal: [26, 35, 46, 42, 59, 66, 73, 91],
     introduction: {
-      en: "Q-Bet is a quantitative calculation engine engineered to capture spreads in inefficient markets. Manual Dutching and Expected Value (EV) calculations are slow and mathematically error-prone. Q-Bet automates odds synchronization, applies quantitative models, and enforces capital protection constraints.",
-      de: "Q-Bet ist eine quantitative Berechnungs-Engine zur Eroberung ineffizienter Märkte. Händische Dutching- und Expected-Value-Berechnungen sind zeitaufwendig und fehleranfällig. Q-Bet automatisiert die Quoten-Synchronisation, wendet Quant-Modelle an und erzwingt Kapital-Limits."
+      en: "Q-Bet is a quantitative calculation engine engineered to capture spreads in inefficient markets. Manual calculations are slow and mathematically error-prone. Q-Bet automates odds synchronization, applies quantitative models, and enforces strict capital protection constraints.",
+      de: "Q-Bet ist eine quantitative Berechnungs-Engine zur Eroberung ineffizienter Märkte. Händische Berechnungen sind zeitaufwendig und fehleranfällig. Q-Bet automatisiert die Quoten-Synchronisation, wendet Quant-Modelle an und erzwingt strikte Kapital-Limits."
     },
     backgroundType: "market_gap",
     background: {
-      en: "Wettmärkte und Arbitrage-Gelegenheiten ändern sich in Sekundenschnelle. Händisches Nachrechnen führt unvermeidlich zu Verzögerungen und Berechnungsfehlern. Q-Bet behandelt Marktquoten als streng typisierte Datenstrukturen, berechnet präzise Einsätze und steuert das Risiko automatisiert.",
-      de: "Wettmärkte und Arbitrage-Gelegenheiten ändern sich in Sekundenschnelle. Händisches Nachrechnen führt unvermeidlich zu Verzögerungen und Berechnungsfehlern. Q-Bet behandelt Marktquoten als streng typisierte Datenstrukturen, berechnet präzise Einsätze und steuert das Risiko automatisiert."
+      en: "Market odds and arbitrage opportunities fluctuate in seconds. Manual stake calculations lead to execution delays and financial errors. Q-Bet treats market odds as strictly typed domain schemas, calculates optimal stake allocations, and enforces risk boundaries automatically.",
+      de: "Wettmärkte und Arbitrage-Gelegenheiten ändern sich in Sekundenschnelle. Händisches Nachrechnen führt zu Verzögerungen und Fehlern. Q-Bet behandelt Marktquoten als streng typisierte Datenstrukturen, berechnet optimale Einsätze und steuert das Risiko automatisiert."
     },
     storySections: [
       {
         eyebrow: { en: "Calculation Core", de: "Berechnungs-Kern" },
-        title: { en: "Typed Data Schemas & Speed Optimization", de: "Typisierte Daten-Schemas & Speed-Optimierung" },
+        title: { en: "Typed Domain Schemas & Speed Optimization", de: "Typisierte Domain-Schemas & Speed-Optimierung" },
         body: {
-          en: "Every market offer, bookmaker spread, and capital allocation window is parsed into Pydantic domain schemas before mathematical evaluation occurs.",
+          en: "Every market offer, bookmaker spread, and liquidity window is parsed into Pydantic domain schemas before mathematical evaluation occurs.",
           de: "Jedes Marktangebot, jeder Spreads und alle Liquiditätsgrenzen werden in streng typisierte Pydantic-Schemas überführt, bevor die Berechnung erfolgt."
         }
       },
@@ -225,7 +223,7 @@ export const defaultProjects: Project[] = [
     ],
     diagram: {
       label: { en: "Engine Architecture", de: "Engine-Architektur" },
-      title: { en: "From Odds Ingestion to Risk Approval", de: "Von der Quoten-Synchronisation zur Risikofreigabe" },
+      title: { en: "From Odds Synchronization to Risk Control", de: "Von der Quoten-Synchronisation zur Risikofreigabe" },
       intro: {
         en: "Live bookmaker odds are collected, normalized, passed to the math engine, and evaluated against strict exposure caps.",
         de: "Live-Quoten werden erfasst, normalisiert, von der Mathe-Engine berechnet und gegen strenge Risikolimits evaluiert."
@@ -233,15 +231,15 @@ export const defaultProjects: Project[] = [
       nodes: [
         { title: { en: "Odds Collector Ingestion", de: "Quoten-Collector Ingestion" }, text: { en: "Automated collectors sync live market feeds", de: "Automatische Collector synchronisieren Live-Quoten" } },
         { title: { en: "Pydantic Domain Validation", de: "Pydantic Domain-Validierung" }, text: { en: "Strict validation of odds & liquidity limits", de: "Strikte Validierung von Spreads & Einsatzgrenzen" } },
-        { title: { en: "EV & Dutch Math Engine", de: "EV & Dutch Mathe-Engine" }, text: { en: "Calculates optimal stake distributions & expected ROI", de: "Berechnet optimale Einsatzverteilungen & ROI" } },
-        { title: { en: "Capital & Risk Gateway", de: "Kapital- & Risiko-Gateway" }, text: { en: "Enforces lockup limits & approves execution", de: "Erzwingt Liquiditätsgrenzen & schaltet Trades frei" } }
+        { title: { en: "EV & Dutch Math Engine", de: "EV & Dutch Mathe-Engine" }, text: { en: "Calculates optimal stake distributions & ROI", de: "Berechnet optimale Einsatzverteilungen & ROI" } },
+        { title: { en: "Supabase Capital Gateway", de: "Supabase Kapital-Gateway" }, text: { en: "Enforces lockup limits & approves execution", de: "Erzwingt Liquiditätsgrenzen & schaltet Trades frei" } }
       ]
     },
-    roadmapTitle: { en: "Ziele & Zukunftsperspektiven", de: "Ziele & Zukunftsperspektiven" },
+    roadmapTitle: { en: "Entwicklungsstufen & Systemfortschritt", de: "Development Stages & System Progress" },
     roadmap: [
-      { title: "Entwicklungsstufe 1", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Core Pydantic domain models, arbitrage math engine & comprehensive calculation unit tests.", de: "Pydantic-Domainmodelle, Arbitrage-Mathe-Engine & umfassende Berechnungs-Tests." } },
-      { title: "Entwicklungsstufe 2", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Matched betting, free-bet optimization algorithms & automated odds collector pipelines.", de: "Matched-Betting, Free-Bet-Optimierung & automatisierte Quoten-Collector-Pipelines." } },
-      { title: "Entwicklungsstufe 3", status: { en: "Planned", de: "Geplant" }, text: { en: "Cloud web dashboard with live telemetry, automated portfolio tracking & risk execution controls.", de: "Cloud Web-Dashboard mit Live-Telemetrie, Portfolio-Tracking & Risiko-Steuerung." } }
+      { title: "Entwicklungsstufe 1: Math Engine", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Core Pydantic domain models, arbitrage math engine & comprehensive calculation unit tests.", de: "Pydantic-Domainmodelle, Arbitrage-Mathe-Engine & umfassende Berechnungs-Tests." } },
+      { title: "Entwicklungsstufe 2: Pipeline Automation", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Matched betting, free-bet optimization algorithms & automated odds collector pipelines.", de: "Matched-Betting, Free-Bet-Optimierung & automatisierte Quoten-Collector-Pipelines." } },
+      { title: "Entwicklungsstufe 3: Live Telemetry", status: { en: "Planned", de: "Geplant" }, text: { en: "Cloud web dashboard with live telemetry, automated portfolio tracking & risk execution controls.", de: "Cloud Web-Dashboard mit Live-Telemetrie, Portfolio-Tracking & Risiko-Steuerung." } }
     ]
   },
   {
@@ -267,23 +265,23 @@ export const defaultProjects: Project[] = [
     status: "active",
     aiAugmented: true,
     aiBadgeText: {
-      en: "AI Agents & Autonomous Workflow",
-      de: "KI-Agenten & Autonomer Workflow"
+      en: "Supported by Agentic Workflows & AI Agents",
+      de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
-    techStack: ["python", "docker", "fastapi", "postgres", "redis", "ai"],
-    secondaryTechStack: ["pytest"],
-    tags: ["Python", "Docker", "Agentic AI", "FastAPI", "RunPod", "vLLM", "PostgreSQL"],
+    techStack: ["python", "docker", "fastapi", "postgres", "ai"],
+    secondaryTechStack: [],
+    tags: ["Python", "Docker", "FastAPI", "PostgreSQL", "AI Agent"],
     href: "https://github.com/BytecodeBrewer/MAS",
     tone: "emerald",
     signal: [20, 38, 55, 62, 78, 85, 92, 98],
     introduction: {
-      en: "MAS is a custom multi-agent orchestration tool designed to process multi-file refactoring tasks without black-box vendor lock-in or recurring SaaS API costs. It provides full control over context parsing and offloads heavy compute to on-demand RunPod cloud GPUs or local LLM instances.",
-      de: "MAS ist ein persönliches Multi-Agenten-Tool für vielschichtige Refactoring-Aufgaben – ohne Black-Box-Tools, Unerwartete Kosten oder Abhängigkeiten. Es bietet volle Kontrolle über den Kontext und lagert schwere Rechenlasten auf RunPod-GPUs oder lokale LLMs aus."
+      en: "MAS is a custom multi-agent orchestration tool designed to process multi-file refactoring tasks without vendor lock-in or recurring SaaS API costs. It provides full control over context parsing and offloads heavy compute to on-demand RunPod cloud GPUs or local LLM instances.",
+      de: "MAS ist ein persönliches Multi-Agenten-Tool für vielschichtige Refactoring-Aufgaben – ohne Unerwartete SaaS-Kosten oder Abhängigkeiten. Es bietet volle Kontrolle über den Kontext und lagert schwere Rechenlasten auf RunPod-GPUs oder lokale LLMs aus."
     },
     backgroundType: "heavy_workload",
     background: {
-      en: "Commercial AI coding tools struggle with full-repository context graphs and generate steep token subscription bills. MAS solves this by deploying specialized worker bots ('Bob', 'Worker-1') that analyze dependency trees, execute code transformations, run local test suites, and commit clean feature branches.",
-      de: "Kommerzielle KI-Tools stoßen bei großen Kontext-Graphen schnell an Leistungsgrenzen und erzeugen hohe Monatskosten. MAS löst dies durch spezialisierte Worker-Bots ('Bob', 'Worker-1'), die Abhängigkeitsbäume analysieren, Code transformieren, Tests ausführen und Git-Branches erstellen."
+      en: "Commercial AI coding tools struggle with full-repository context graphs and generate high monthly subscription bills. MAS solves this by deploying specialized worker bots that analyze dependency trees, execute code transformations, run local test suites, and commit clean feature branches.",
+      de: "Kommerzielle KI-Tools stoßen bei großen Kontext-Graphen schnell an Leistungsgrenzen und erzeugen hohe Monatskosten. MAS löst dies durch spezialisierte Worker-Bots, die Abhängigkeitsbäume analysieren, Code transformieren, Tests ausführen und Git-Branches erstellen."
     },
     storySections: [
       {
@@ -313,15 +311,15 @@ export const defaultProjects: Project[] = [
       nodes: [
         { title: { en: "CLI Task Ingestion", de: "CLI Task-Erfassung" }, text: { en: "User submits refactoring spec via terminal", de: "Nutzer übergibt Refactoring-Spezifikation via CLI" } },
         { title: { en: "Context Dependency Graph", de: "Kontext-Abhängigkeitsgraph" }, text: { en: "Orchestrator parses impacted repository files", de: "Orchestrator analysiert betroffene Quelldateien" } },
-        { title: { en: "Worker Execution (RunPod / vLLM)", de: "Worker-Ausführung (RunPod / vLLM)" }, text: { en: "Worker bot 'Bob' implements multi-file changes", de: "Worker-Bot 'Bob' setzt Dateiänderungen um" } },
+        { title: { en: "Worker Execution (Docker / vLLM)", de: "Worker-Ausführung (Docker / vLLM)" }, text: { en: "Worker bot implements multi-file changes in container", de: "Worker-Bot setzt Dateiänderungen im Container um" } },
         { title: { en: "Automated Test & Git Commit", de: "Automatisierter Test & Git Commit" }, text: { en: "Executes test suite & commits clean git branch", de: "Führt Testsuite aus & erstellt sauberen Git-Branch" } }
       ]
     },
-    roadmapTitle: { en: "Ziele & Zukunftsperspektiven", de: "Ziele & Zukunftsperspektiven" },
+    roadmapTitle: { en: "Meilensteine & Systemfortschritt", de: "Milestones & System Progress" },
     roadmap: [
-      { title: "Meilenstein 1", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Terminal client interface, local repository context parser & autonomous agent tool loop.", de: "Terminal-Client, lokaler Datei-Parser & autonome Agenten-Werkzeugschleife." } },
-      { title: "Meilenstein 2", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Dynamic spin-up of cost-effective RunPod GPU workers for heavy contextual refactorings.", de: "Dynamisches Starten günstiger RunPod GPU-Worker für schwere Refactoring-Passes." } },
-      { title: "Meilenstein 3", status: { en: "Planned", de: "Geplant" }, text: { en: "Local vLLM pooling integration for zero external API costs during extended coding runs.", de: "Lokale vLLM-Pooling-Integration für absolut kostenfreie Offline-Coding-Sessions." } }
+      { title: "Meilenstein 1: Agent Core", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Terminal client interface, local repository context parser & autonomous agent tool loop.", de: "Terminal-Client, lokaler Datei-Parser & autonome Agenten-Werkzeugschleife." } },
+      { title: "Meilenstein 2: GPU Offloading", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Dynamic spin-up of cost-effective RunPod GPU workers for heavy contextual refactorings.", de: "Dynamisches Starten günstiger RunPod GPU-Worker für schwere Refactoring-Passes." } },
+      { title: "Meilenstein 3: Local vLLM Pooling", status: { en: "Planned", de: "Geplant" }, text: { en: "Local vLLM pooling integration for zero external API costs during extended coding runs.", de: "Lokale vLLM-Pooling-Integration für absolut kostenfreie Offline-Coding-Sessions." } }
     ]
   },
   {
@@ -346,20 +344,20 @@ export const defaultProjects: Project[] = [
     },
     status: "active",
     aiAugmented: false,
-    techStack: ["python", "azure", "databricks", "snowflake", "pytorch"],
-    secondaryTechStack: ["numpy", "pytest"],
-    tags: ["Python", "Azure", "Databricks", "Snowflake", "PyTorch", "RAG Systems", "NumPy"],
+    techStack: ["python", "databricks", "snowflake", "pytorch"],
+    secondaryTechStack: [],
+    tags: ["Python", "Databricks", "Snowflake", "PyTorch"],
     href: "https://github.com/BytecodeBrewer/Data-Lab",
     tone: "blue",
     signal: [30, 45, 60, 70, 82, 88, 94, 99],
     introduction: {
-      en: "Data Lab is a single-developer learning repository designed to master data engineering fundamentals from first principles. Rather than relying on high-level wrappers, it implements numerical methods, graph search algorithms, vector embeddings, and cloud warehouse blueprints directly in Python.",
+      en: "Data Lab is a single-developer learning repository designed to master data engineering fundamentals from first principles. Rather than relying on high-level wrappers, it implements numerical solvers, graph search algorithms, vector embeddings, and cloud warehouse blueprints directly in Python.",
       de: "Data Lab ist ein persönliches Lernprojekt zur Vertiefung von Data-Engineering-Grundlagen. Statt sich auf fertige Frameworks zu verlassen, werden numerische Verfahren, Graphsuche, Vektor-Retrieval und Cloud-Warehouse-Blueprints von Grund auf selbst entwickelt."
     },
     backgroundType: "proof_of_work",
     background: {
-      en: "Solid engineering requires understanding how algorithms operate under the hood. Data Lab houses custom implementations of numerical solvers (linear systems, optimization), classical AI search (BFS, DFS, A*), PyTorch mechanics, RAG vector indexing, and architecture patterns for Azure, Databricks Delta Lake, and Snowflake certifications.",
-      de: "Fundiertes Engineering erfordert tiefes Verständnis der mathematischen Grundlagen. Data Lab vereint selbst entwickelte Numerik-Löser, klassische KI-Suche (BFS, DFS, A*), PyTorch-Mechaniken, RAG-Indexierung sowie Blueprints für Azure, Databricks und Snowflake."
+      en: "Solid engineering requires understanding how algorithms operate under the hood. Data Lab houses custom implementations of numerical solvers, classical AI search (BFS, DFS, A*), PyTorch mechanics, RAG vector indexing, and enterprise data warehouse blueprints for Databricks Delta Lake and Snowflake.",
+      de: "Fundiertes Engineering erfordert tiefes Verständnis der mathematischen Grundlagen. Data Lab vereint selbst entwickelte Numerik-Löser, klassische KI-Suche (BFS, DFS, A*), PyTorch-Mechaniken, RAG-Indexierung sowie Blueprints für Databricks Delta Lake und Snowflake."
     },
     storySections: [
       {
@@ -374,8 +372,8 @@ export const defaultProjects: Project[] = [
         eyebrow: { en: "Cloud Data Engineering", de: "Cloud Data Engineering" },
         title: { en: "Enterprise Cloud Warehouse Blueprints", de: "Enterprise Cloud Warehouse Blueprints" },
         body: {
-          en: "Translates core algorithms into cloud warehouse architectures, Delta Lake storage patterns, and scalable ETL pipeline templates on Azure and Snowflake.",
-          de: "Übersetzt Grundlagen-Algorithmen in Cloud Data Warehouse Architekturmuster, Delta Lake Tabellen und ETL-Pipelines auf Azure und Snowflake."
+          en: "Translates core algorithms into cloud warehouse architectures, Delta Lake storage patterns, and scalable ETL pipeline templates on Databricks and Snowflake.",
+          de: "Übersetzt Grundlagen-Algorithmen in Cloud Data Warehouse Architekturmuster, Delta Lake Tabellen und ETL-Pipelines auf Databricks und Snowflake."
         }
       }
     ],
@@ -390,14 +388,14 @@ export const defaultProjects: Project[] = [
         { title: { en: "01. Numerical Algorithms", de: "01. Numerische Algorithmen" }, text: { en: "Linear systems, root finding, optimization & error analysis", de: "Lineare Systeme, Nullstellen, Optimierung & Fehleranalyse" } },
         { title: { en: "02. Classical AI & Graph Search", de: "02. Klassische KI & Graph-Suche" }, text: { en: "BFS, DFS, A* heuristics & graph data structures", de: "BFS, DFS, A* Heuristiken & Graph-Datenstrukturen" } },
         { title: { en: "03. Vector Retrieval & RAG", de: "03. Vektor-Retrieval & RAG" }, text: { en: "Embeddings, vector indexing & semantic search", de: "Embeddings, Vektor-Indexierung & Semantische Suche" } },
-        { title: { en: "04. Cloud Data Warehouse", de: "04. Cloud Data Warehouse" }, text: { en: "Azure, Databricks Delta Lake & Snowflake pipelines", de: "Azure, Databricks Delta Lake & Snowflake Pipelines" } }
+        { title: { en: "04. Cloud Data Warehouse", de: "04. Cloud Data Warehouse" }, text: { en: "Databricks Delta Lake & Snowflake pipeline patterns", de: "Databricks Delta Lake & Snowflake Pipeline-Muster" } }
       ]
     },
-    roadmapTitle: { en: "Ziele & Zukunftsperspektiven", de: "Ziele & Zukunftsperspektiven" },
+    roadmapTitle: { en: "Zukunftsperspektiven & Forschungsschwerpunkte", de: "Future Perspectives & Research Focus" },
     roadmap: [
-      { title: "Schwerpunkt 1", status: { en: "Active", de: "Aktiv" }, text: { en: "Core numerical algorithms, linear system solvers, and classical AI graph search implementation.", de: "Implementierung von Numerik-Lösern, linearen Systemen und klassischer Graph-Suche." } },
-      { title: "Schwerpunkt 2", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Lightweight vector indexing experiments, embedding storage, and RAG pipelines.", de: "Vektor-Indexierungs-Experimente, Embedding-Speicher & RAG-Pipelines." } },
-      { title: "Schwerpunkt 3", status: { en: "Planned", de: "Geplant" }, text: { en: "Certified Azure Data Factory, Databricks Delta Lake & Snowflake deployment templates.", de: "Zertifizierte Azure Data Factory, Databricks Delta Lake & Snowflake Deployment-Templates." } }
+      { title: "Forschungsschwerpunkt 1: Numerik", status: { en: "Active", de: "Aktiv" }, text: { en: "Core numerical algorithms, linear system solvers, and classical AI graph search implementation.", de: "Implementierung von Numerik-Lösern, linearen Systemen und klassischer Graph-Suche." } },
+      { title: "Forschungsschwerpunkt 2: Vektorsuche", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Lightweight vector indexing experiments, embedding storage, and RAG pipelines.", de: "Vektor-Indexierungs-Experimente, Embedding-Speicher & RAG-Pipelines." } },
+      { title: "Forschungsschwerpunkt 3: Cloud Blueprints", status: { en: "Planned", de: "Geplant" }, text: { en: "Databricks Delta Lake & Snowflake deployment templates for enterprise data processing.", de: "Databricks Delta Lake & Snowflake Deployment-Templates für Enterprise ETL." } }
     ]
   },
   {
@@ -423,12 +421,12 @@ export const defaultProjects: Project[] = [
     status: "paused",
     aiAugmented: true,
     aiBadgeText: {
-      en: "AI Agents & Knowledge Pipeline",
-      de: "KI-Agenten & Wissens-Pipeline"
+      en: "Supported by Agentic Workflows & AI Agents",
+      de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
-    techStack: ["typescript", "electron", "nextjs", "postgres", "redis", "ai"],
+    techStack: ["typescript", "bun", "electron", "nextjs", "postgres", "ai"],
     secondaryTechStack: [],
-    tags: ["TypeScript", "Electron", "Node.js", "Notion API", "Workflow Automation"],
+    tags: ["TypeScript", "Bun", "Electron", "Next.js", "PostgreSQL", "AI Agent"],
     href: "https://github.com/BytecodeBrewer/Notion-Sync",
     tone: "amber",
     signal: [24, 34, 42, 55, 47, 62, 74, 80],
@@ -473,10 +471,10 @@ export const defaultProjects: Project[] = [
         { title: { en: "Central Master Application", de: "Zentrale Master-Anwendung" }, text: { en: "Unified operational 'All Tasks' master view", de: "Zentrale operative 'All Tasks' Master-Ansicht" } }
       ]
     },
-    roadmapTitle: { en: "Ziele & Zukunftsperspektiven", de: "Ziele & Zukunftsperspektiven" },
+    roadmapTitle: { en: "Zukunftsperspektiven & Entwicklungsfokus", de: "Future Perspectives & Development Focus" },
     roadmap: [
-      { title: "Entwicklungsziel 1", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Advanced conflict resolution handling simultaneous edits between source and master tables.", de: "Erweiterte Konfliktlösung bei gleichzeitigen Bearbeitungen zwischen Quell- und Master-Tabelle." } },
-      { title: "Entwicklungsziel 2", status: { en: "Planned", de: "Geplant" }, text: { en: "Migration of background sync polling to serverless cloud workers for desktop-independent operation.", de: "Migration des Sync-Pollers in Serverless Cloud Worker für plattformunabhängigen Betrieb." } }
+      { title: "Entwicklungsfokus 1: Conflict Management", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Advanced conflict resolution handling simultaneous edits between source and master tables.", de: "Erweiterte Konfliktlösung bei gleichzeitigen Bearbeitungen zwischen Quell- und Master-Tabelle." } },
+      { title: "Entwicklungsfokus 2: Serverless Sync Daemon", status: { en: "Planned", de: "Geplant" }, text: { en: "Migration of background sync polling to serverless cloud workers for desktop-independent operation.", de: "Migration des Sync-Pollers in Serverless Cloud Worker für plattformunabhängigen Betrieb." } }
     ]
   },
   {
@@ -492,33 +490,33 @@ export const defaultProjects: Project[] = [
       de: "Kollaboratives Uni-Projekt"
     },
     summary: {
-      en: "A collaborative Linux system telemetry suite built in Go & TypeScript to monitor kernel memory, CPU load, and systemd daemons in real time.",
-      de: "Eine kollaborative Linux-Systemtelemetrie-Suite in Go & TypeScript zur Überwachung von Kernel-Speicher, CPU-Last und systemd-Daemons."
+      en: "A collaborative Linux system telemetry suite built in Go & TypeScript to monitor kernel memory, CPU load, and systemd daemons in real time with AWS cloud integration.",
+      de: "Eine kollaborative Linux-Systemtelemetrie-Suite in Go & TypeScript zur Echtzeit-Überwachung von Kernel-Speicher, CPU-Last und systemd-Daemons mit AWS Cloud-Anbindung."
     },
     contribution: {
-      en: "Collaborative Systems Project · Lightweight Telemetry",
-      de: "Kollaboratives System-Projekt · Leichtgewichtige Telemetrie"
+      en: "Collaborative University Project · Personal Focus: AWS Infrastructure, Docker & MCP Integration",
+      de: "Kollaboratives Uni-Projekt · Persönlicher Fokus: AWS Infrastructure, Docker & MCP Integration"
     },
     status: "side-quest",
     aiAugmented: true,
     aiBadgeText: {
-      en: "AI Agents & Telemetry Integration",
-      de: "KI-Agenten & Telemetrie-Integration"
+      en: "Supported by Agentic Workflows & AI Agents",
+      de: "Unterstützt durch Agentic Workflows & KI-Agenten"
     },
-    techStack: ["go", "typescript", "docker", "mcp", "ai"],
+    techStack: ["go", "typescript", "docker", "aws", "ai"],
     secondaryTechStack: [],
-    tags: ["Go", "TypeScript", "Docker", "Linux Telemetry", "MCP"],
+    tags: ["Go", "TypeScript", "Docker", "AWS", "AI Agent"],
     href: "https://github.com/BytecodeBrewer/SMART",
     tone: "violet",
     signal: [28, 40, 48, 43, 65, 58, 77, 84],
     introduction: {
-      en: "SMART is a collaborative university project engineered to track Linux system health and daemon states with low CPU overhead. Built during computer science systems studies, it explores live AI integration, telemetry persistence, and deterministic testing.",
-      de: "SMART ist ein kollaboratives Uni-Projekt zur Überwachung von Linux-Systemzuständen und Daemons bei minimaler CPU-Last. Es entstand im Informatikstudium, um KI-Integration in Live-Systemen und deterministische Testverfahren zu erforschen."
+      en: "SMART is a collaborative university project engineered to track Linux system health and daemon states with low CPU overhead. Built during computer science systems studies, it explores live AI integration, containerized telemetry daemons, and AWS cloud metric storage.",
+      de: "SMART ist ein kollaboratives Uni-Projekt zur Überwachung von Linux-Systemzuständen und Daemons bei minimaler CPU-Last. Es entstand im Informatikstudium zur Erforschung von KI-Integration, containerisierten Telemetrie-Daemons und AWS Cloud-Metrikspeicherung."
     },
     backgroundType: "academic",
     background: {
-      en: "Developing reliable telemetry systems requires low-level kernel interaction. SMART was created to master Linux process calls, containerized telemetry daemons, and persistent metric caching for reproducible diagnostic evaluations.",
-      de: "Zuverlässige Telemetriesysteme erfordern direkten Kernel-Zugriff. SMART wurde entwickelt, um Linux-Prozessaufrufe, containerisierte Telemetrie-Daemons und Metrik-Caching für reproduzierbare Tests zu vertiefen."
+      en: "Developing reliable telemetry systems requires low-level kernel interaction. SMART was created in a university team to master Linux process calls, containerized telemetry daemons, and cloud metric gateways for reproducible diagnostic evaluations.",
+      de: "Zuverlässige Telemetriesysteme erfordern direkten Kernel-Zugriff. SMART wurde im Uniteam entwickelt, um Linux-Prozessaufrufe, containerisierte Telemetrie-Daemons und Cloud-Metrik-Gateways für reproduzierbare Tests zu vertiefen."
     },
     storySections: [
       {
@@ -530,32 +528,34 @@ export const defaultProjects: Project[] = [
         }
       },
       {
-        eyebrow: { en: "Live AI Integration", de: "Live KI-Integration" },
-        title: { en: "Telemetry Analysis & Deterministic Diagnostics", de: "Telemetrie-Analyse & Deterministische Diagnose" },
+        eyebrow: { en: "Cloud & AI Gateway", de: "Cloud & KI-Gateway" },
+        title: { en: "AWS Infrastructure & MCP Diagnostics", de: "AWS Infrastruktur & MCP-Diagnose" },
         body: {
-          en: "Connects raw telemetry logs with AI monitoring agents to evaluate system health trends while caching metrics for reproducible diagnostic testing.",
-          de: "Verbindet Telemetrie-Logs mit KI-Agenten zur Analyse von Systemzuständen und speichert Metriken für deterministische Tests."
+          en: "Connects raw telemetry logs with AI monitoring agents via Model Context Protocol (MCP) and persists diagnostic data onto AWS Cloud infrastructure.",
+          de: "Verbindet Telemetrie-Logs über das Model Context Protocol (MCP) mit KI-Agenten und sichert Diagnosedaten in der AWS Cloud."
         }
       }
     ],
     diagram: {
       label: { en: "Telemetry Architecture", de: "Telemetrie Architektur" },
-      title: { en: "From Kernel Metrics to Real-Time Telemetry HUD", de: "Von Kernel-Metriken zum Realtime Telemetrie HUD" },
+      title: { en: "From Kernel Metrics to AWS Cloud & MCP Diagnostics", de: "Von Kernel-Metriken zur AWS Cloud & MCP-Diagnose" },
       intro: {
-        en: "Low-overhead collection loop polling systemd daemons and Linux kernel metrics.",
-        de: "Minimalistische Abfrageschleife für systemd-Daemons und Linux-Kernel-Metriken."
+        en: "Low-overhead collection loop polling systemd daemons, streaming data to AWS Cloud and MCP AI analyzers.",
+        de: "Minimalistische Abfrageschleife für systemd-Daemons mit Daten-Streaming in die AWS Cloud und zu MCP-KI-Analysetools."
       },
       nodes: [
         { title: { en: "Linux Kernel Metrics", de: "Linux-Kernel-Metriken" }, text: { en: "Reads /proc metrics, CPU load & memory allocation", de: "Liest /proc Metriken, CPU-Last & RAM-Belegung" } },
         { title: { en: "Go Telemetry Daemon", de: "Go Telemetrie Daemon" }, text: { en: "High-speed metric collector & log formatter", de: "Schneller Metrik-Sammler & Log-Formatter" } },
-        { title: { en: "Terminal HUD & AI Gateway", de: "Terminal HUD & KI-Gateway" }, text: { en: "Displays system HUD & streams logs to AI analyzer", de: "Zeigt System-HUD & leitet Logs an KI-Analyse weiter" } }
+        { title: { en: "Docker & AWS Cloud Gateway", de: "Docker & AWS Cloud Gateway" }, text: { en: "Containerized telemetry daemon pushing logs to AWS", de: "Containerisierter Daemon überträgt Logs zu AWS" } },
+        { title: { en: "MCP AI Diagnostic Gateway", de: "MCP KI-Diagnose Gateway" }, text: { en: "Streams telemetry logs to MCP protocol analyzers", de: "Leitet Telemetrie-Logs an MCP-Protokoll-Analyse weiter" } }
       ]
     },
-    roadmapTitle: { en: "Ziele & Zukunftsperspektiven", de: "Ziele & Zukunftsperspektiven" },
+    roadmapTitle: { en: "Universitäre Sprints & Systemfortschritt", de: "University Sprints & System Progress" },
     roadmap: [
-      { title: "Meilenstein 1", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Core metric collection daemon in Go with systemd integration.", de: "Kern-Metrik-Sammler in Go mit systemd Integration." } },
-      { title: "Meilenstein 2", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Terminal HUD display, log output formatter, and MCP protocol integration.", de: "Terminal-HUD, Log-Formatter und MCP-Protokoll-Integration." } },
-      { title: "Meilenstein 3", status: { en: "Planned", de: "Geplant" }, text: { en: "Multi-node gRPC telemetry aggregation across distributed Linux server instances.", de: "Multi-Node gRPC-Telemetrie-Aggregation über verteilte Linux-Server." } }
+      { title: "Sprint 1: Go Collector Daemon", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "Core metric collection daemon in Go with systemd integration.", de: "Kern-Metrik-Sammler in Go mit systemd Integration." } },
+      { title: "Sprint 2: Terminal HUD Display", status: { en: "Completed", de: "Abgeschlossen" }, text: { en: "CLI/Terminal HUD display and log output formatting routines.", de: "Terminal-HUD Anzeige und Log-Formatierungs-Routinen." } },
+      { title: "Sprint 3: Docker & AWS Integration", status: { en: "In Progress", de: "In Arbeit" }, text: { en: "Containerization with Docker, AWS cloud telemetry gateway & MCP protocol integration.", de: "Containerisierung mit Docker, AWS Cloud Gateway & MCP-Protokoll-Anbindung." } },
+      { title: "Sprint 4: Multi-Node gRPC Aggregation", status: { en: "Planned", de: "Geplant" }, text: { en: "Multi-node gRPC telemetry aggregation across distributed Linux server instances.", de: "Multi-Node gRPC-Telemetrie-Aggregation über verteilte Linux-Server." } }
     ]
   }
 ];
